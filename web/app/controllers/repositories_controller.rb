@@ -1,4 +1,6 @@
 class RepositoriesController < ApplicationController
+  before_filter :find_user
+
   # GET /repositories
   # GET /repositories.xml
   def index
@@ -14,6 +16,8 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1.xml
   def show
     @repository = Repository.find(params[:id])
+    @owner = User.find(@repository.user_id)
+    @host = "meyerhome.net"
 
     respond_to do |format|
       format.html # show.html.erb
@@ -21,23 +25,11 @@ class RepositoriesController < ApplicationController
     end
   end
 
-  def find_owner
-    owner_id = session[:user_id]
-    owner = User.find(owner_id)
-    owner
-  rescue
-    logger.error("Log in")
-    flash[:notice] = "not logged in"
-    nil
-  end
-
   # GET /repositories/new
   # GET /repositories/new.xml
   def new
-    @owner = find_owner
-    if @owner == nil
+    if @user == nil
         redirect_to :action => 'index'
-        return
     end
     @repository = Repository.new
 
@@ -55,16 +47,14 @@ class RepositoriesController < ApplicationController
   # POST /repositories
   # POST /repositories.xml
   def create
-    @owner = find_owner
-    if @owner == nil
+    if @user == nil
         redirect_to :action => 'index'
         return
     end
     @repository = Repository.new(params[:repository])
-#    @repository.owner_id = session[:user_id]
-    @owner.addRepository(@repository)
+    @user.addRepository(@repository)
     respond_to do |format|
-      if @owner.save
+      if @user.save
         flash[:notice] = 'Repository was successfully created.'
         format.html { redirect_to(@repository) }
         format.xml  { render :xml => @repository, :status => :created, :location => @repository }
@@ -103,4 +93,15 @@ class RepositoriesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+private
+  def find_user
+    @user = User.find(session[:user_id])
+  rescue
+    logger.error("Log in")
+    flash[:notice] = "not logged in"
+    @user = nil
+  end
+
+
 end

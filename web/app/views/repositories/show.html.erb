@@ -1,23 +1,12 @@
-<p>
-  <b>User:</b>
-  <%=h @repository.user_id %>
-</p>
 
-<p>
-  <b>Name:</b>
-  <%=h @repository.name %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%=h @repository.description %>
-</p>
-
-<p>
-  <b>Defaultbranch:</b>
-  <%=h @repository.defaultbranch %>
-</p>
-
-
-<%= link_to 'Edit', edit_repository_path(@repository) %> |
 <%= link_to 'Back', repositories_path %>
+
+<div id="repository">
+<%=h(@owner.username) %> / <b><%=h @repository.name %></b>
+  <%= link_to '[Edit]', edit_repository_path(@repository) %><br />
+Description: <%=h @repository.description %><br />
+Homepage: <%=h @repository.url %><br />
+Public Clone URL: <b>git://<%= @host + ':' + h(@owner.username) + '/' + h(@repository.name) + '.git' %></b><br />
+Your Clone URL: <b>git@<%= @host + ':' + h(@owner.username) + '/' + h(@repository.name) + '.git' %></b><br />
+</div>
+
