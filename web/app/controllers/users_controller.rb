@@ -7,7 +7,7 @@ class UsersController < ApplicationController
         session[:user_id] = user.id
         uri = session[:original_uri]
         session[:original_uri] = nil
-        redirect_to(uri || { :action => "index"} )
+        redirect_to(uri || { :action => 'show', :id => user.id } )
       else
         flash.now[:notice] = "Invalid user/password combination"
       end
@@ -95,7 +95,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        flash[:notice] = "User #{@user.username} was successfully updated."
+        flash[:notice] = "Successfully updated user #{@user.username}."
         format.html { redirect_to(@user) }
         format.xml  { head :ok }
       else
