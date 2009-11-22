@@ -39,7 +39,9 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1/edit
   def edit
     @repository = Repository.find(params[:id])
-    check_authorization
+    if !check_authorization
+      return
+    end
   end
 
   # POST /repositories
@@ -63,7 +65,9 @@ class RepositoriesController < ApplicationController
   # PUT /repositories/1.xml
   def update
     @repository = Repository.find(params[:id])
-    check_authorization
+    if !check_authorization
+      return
+    end
 
     respond_to do |format|
       if @repository.update_attributes(params[:repository])
@@ -81,7 +85,9 @@ class RepositoriesController < ApplicationController
   # DELETE /repositories/1.xml
   def destroy
     @repository = Repository.find(params[:id])
-    check_authorization
+    if !check_authorization
+      return
+    end
     @repository.destroy
 
     respond_to do |format|
@@ -96,9 +102,12 @@ private
     if @owner != @user
         flash[:notice] = "You do not have permissions to modify this repository."
         redirect_to :action => 'index'
+        return false
     end
   rescue
     logger.error("Unable to find repository")
+    redirect_to :action => 'index'
+    return true
   end
 
   def find_user
