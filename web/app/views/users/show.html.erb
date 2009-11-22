@@ -1,27 +1,13 @@
-<p>
-  <b>Username:</b>
-  <%=h @user.username %>
-</p>
+<div id="user">
+<%= image_tag @user.gravatar_url %>
+<h1><%=h @user.username %></h1>
+(<%=h @user.name %>)
+<hr>
 
-<p>
-  <b>Name:</b>
-  <%=h @user.name %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%=h @user.email %>
-</p>
-
-<p>
-  <b>Url:</b>
-  <%=h @user.url %>
-</p>
-
-<p>
-  <b>Avatar:</b>
-  <%=h @user.avatar %>
-</p>
+Name: <%=h @user.name %><br />
+Email: <%=h @user.email %><br />
+Website: <%=h @user.url %><br />
+</div>
 
 <h2>Repositories:</h2>
 <ul id="repositories">

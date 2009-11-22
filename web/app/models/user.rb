@@ -1,6 +1,7 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
+  is_gravtastic!(:source => "avatar")
   has_many :repositories
 
   validates_presence_of   :username
