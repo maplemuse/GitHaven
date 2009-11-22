@@ -23,6 +23,10 @@
   <%=h @user.avatar %>
 </p>
 
+<h2>Repositories:</h2>
+<ul id="repositories">
+<% for repo in @user.repositories %>
+    <li><%=link_to h(repo.name), :controller => "repositories", :action => "show", :repo => repo.name %></li>
+<% end %>
+</ul>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
