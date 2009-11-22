@@ -8,31 +8,19 @@
     <%= f.text_field :username %>
   </p>
   <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :hashed_password %><br />
-    <%= f.text_field :hashed_password %>
-  </p>
-  <p>
-    <%= f.label :salt %><br />
-    <%= f.text_field :salt %>
-  </p>
-  <p>
-    <%= f.label :email %><br />
+    <%= f.label :email %> (optional)<br />
     <%= f.text_field :email %>
   </p>
   <p>
-    <%= f.label :url %><br />
-    <%= f.text_field :url %>
+    <%= f.label :user_password, 'Password:' %><br />
+    <%= f.password_field :password, :size => 40 %>
   </p>
   <p>
-    <%= f.label :avatar %><br />
-    <%= f.text_field :avatar %>
+    <%= f.label :user_password_confirmation, 'Verify Password:' %><br />
+    <%= f.password_field :password_confirmation, :size => 40 %>
   </p>
   <p>
-    <%= f.submit "Create" %>
+    <%= f.submit "Agree and signup!" %>
   </p>
 <% end %>
 
