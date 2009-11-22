@@ -1,0 +1,28 @@
+<h1>Editing repository</h1>
+
+<% form_for(@repository) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :owner_id %><br />
+    <%= f.text_field :owner_id %>
+  </p>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </p>
+  <p>
+    <%= f.label :defaultbranch %><br />
+    <%= f.text_field :defaultbranch %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @repository %> |
+<%= link_to 'Back', repositories_path %>
