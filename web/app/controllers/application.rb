@@ -3,7 +3,6 @@
 
 class ApplicationController < ActionController::Base
   layout "site"
-  # before_filter :authorize, :except => [:login, :new]
   helper :all # include all helpers, all the time
 
   # See ActionController::RequestForgeryProtection for details
@@ -14,13 +13,4 @@ class ApplicationController < ActionController::Base
   # Uncomment this to filter the contents of submitted sensitive data parameters
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
-
-protected
-  def authorize
-    unless User.find_by_id(session[:user_id])
-      session[:original_uri] = request.request_uri
-      flash[:notice] = "Please login in"
-      redirect_to :controller => "users", :action => "login"
-    end
-  end
 end
