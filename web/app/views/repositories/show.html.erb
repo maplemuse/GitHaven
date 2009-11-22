@@ -3,7 +3,10 @@
 
 <div id="repository">
 <%=h(@owner.username) %> / <b><%=h @repository.name %></b>
-  <%= link_to '[Edit]', edit_repository_path(@repository) %><br />
+  <% if @owner == @user -%>
+  <%= link_to '[Edit]', edit_repository_path(@repository) %>
+  <% end -%>
+<br />
 Description: <%=h @repository.description %><br />
 Homepage: <%=h @repository.url %><br />
 Public Clone URL: <b>git://<%= @host + ':' + h(@owner.username) + '/' + h(@repository.name) + '.git' %></b><br />

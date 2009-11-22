@@ -1,12 +1,13 @@
 class RepositoriesController < ApplicationController
   before_filter :find_user, :except => :index
-  before_filter :find_owner, :except => :index
 
   # GET /repositories
   # GET /repositories.xml
   def index
     @repositories = Repository.find(:all)
-
+    @user = User.find(session[:user_id])
+    rescue
+      @user = nil
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @repositories }
@@ -17,6 +18,7 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1.xml
   def show
     @repository = Repository.find(params[:id])
+    find_owner
     @host = "meyerhome.net"
 
     respond_to do |format|
@@ -29,7 +31,7 @@ class RepositoriesController < ApplicationController
   # GET /repositories/new.xml
   def new
     @repository = Repository.new
-
+    @owner = @user
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @repository }
@@ -39,6 +41,7 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1/edit
   def edit
     @repository = Repository.find(params[:id])
+    find_owner
     if !check_authorization
       return
     end
@@ -110,7 +113,9 @@ private
   end
 
   def find_owner
-    @owner = User.find(@repository.user_id)
+    if @repository
+      @owner = User.find(@repository.user_id)
+    end
   end
 
   def find_user
