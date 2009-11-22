@@ -67,7 +67,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         flash[:notice] = "User #{@user.username} was successfully created."
-        format.html { redirect_to(@user) }
+        format.html { redirect_to(:action => 'login') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }
