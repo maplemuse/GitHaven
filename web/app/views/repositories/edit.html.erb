@@ -1,5 +1,7 @@
 <h1>Editing repository</h1>
 
+<%= link_to 'Show', @repository %>
+
 <% form_for(@repository) do |f| %>
   <%= f.error_messages %>
   <p>
@@ -19,5 +21,4 @@
   </p>
 <% end %>
 
-<%= link_to 'Show', @repository %> |
-<%= link_to 'Back', repositories_path %>
+<%= button_to 'Delete Repository', @repository, :confirm => 'Are you sure?', :method => :delete  %>

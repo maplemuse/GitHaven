@@ -2,12 +2,14 @@
 <%= image_tag @user.gravatar_url %>
 <h1><%=h @user.username %></h1>
 (<%=h @user.name %>)
-<hr>
 
 Name: <%=h @user.name %><br />
 Email: <%=h @user.email %><br />
 Website: <%=h @user.url %><br />
 </div>
+
+
+<%= button_to "Create repository", :controller => "repositories", :action => "new" %>
 
 <h2>Repositories:</h2>
 <ul id="repositories">
