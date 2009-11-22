@@ -1,5 +1,5 @@
 class RepositoriesController < ApplicationController
-  before_filter :find_user
+  before_filter :find_user, :except => :index
 
   # GET /repositories
   # GET /repositories.xml
@@ -28,9 +28,6 @@ class RepositoriesController < ApplicationController
   # GET /repositories/new
   # GET /repositories/new.xml
   def new
-    if @user == nil
-        redirect_to :action => 'index'
-    end
     @repository = Repository.new
 
     respond_to do |format|
@@ -42,15 +39,12 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1/edit
   def edit
     @repository = Repository.find(params[:id])
+    check_authorization
   end
 
   # POST /repositories
   # POST /repositories.xml
   def create
-    if @user == nil
-        redirect_to :action => 'index'
-        return
-    end
     @repository = Repository.new(params[:repository])
     @user.addRepository(@repository)
     respond_to do |format|
@@ -69,6 +63,7 @@ class RepositoriesController < ApplicationController
   # PUT /repositories/1.xml
   def update
     @repository = Repository.find(params[:id])
+    check_authorization
 
     respond_to do |format|
       if @repository.update_attributes(params[:repository])
@@ -86,6 +81,7 @@ class RepositoriesController < ApplicationController
   # DELETE /repositories/1.xml
   def destroy
     @repository = Repository.find(params[:id])
+    check_authorization
     @repository.destroy
 
     respond_to do |format|
@@ -95,12 +91,23 @@ class RepositoriesController < ApplicationController
   end
 
 private
+  def check_authorization
+    @owner = User.find(@repository.user_id)
+    if @owner != @user
+        flash[:notice] = "You do not have permissions to modify this repository."
+        redirect_to :action => 'index'
+    end
+  rescue
+    logger.error("Unable to find repository")
+  end
+
   def find_user
     @user = User.find(session[:user_id])
   rescue
-    logger.error("Log in")
-    flash[:notice] = "not logged in"
+    logger.error("This action requires that you be logged in.")
+    flash[:notice] = "Not logged in."
     @user = nil
+    redirect_to :controller => 'users', :action => 'login'
   end
 
 
