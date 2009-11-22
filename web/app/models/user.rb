@@ -1,7 +1,6 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  has_many :repositories
 
   validates_presence_of   :username
   validates_uniqueness_of :username
@@ -10,6 +9,10 @@ class User < ActiveRecord::Base
   validates_confirmation_of   :password
 
   validate :password_non_blank
+
+  def addRepository(repository)
+    repositories << repository
+  end
 
   def self.authenticate(username, password)
     user = self.find_by_name(username)
@@ -46,4 +49,6 @@ private
   def password_non_blank
     errors.add(:password, 'Missing password') if hashed_password.blank?
   end
+
+  has_many :repositories
 end
