@@ -72,6 +72,7 @@ class RepositoriesController < ApplicationController
   # PUT /repositories/1.xml
   def update
     @repository = Repository.find(params[:id])
+    find_owner
     if !check_authorization
       return
     end
@@ -92,7 +93,8 @@ class RepositoriesController < ApplicationController
   # DELETE /repositories/1.xml
   def destroy
     @repository = Repository.find(params[:id])
-    if !check_authorization
+    find_owner
+    if check_authorization == false
       return
     end
     @repository.destroy
@@ -110,9 +112,6 @@ private
         redirect_to :action => 'index'
         return false
     end
-  rescue
-    logger.error("Unable to find repository")
-    redirect_to :action => 'index'
     return true
   end
 
