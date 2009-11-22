@@ -12,10 +12,6 @@
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.label :hashed_password %><br />
-    <%= f.text_field :hashed_password %>
-  </p>
-  <p>
     <%= f.label :email %><br />
     <%= f.text_field :email %>
   </p>
@@ -32,5 +28,6 @@
   </p>
 <% end %>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<p>
+<%= link_to 'Delete my Account', @user, :confirm => 'Are you sure?', :method => :delete  %>
+</p>
