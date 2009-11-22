@@ -9,7 +9,8 @@
 </head>
 <body>
 
-<div id="header">
+PG
+<div id="header" style="float:right">
 <% if session[:user_id] %>
 <%  username = User.find(session[:user_id]).username %>
 <%= link_to username, :user => username, :controller => "users", :action => "show" %> |
