@@ -1,5 +1,6 @@
 class RepositoriesController < ApplicationController
   before_filter :find_user, :except => :index
+  before_filter :find_owner, :except => :index
 
   # GET /repositories
   # GET /repositories.xml
@@ -16,7 +17,6 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1.xml
   def show
     @repository = Repository.find(params[:id])
-    @owner = User.find(@repository.user_id)
     @host = "meyerhome.net"
 
     respond_to do |format|
@@ -98,7 +98,6 @@ class RepositoriesController < ApplicationController
 
 private
   def check_authorization
-    @owner = User.find(@repository.user_id)
     if @owner != @user
         flash[:notice] = "You do not have permissions to modify this repository."
         redirect_to :action => 'index'
@@ -110,6 +109,10 @@ private
     return true
   end
 
+  def find_owner
+    @owner = User.find(@repository.user_id)
+  end
+
   def find_user
     @user = User.find(session[:user_id])
   rescue
@@ -118,6 +121,5 @@ private
     @user = nil
     redirect_to :controller => 'users', :action => 'login'
   end
-
 
 end
