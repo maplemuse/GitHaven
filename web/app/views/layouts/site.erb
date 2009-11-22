@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title><%= controller.action_name %> - PG</title>
+  <%= stylesheet_link_tag 'scaffold' %>
+</head>
+<body>
+
+<div id="header">
+<% if session[:user_id] %>
+<%  username = User.find(session[:user_id]).username %>
+<%= link_to username, :user => username, :controller => "users", :action => "show" %> |
+<%= link_to "Preferences", :controller => "users", :action => "edit" %> |
+<%= link_to "Logout", :controller => "users", :action => "logout" %>
+<% else %>
+<%= link_to "Signup", :controller => "users", :action => "new" %> |
+<%= link_to "Login", :controller => "users", :action => "login" %>
+<% end %>
+</div>
+
+<div id="main">
+<p style="color: green"><%= flash[:notice] %></p>
+<%= yield  %>
+</div>
+
+</body>
+</html>

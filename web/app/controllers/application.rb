@@ -2,6 +2,7 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+  layout "site"
   # before_filter :authorize, :except => [:login, :new]
   helper :all # include all helpers, all the time
 
@@ -22,5 +23,4 @@ protected
       redirect_to :controller => "users", :action => "login"
     end
   end
-
 end

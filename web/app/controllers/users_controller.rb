@@ -32,11 +32,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def find_username_arg
+    if params[:id]
+        @user = User.find(params[:id])
+    else
+        @user = User.find_by_username(params[:user])
+    end
+  end
+
   # GET /users/1
   # GET /users/1.xml
   def show
-    @user = User.find(params[:id])
-
+    find_username_arg
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user }
@@ -56,7 +63,12 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    session_user = User.find(session[:user_id])
+    if !session_user
+        redirect_to(:action => 'login')
+        return
+    end
+    @user = session_user
   end
 
   # POST /users
@@ -79,7 +91,7 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
-    @user = User.find(params[:id])
+    find_username_arg
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
@@ -96,7 +108,8 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.xml
   def destroy
-    @user = User.find(params[:id])
+    find_username_arg
+
     @user.destroy
     respond_to do |format|
       format.html { redirect_to(users_url) }
