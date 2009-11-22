@@ -1,6 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :repositories
-
   map.resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -48,4 +47,9 @@ ActionController::Routing::Routes.draw do |map|
  
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
+
+  map.connect ':user/:repo',
+      :controller => "repositories",
+      :action => "show"
+
 end

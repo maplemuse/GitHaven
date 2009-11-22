@@ -17,7 +17,11 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1
   # GET /repositories/1.xml
   def show
-    @repository = Repository.find(params[:id])
+    if params[:repo]
+      @repository = Repository.find_by_name(params[:repo])
+    else
+      @repository = Repository.find(params[:id])
+    end
     find_owner
     @host = "meyerhome.net"
 
