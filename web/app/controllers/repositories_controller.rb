@@ -21,9 +21,24 @@ class RepositoriesController < ApplicationController
     end
   end
 
+  def find_owner
+    owner_id = session[:user_id]
+    owner = User.find(owner_id)
+    owner
+  rescue
+    logger.error("Log in")
+    flash[:notice] = "not logged in"
+    nil
+  end
+
   # GET /repositories/new
   # GET /repositories/new.xml
   def new
+    @owner = find_owner
+    if @owner == nil
+        redirect_to :action => 'index'
+        return
+    end
     @repository = Repository.new
 
     respond_to do |format|
@@ -40,10 +55,16 @@ class RepositoriesController < ApplicationController
   # POST /repositories
   # POST /repositories.xml
   def create
+    @owner = find_owner
+    if @owner == nil
+        redirect_to :action => 'index'
+        return
+    end
     @repository = Repository.new(params[:repository])
-
+#    @repository.owner_id = session[:user_id]
+    @owner.addRepository(@repository)
     respond_to do |format|
-      if @repository.save
+      if @owner.save
         flash[:notice] = 'Repository was successfully created.'
         format.html { redirect_to(@repository) }
         format.xml  { render :xml => @repository, :status => :created, :location => @repository }
