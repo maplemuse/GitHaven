@@ -1,0 +1,24 @@
+<h1>Listing sshkeys</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Key</th>
+    <th>User</th>
+  </tr>
+
+<% for sshkey in @sshkeys %>
+  <tr>
+    <td><%=h sshkey.name %></td>
+    <td><%=h sshkey.key %></td>
+    <td><%=h sshkey.user_id %></td>
+    <td><%= link_to 'Show', sshkey %></td>
+    <td><%= link_to 'Edit', edit_sshkey_path(sshkey) %></td>
+    <td><%= link_to 'Destroy', sshkey, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New sshkey', new_sshkey_path %>

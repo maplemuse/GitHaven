@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :sshkeys
+
   map.connect 'login', :controller => 'users', :action => 'login'
   map.connect 'logout', :controller => 'users', :action => 'logout'
   map.connect 'signup', :controller => 'users', :action => 'new'

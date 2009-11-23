@@ -1,0 +1,24 @@
+<h1>Editing sshkey</h1>
+
+<% form_for(@sshkey) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :key %><br />
+    <%= f.text_field :key %>
+  </p>
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @sshkey %> |
+<%= link_to 'Back', sshkeys_path %>
