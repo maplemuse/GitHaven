@@ -1,6 +1,7 @@
 #!/bin/bash -e
 
 export PATH=$PATH:`dirname $0`
+cd `dirname $0`/../web/db
 
 user_id="${1}"
 ssh_command="${SSH_ORIGINAL_COMMAND}"
@@ -19,9 +20,9 @@ fi
 repo=`echo $ssh_command | sed -e 's/.* //g' -e s/\'//g`
 
 if [ "${cmd}" = "receive-pack" ] ; then
-  gitforest-access "read" "$userid" "$repo"
+  gitforest-access "write" "${user_id}" "${repo}"
 elif [ "${cmd}" = "upload-pack" ] ; then
-  gitforest-access "write" "$userid" "$repo"
+  gitforest-access "read" "${user_id}" "${repo}"
 fi
 
 echo "Executing $ssh_command"
