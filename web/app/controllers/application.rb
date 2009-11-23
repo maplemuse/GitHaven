@@ -2,6 +2,7 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+  before_filter :find_user
   layout "site"
   helper :all # include all helpers, all the time
 
@@ -17,11 +18,20 @@ class ApplicationController < ActionController::Base
 protected
   def find_user
     @user = User.find(session[:user_id])
+    if @user.sshkeys.count == 0
+      flash[:notice] = "To push to GitForest you need to <a href='#{url_for(:controller => 'sshkeys', :action => 'new')}'>add a ssh key</a>.";
+    end
   rescue
-    logger.error("This action requires that you be logged in.")
-    flash[:notice] = "Not logged in."
     @user = nil
-    redirect_to :controller => 'users', :action => 'login'
   end
+
+  def require_login
+    if @user == nil
+        logger.error("This action requires that you be logged in.")
+        flash[:notice] = "Not logged in."
+        redirect_to :controller => 'users', :action => 'login'
+    end
+  end
+
 
 end

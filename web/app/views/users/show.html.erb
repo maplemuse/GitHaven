@@ -19,11 +19,6 @@ Website: <%=h @user.url %><br />
 </ul>
 <%= button_to "Create repository", :controller => 'repositories', :action => 'new' %>
 
-<h2>Keys:</h2>
-<ul id="sshkeys">
-<% for key in @user.sshkeys %>
-    <li><%=link_to h(key.name), :controller => "sshkeys", :action => "show", :id => key.id %></li>
-<% end %>
-</ul>
-<%= button_to "Add Key", :controller => 'sshkeys', :action => 'new' %>
-
+<%=
+@sshkeys = @user.sshkeys
+render(:partial => 'sshkeys/show') %>

@@ -1,5 +1,5 @@
 class RepositoriesController < ApplicationController
-  before_filter :find_user, :except => :index
+  before_filter :require_login, :except => :index
 
   # GET /repositories
   # GET /repositories.xml

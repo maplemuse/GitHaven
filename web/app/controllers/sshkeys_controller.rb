@@ -1,52 +1,14 @@
 class SshkeysController < ApplicationController
-  before_filter :find_user, :except => :index
+  before_filter :require_login
 
-  # GET /sshkeys
-  # GET /sshkeys.xml
-  def index
-    @sshkeys = Sshkey.find(:all)
-    if @sshkeys.count == 0
-        flash[:notice] = 'No SSHkeys.'
-    end
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @sshkeys }
-    end
-  end
-
-  # GET /sshkeys/1
-  # GET /sshkeys/1.xml
-  def show
-    @sshkey = Sshkey.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @sshkey }
-    end
-  end
-
-  # GET /sshkeys/new
-  # GET /sshkeys/new.xml
   def new
     @sshkey = Sshkey.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @sshkey }
-    end
   end
 
-  # GET /sshkeys/1/edit
   def edit
     @sshkey = Sshkey.find(params[:id])
   end
 
-  def update_authorizedkeys
-    system("/home/ben/learningrails/pg/bin/gitforest-generateauthorizedkeys")
-  end
-
-  # POST /sshkeys
-  # POST /sshkeys.xml
   def create
     @sshkey = Sshkey.new(params[:sshkey])
     @user.sshkeys << @sshkey
@@ -55,7 +17,7 @@ class SshkeysController < ApplicationController
       if @user.save
         update_authorizedkeys
         flash[:notice] = 'SSHkey was successfully created.'
-        format.html { redirect_to(@sshkey) }
+        format.html { redirect_to(:controller => 'users', :action => 'show', :user => @user.username) }
         format.xml  { render :xml => @sshkey, :status => :created, :location => @sshkey }
       else
         format.html { render :action => "new" }
@@ -64,8 +26,6 @@ class SshkeysController < ApplicationController
     end
   end
 
-  # PUT /sshkeys/1
-  # PUT /sshkeys/1.xml
   def update
     @sshkey = Sshkey.find(params[:id])
 
@@ -73,7 +33,7 @@ class SshkeysController < ApplicationController
       if @sshkey.update_attributes(params[:sshkey])
         update_authorizedkeys
         flash[:notice] = 'SSHkey was successfully updated.'
-        format.html { redirect_to(@sshkey) }
+        format.html { redirect_to(:controller => 'users', :action => 'show', :user => @user.username) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -82,16 +42,20 @@ class SshkeysController < ApplicationController
     end
   end
 
-  # DELETE /sshkeys/1
-  # DELETE /sshkeys/1.xml
   def destroy
     @sshkey = Sshkey.find(params[:id])
     @sshkey.destroy
     update_authorizedkeys
 
     respond_to do |format|
-      format.html { redirect_to(sshkeys_url) }
+      format.html { redirect_to(:controller => 'users', :action => 'show', :user => @user.username) }
       format.xml  { head :ok }
     end
   end
+
+private:
+  def update_authorizedkeys
+    system("/home/ben/learningrails/pg/bin/gitforest-generateauthorizedkeys")
+  end
+
 end
