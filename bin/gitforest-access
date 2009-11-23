@@ -1,14 +1,17 @@
-#!/bin/sh -ex
-#
-#
-
-if [ "${access}" = "read" ] ; then
-  # Everyone has read access
-  return 0
-fi
+#!/bin/bash -e
 
 access="${1}"
 user_id="${2}"
+
+if [[ -z "${access}" || -z "${user_id}" ]] ; then
+  echo "Internal error, user id or access not found" >&2
+  exit 1
+fi
+
+if [ "${access}" = "read" ] ; then
+  # Everyone has read access
+  exit 0
+fi
 
 # repositories should come in user/repo.git
 reponame="${3}"
@@ -21,19 +24,18 @@ echo "owner $repo_owner name $repo_name id $repoowner_id id $repo_id"
 
 # The owner of the repo can always modify the repo
 if [ "${user_id}" = "${repoowner_id}" ] ; then
-    return 0;
+  exit 0
 fi
 
 if [ "${access}" = "write" ] ; then
-  good=`gitforest-permissionsforuserid | grep $repo_id`
+  good=`gitforest-permissionsforuserid $user_id | grep $repo_id`
   if [ "${good}" = "${repo_id}" ] ; then
-    return 0
+    exit 0
   fi
 
   echo "You do not have write access to $reponame.  Access is denied";
-  return 1
+  exit 1
 fi
 
 echo "Invalid authorization check: ${access}"
-return 1
-
+exit 1
