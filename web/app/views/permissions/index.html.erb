@@ -8,8 +8,8 @@
 
 <% for permission in @permissions %>
   <tr>
-    <td><%=h permission.repository_id %></td>
-    <td><%=h permission.user_id %></td>
+    <td><%=h permission.repository.name %></td>
+    <td><%=h permission.user.username %></td>
     <td><%= link_to 'Show', permission %></td>
     <td><%= link_to 'Edit', edit_permission_path(permission) %></td>
     <td><%= link_to 'Destroy', permission, :confirm => 'Are you sure?', :method => :delete %></td>

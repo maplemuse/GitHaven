@@ -24,7 +24,9 @@ class PermissionsController < ApplicationController
   # GET /permissions/new
   # GET /permissions/new.xml
   def new
+    @repository = Repository.find(params[:repo])
     @permission = Permission.new
+    @permission.repository = @repository
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,9 +43,12 @@ class PermissionsController < ApplicationController
   # POST /permissions.xml
   def create
     @permission = Permission.new(params[:permission])
+    @repository = @permission.repository
+    @permission.user_id = User.find_by_username(params[:user]).id
+    @repository.permissions << @permission
 
     respond_to do |format|
-      if @permission.save
+      if @repository.save
         flash[:notice] = 'Permission was successfully created.'
         format.html { redirect_to(@permission) }
         format.xml  { render :xml => @permission, :status => :created, :location => @permission }
