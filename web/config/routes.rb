@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :permissions
+
   map.resources :sshkeys
 
   map.connect 'login', :controller => 'users', :action => 'login'
