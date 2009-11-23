@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 
 export PATH=$PATH:`dirname $0`
 cd `dirname $0`/../web/db
@@ -25,5 +25,10 @@ elif [ "${cmd}" = "upload-pack" ] ; then
 fi
 
 cd `dirname $0`/../repos
-echo "Executing $ssh_command"
-#git shell -c "${ssh_command}"
+if [ ! -d ${repopath} ] ; then
+    mkdir -p $repopath
+    cd $repopath
+    git init --bare
+fi
+
+git-shell -c "$SSH_ORIGINAL_COMMAND"
