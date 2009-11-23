@@ -23,6 +23,11 @@ class RepositoriesController < ApplicationController
       @repository = Repository.find(params[:id])
     end
     find_owner
+    if !@owner
+        flash[:notice] = "Sorry, but the repository does not exist."
+        redirect_to :action => 'index'
+        return
+    end
     @host = "meyerhome.net"
 
     respond_to do |format|
