@@ -1,0 +1,28 @@
+#!/bin/bash -e
+
+export PATH=$PATH:`dirname $0`
+
+user_id="${1}"
+ssh_command="${SSH_ORIGINAL_COMMAND}"
+
+if [ -z "${ssh_command}" ] ; then
+  echo "SSH_ORIGINAL_COMMAND is not set. Please report this error to the sysadmin."
+  exit 1;
+fi
+
+cmd=`echo $ssh_command | grep '^git' | sed -e 's/\ .*//g' | sed -e 's/git.//g'`
+if [[ "${cmd}" != "receive-pack" && "${cmd}" != "upload-pack" ]] ; then
+  echo "Unauthorized command; aborting"
+  exit 1;
+fi
+
+repo=`echo $ssh_command | sed -e 's/.* //g' -e s/\'//g`
+
+if [ "${cmd}" = "receive-pack" ] ; then
+  gitforest-access "read" "$userid" "$repo"
+elif [ "${cmd}" = "upload-pack" ] ; then
+  gitforest-access "write" "$userid" "$repo"
+fi
+
+echo "Executing $ssh_command"
+#git shell -c $ssh_command

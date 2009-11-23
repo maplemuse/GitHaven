@@ -1,0 +1,9 @@
+#!/bin/sh -e
+name=$1
+table="repositories"
+id=`sqlite3 development.sqlite3 "select id,name from ${table}" | grep "${name}$" | sed -e s/\|"${name}$"//g`
+if [ -z "$id" ] ; then
+    echo "Unknown repository: $name" >&2
+    exit 1
+fi
+echo $id

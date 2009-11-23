@@ -1,0 +1,39 @@
+#!/bin/sh -ex
+#
+#
+
+if [ "${access}" = "read" ] ; then
+  # Everyone has read access
+  return 0
+fi
+
+access="${1}"
+user_id="${2}"
+
+# repositories should come in user/repo.git
+reponame="${3}"
+repo_owner=`echo $reponame | sed -e 's_\(.*\)/\(.*\).git_\1_g'`
+repo_name=`echo $reponame | sed -e 's_\(.*\)/\(.*\).git_\2_g'`
+repoowner_id=`gitforest-idfromusername $repo_owner`
+repo_id=`gitforest-idfromreponame $repo_name`
+
+echo "owner $repo_owner name $repo_name id $repoowner_id id $repo_id"
+
+# The owner of the repo can always modify the repo
+if [ "${user_id}" = "${repoowner_id}" ] ; then
+    return 0;
+fi
+
+if [ "${access}" = "write" ] ; then
+  good=`gitforest-permissionsforuserid | grep $repo_id`
+  if [ "${good}" = "${repo_id}" ] ; then
+    return 0
+  fi
+
+  echo "You do not have write access to $reponame.  Access is denied";
+  return 1
+fi
+
+echo "Invalid authorization check: ${access}"
+return 1
+

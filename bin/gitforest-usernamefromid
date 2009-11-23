@@ -1,0 +1,8 @@
+#!/bin/sh -e
+username=$1
+user_id=`sqlite3 development.sqlite3 "select id,username from users"  | grep $username`
+if [ -z "$user_id" ] ; then
+    echo "Unknown user: $username" >&2
+    exit 1
+fi
+echo $user_id
