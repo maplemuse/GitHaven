@@ -11,7 +11,7 @@
 
 GitForest
 <div id="header" style="float:right">
-<% if session[:user_id] %>
+<% if session[:user_id] && User.find(session[:user_id]) %>
 <%  username = User.find(session[:user_id]).username %>
 <%= link_to username, :user => username, :controller => "users", :action => "show" %> |
 <%= link_to "Preferences", :controller => "users", :action => "edit" %> |
