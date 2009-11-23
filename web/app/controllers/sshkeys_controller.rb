@@ -1,4 +1,6 @@
 class SshkeysController < ApplicationController
+  before_filter :find_user, :except => :index
+
   # GET /sshkeys
   # GET /sshkeys.xml
   def index
@@ -41,9 +43,10 @@ class SshkeysController < ApplicationController
   # POST /sshkeys.xml
   def create
     @sshkey = Sshkey.new(params[:sshkey])
+    @user.sshkeys << @sshkey
 
     respond_to do |format|
-      if @sshkey.save
+      if @user.save
         flash[:notice] = 'Sshkey was successfully created.'
         format.html { redirect_to(@sshkey) }
         format.xml  { render :xml => @sshkey, :status => :created, :location => @sshkey }

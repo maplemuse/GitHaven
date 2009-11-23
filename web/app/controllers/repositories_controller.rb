@@ -126,13 +126,4 @@ private
     end
   end
 
-  def find_user
-    @user = User.find(session[:user_id])
-  rescue
-    logger.error("This action requires that you be logged in.")
-    flash[:notice] = "Not logged in."
-    @user = nil
-    redirect_to :controller => 'users', :action => 'login'
-  end
-
 end

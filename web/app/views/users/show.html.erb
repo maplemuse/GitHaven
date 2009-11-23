@@ -8,12 +8,22 @@ Email: <%=h @user.email %><br />
 Website: <%=h @user.url %><br />
 </div>
 
-<%= button_to "Create repository", :controller => 'repositories', :action => 'new' %>
 
 <h2>Repositories:</h2>
 <ul id="repositories">
 <% for repo in @user.repositories %>
-    <li><%=link_to h(repo.name), :controller => "repositories", :action => "show", :repo => repo.name %></li>
+    <li><%=link_to h(repo.name), :controller => "repositories", :action => "show", :repo => repo.name %>
+    :: <%= repo.description %>
+    </li>
 <% end %>
 </ul>
+<%= button_to "Create repository", :controller => 'repositories', :action => 'new' %>
+
+<h2>Keys:</h2>
+<ul id="sshkeys">
+<% for key in @user.sshkeys %>
+    <li><%=link_to h(key.name), :controller => "sshkeys", :action => "show", :id => key.id %></li>
+<% end %>
+</ul>
+<%= button_to "Add Key", :controller => 'sshkeys', :action => 'new' %>
 
