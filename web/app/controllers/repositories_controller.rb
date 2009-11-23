@@ -105,7 +105,7 @@ class RepositoriesController < ApplicationController
     @repository.destroy
 
     respond_to do |format|
-      format.html { redirect_to(repositories_url) }
+      format.html { redirect_to(:controller => 'users', :action => 'show', :user => @user.username ) }
       format.xml  { head :ok }
     end
   end
