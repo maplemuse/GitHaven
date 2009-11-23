@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   validates_presence_of   :username
   validates_uniqueness_of :username
+  validates_presence_of   :email
 
   attr_accessor :password_confirmation
   validates_confirmation_of   :password
@@ -48,6 +49,7 @@ private
     self.salt = self.object_id.to_s + rand.to_s
   end
 
+private
   def password_non_blank
     errors.add(:password, 'Missing password') if hashed_password.blank?
   end
