@@ -7,7 +7,7 @@
 </div>
 
 <div id="repository">
-<%=h(@owner.username) %> / <b><%=h @repository.name %></b><br />
+<%= link_to h(@owner.username), :controller => 'users', :action => 'show', :user => @owner.username %> / <b><%= link_to h @repository.name %></b><br />
 Description: <%=h @repository.description %><br />
 Homepage: <%=h @repository.url %><br />
 Public Clone URL: <b>git://<%= @host + ':' + h(@owner.username) + '/' + h(@repository.name) + '.git' %></b><br />
