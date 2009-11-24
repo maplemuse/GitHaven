@@ -53,7 +53,7 @@ class SshkeysController < ApplicationController
     end
   end
 
-private:
+private
   def update_authorizedkeys
     system("/home/ben/learningrails/pg/bin/gitforest-generateauthorizedkeys")
   end
