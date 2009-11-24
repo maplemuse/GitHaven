@@ -1,7 +1,7 @@
 require 'grit'
 
 class RepositoriesController < ApplicationController
-  before_filter :require_login, :except => [:index, :show]
+  before_filter :require_login, :except => [:index, :show, :commits, :commit]
 
   def location
     return "/home/ben/learningrails/pg/repos/" + @repository.user.username + "/" + @repository.name + ".git"
@@ -20,9 +20,7 @@ class RepositoriesController < ApplicationController
     end
   end
 
-  # GET /repositories/1
-  # GET /repositories/1.xml
-  def show
+  def find_repository
     if params[:repo]
       @repository = Repository.find_by_name(params[:repo])
     else
@@ -30,13 +28,56 @@ class RepositoriesController < ApplicationController
     end
     find_owner
     if !@owner
-        flash[:notice] = "Sorry, but the repository does not exist."
-        redirect_to :action => 'index'
-        return
+      flash[:notice] = "Sorry, but the repository does not exist."
+      redirect_to :action => 'index'
+      return false;
     end
     @host = "meyerhome.net"
     @repo = Grit::Repo.new(location())
+    return true
+    rescue
+    flash[:notice] = "Sorry, but the repository is currently empty."
+    return true
+  end
 
+  # GET /repositories/1
+  # GET /repositories/1.xml
+  def show
+    if !find_repository
+      return
+    end
+
+    if @repo
+        @commits = @repo.commits('master', 1)
+    end
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @repository }
+    end
+  end
+
+  def commits
+    if !find_repository
+      return
+    end
+    if @repo
+        @commits = @repo.commits('master', 20)
+    end
+    respond_to do |format|
+      format.html
+      format.xml  { render :xml => @repository }
+    end
+  end
+
+  def commit
+    if !find_repository
+      return
+    end
+    if !params[:sha1]
+      redirect_to :action => 'index'
+    end
+    @sha1 = params[:sha1]
+    @commits = @repo.commits(@sha1, 1);
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @repository }
@@ -129,7 +170,7 @@ private
 
   def find_owner
     if @repository
-      @owner = User.find(@repository.user_id)
+      @owner = @repository.user
     end
   end
 

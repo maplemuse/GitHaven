@@ -1,0 +1,24 @@
+<div id="repoheader">
+  <%= link_to 'Source', :action => 'tree' %>
+  | <%= link_to 'Commits', :action => 'commits' %>
+  <% if @owner == @user -%>
+  | <%= link_to 'Admin', edit_repository_path(@repository) %>
+  <% end -%>
+</div>
+<hr>
+<% if @repo %>
+Branches:
+<% for branch in @repo.branches() %>
+<%= h branch.name %><br />
+<% end %>
+<% end %>
+
+<div id="repository">
+<%= link_to h(@owner.username), :controller => 'users', :action => 'show', :user => @owner.username %> / <b><%= link_to h @repository.name %></b><br />
+Description: <%=h @repository.description %><br />
+Homepage: <%=h @repository.url %><br />
+Public Clone URL: <b>git://<%= @host + ':' + h(@owner.username) + '/' + h(@repository.name) + '.git' %></b><br />
+Your Clone URL: <b>git@<%= @host + ':' + h(@owner.username) + '/' + h(@repository.name) + '.git' %></b><br />
+</div>
+
+

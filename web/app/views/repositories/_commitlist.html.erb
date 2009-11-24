@@ -1,0 +1,10 @@
+<% if @commits %>
+    <% for commit in @commits %>
+    <div class="commit">
+    <%= h commit.message %><br />
+    <%= h commit.author %><br />
+    <%= h commit.date() %><br />
+    Commit: <%= link_to h(commit.sha), :action => 'commit', :sha1 => commit.sha %><br />
+    </div>
+    <% end %>
+<% end %>

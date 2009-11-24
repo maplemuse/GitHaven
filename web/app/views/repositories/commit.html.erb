@@ -1,0 +1,5 @@
+<%= render(:partial => 'repositorytop.html.erb') %>
+<%= render(:partial => 'commitlist.html.erb') %>
+<pre>
+<%= @commits.first.to_patch %>
+</pre>

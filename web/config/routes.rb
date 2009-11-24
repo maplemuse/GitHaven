@@ -20,6 +20,27 @@ ActionController::Routing::Routes.draw do |map|
       :action => 'show',
       :conditions => { :method => :get }
 
+  map.connect ':user/:repo/tree',
+      :controller => 'repositories',
+      :action => 'show',
+      :conditions => { :method => :get }
+
+  map.connect ':user/:repo/tree/:branch/:path',
+      :controller => 'repositories',
+      :action => 'show',
+      :conditions => { :method => :get }
+
+  map.connect ':user/:repo/commits',
+      :controller => 'repositories',
+      :action => 'commits',
+      :conditions => { :method => :get }
+
+  map.connect ':user/:repo/commit/:sha1',
+      :controller => 'repositories',
+      :action => 'commit',
+      :conditions => { :method => :get }
+
+
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 end
