@@ -9,8 +9,9 @@
 </head>
 <body>
 
-GitForest
-<div id="header" style="float:right">
+<div id="header">
+    𝜩 GitForest
+<div id="account" style="float:right">
 <% if session[:user_id] && User.exists?(session[:user_id]) %>
 <%  username = User.find(session[:user_id]).username %>
 <%= link_to username, :user => username, :controller => "users", :action => "show" %> |
@@ -21,8 +22,7 @@ GitForest
 <%= link_to "Login", :controller => "users", :action => "login" %>
 <% end %>
 </div>
-
-<hr>
+</div>
 
 <div id="main">
 <p style="color: green"><%= flash[:notice] %></p>
@@ -30,7 +30,6 @@ GitForest
 </div>
 
 <div id="footer">
-<hr>
 GitForest is Copyright Benjamin Meyer 2009
 </div>
 

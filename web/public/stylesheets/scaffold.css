@@ -1,4 +1,8 @@
-body { background-color: #fff; color: #333; }
+body {
+    margin: 0;
+    background-color: #fff;
+    color: #333;
+}
 
 body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
@@ -64,5 +68,28 @@ a:hover { color: #fff; background-color:#000; }
   padding: 1em;
   background-color: #FFFFCC;
   border: 1px solid #FFFF66;
+}
+
+#header {
+  border-bottom: 1px solid #66ccff;
+}
+
+#main {
+    height: auto !important;
+    margin: 1em;
+}
+
+#footer {
+  height: 1.4em;
+  clear: both;
+  bottom: 0px;
+  width: 100%;
+  position: fixed;
+  border-top: 1px solid #66ccff;
+}
+
+#footer, #header {
+  padding: .25em .5em;
+  background-color: #ccffff;
 }
 
