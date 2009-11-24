@@ -75,6 +75,12 @@ class UsersController < ApplicationController
   # POST /users.xml
   def create
     @user = User.new(params[:user])
+    if !params[:sshkey].empty?
+        @sshkey = Sshkey.new()
+        @sshkey.name = 'Default'
+        @sshkey.key = params[:sshkey]
+        @user.sshkeys << @sshkey
+    end
 
     respond_to do |format|
       if @user.save

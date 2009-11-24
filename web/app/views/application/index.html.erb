@@ -1,6 +1,6 @@
-<% if @user %>
+<% if !@user %>
 <center>
-<%= button_to "Sign up now!", new_user_path %>
+<%= button_to "Sign up now!", 'signup', :method => 'get' %>
 </center>
 <% end %>
 
