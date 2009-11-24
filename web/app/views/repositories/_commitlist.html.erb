@@ -1,10 +1,11 @@
 <% if @commits %>
     <% for commit in @commits %>
     <div class="commit">
-    <%= h commit.message %><br />
+    <%= link_to h(commit.message), :action => 'commit', :sha1 => commit.sha %><br />
     <%= h commit.author %><br />
-    <%= h commit.date() %><br />
+    <%= Date::MONTHNAMES[commit.date.mon] %> <%= commit.date.mday %>, <%= commit.date.year %><br />
     Commit: <%= link_to h(commit.sha), :action => 'commit', :sha1 => commit.sha %><br />
+    Parent: <%= link_to h(commit.parents[0].sha), :action => 'commit', :sha1 => commit.parents[0].sha %><br />
     </div>
     <% end %>
 <% end %>
