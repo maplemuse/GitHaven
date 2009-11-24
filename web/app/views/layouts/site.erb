@@ -15,7 +15,7 @@
 <div id="account" style="float:right">
 <% if session[:user_id] && User.exists?(session[:user_id]) %>
 <%  username = User.find(session[:user_id]).username %>
-<%= link_to username, :user => username, :controller => 'users', :action => 'show' %> |
+<%= link_to h(username), :user => username, :controller => 'users', :action => 'show' %> |
 <%= link_to t 'user.preferences', :controller => 'users', :action => 'edit' %> |
 <%= link_to t 'user.logout', :controller => 'users', :action => 'logout' %>
 <% else %>
