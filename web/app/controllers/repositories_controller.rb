@@ -1,5 +1,11 @@
+require 'grit'
+
 class RepositoriesController < ApplicationController
   before_filter :require_login, :except => :index
+
+  def location
+    return "/home/ben/learningrails/pg/repos/" + @user.username + "/" + @repository.name + ".git"
+  end
 
   # GET /repositories
   # GET /repositories.xml
@@ -29,6 +35,7 @@ class RepositoriesController < ApplicationController
         return
     end
     @host = "meyerhome.net"
+    @repo = Grit::Repo.new(location())
 
     respond_to do |format|
       format.html # show.html.erb
