@@ -11,12 +11,9 @@ class User < ActiveRecord::Base
 
   attr_accessor :password_confirmation
   validates_confirmation_of   :password
+  attr_protected :hashed_password
 
   validate :password_non_blank
-
-  def addRepository(repository)
-    repositories << repository
-  end
 
   def self.authenticate(username, password)
     user = self.find_by_username(username)
@@ -50,7 +47,6 @@ private
     self.salt = self.object_id.to_s + rand.to_s
   end
 
-private
   def password_non_blank
     errors.add(:password, 'Missing password') if hashed_password.blank?
   end
