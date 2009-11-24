@@ -16,11 +16,11 @@
 <% if session[:user_id] && User.exists?(session[:user_id]) %>
 <%  username = User.find(session[:user_id]).username %>
 <%= link_to h(username), :user => username, :controller => 'users', :action => 'show' %> |
-<%= link_to t 'user.preferences', :controller => 'users', :action => 'edit' %> |
-<%= link_to t 'user.logout', :controller => 'users', :action => 'logout' %>
+<%= link_to t('user.preferences'), :controller => 'users', :action => 'edit' %> |
+<%= link_to t('user.logout'), :controller => 'users', :action => 'logout' %>
 <% else %>
-<%= link_to t 'user.signup', :controller => 'users', :action => 'new' %> |
-<%= link_to t 'user.login', :controller => 'users', :action => 'login' %>
+<%= link_to t('user.signup'), :controller => 'users', :action => 'new' %> |
+<%= link_to t('user.login'), :controller => 'users', :action => 'login' %>
 <% end %>
 </div>
 </div>
