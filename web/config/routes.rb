@@ -8,10 +8,6 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'signup',      :controller => 'users', :action => 'new'
   map.connect 'preferences', :controller => 'users', :action => 'edit'
  
-  map.resources :user do |user|
-    user.connect ':repo', :controller => 'repositories'
-  end
-
   # RESTful Routes
   map.resources :users
   map.resources :sshkeys
