@@ -23,7 +23,7 @@ protected
   def find_user
     @user = User.find(session[:user_id])
     if @user.sshkeys.count == 0
-      flash[:notice] = "To push to GitForest you need to <a href='#{url_for(:controller => 'sshkeys', :action => 'new')}'>add a ssh key</a>.";
+      flash[:notice] = "Note: to push to a repository you need to <a href='#{url_for(:controller => 'sshkeys', :action => 'new')}'>add a ssh key</a>.";
     end
   rescue
     @user = nil
@@ -36,6 +36,5 @@ protected
         redirect_to :controller => 'users', :action => 'login'
     end
   end
-
 
 end
