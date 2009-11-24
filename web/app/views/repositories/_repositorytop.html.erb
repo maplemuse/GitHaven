@@ -1,6 +1,6 @@
 <div id="repoheader">
-  <%= link_to 'Source', :action => 'tree' %>
-  | <%= link_to 'Commits', :action => 'commits' %>
+  <%= link_to 'Source', :action => 'show' %>
+  | <%= link_to 'Commits', :controller => 'repositories', :action => 'commits', :repo => @repository.name, :user => @repository.user.username %>
   <% if @owner == @user -%>
   | <%= link_to 'Admin', edit_repository_path(@repository) %>
   <% end -%>
