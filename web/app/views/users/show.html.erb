@@ -17,8 +17,12 @@ Website: <%=h @user.url %><br />
     </li>
 <% end %>
 </ul>
+<% if session[:userid] %>
 <%= button_to "Create repository", :controller => 'repositories', :action => 'new' %>
+<% end %>
 
-<%=
+<%= if session[:userid]
 @sshkeys = @user.sshkeys
-render(:partial => 'sshkeys/show') %>
+render(:partial => 'sshkeys/show')
+end
+%>
