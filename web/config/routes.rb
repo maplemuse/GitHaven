@@ -1,19 +1,27 @@
 ActionController::Routing::Routes.draw do |map|
+  # Root
   map.root :controller => 'application'
 
-  map.connect 'login', :controller => 'users', :action => 'login'
-  map.connect 'logout', :controller => 'users', :action => 'logout'
-  map.connect 'signup', :controller => 'users', :action => 'new'
+  # Named Routes
+  map.connect 'login',       :controller => 'users', :action => 'login'
+  map.connect 'logout',      :controller => 'users', :action => 'logout'
+  map.connect 'signup',      :controller => 'users', :action => 'new'
   map.connect 'preferences', :controller => 'users', :action => 'edit'
  
-  map.resources :permissions
+  map.resources :user do |user|
+    user.connect ':repo', :controller => 'repositories'
+  end
+
+  # RESTful Routes
+  map.resources :users
   map.resources :sshkeys
   map.resources :repositories
-  map.resources :users
+  map.resources :permissions
 
   map.connect ':user',
       :controller => 'users',
-      :action => 'show'
+      :action => 'show',
+      :conditions => { :method => :get }
 
   map.connect ':user/:repo',
       :controller => 'repositories',
@@ -25,7 +33,7 @@ ActionController::Routing::Routes.draw do |map|
       :action => 'show',
       :conditions => { :method => :get }
 
-  map.connect ':user/:repo/tree/:branch/:path',
+  map.connect ':user/:repo/tree/:branch/*:path',
       :controller => 'repositories',
       :action => 'show',
       :conditions => { :method => :get }
@@ -40,7 +48,7 @@ ActionController::Routing::Routes.draw do |map|
       :action => 'commit',
       :conditions => { :method => :get }
 
-
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  # Default Routes
+  #map.connect ':controller/:action/:id'
+  #map.connect ':controller/:action/:id.:format'
 end
