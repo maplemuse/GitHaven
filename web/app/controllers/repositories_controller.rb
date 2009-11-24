@@ -43,9 +43,7 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1
   # GET /repositories/1.xml
   def show
-    if !find_repository
-      return
-    end
+    return if !find_repository
 
     if @repo
         @commits = @repo.commits('master', 1)
@@ -57,9 +55,7 @@ class RepositoriesController < ApplicationController
   end
 
   def commits
-    if !find_repository
-      return
-    end
+    return if !find_repository
     if @repo
         @commits = @repo.commits('master', 20)
     end
@@ -108,7 +104,7 @@ class RepositoriesController < ApplicationController
   # POST /repositories.xml
   def create
     @repository = Repository.new(params[:repository])
-    @user.addRepository(@repository)
+    @user.repositories << @repository
     respond_to do |format|
       if @user.save
         flash[:notice] = 'Repository was successfully created.'
