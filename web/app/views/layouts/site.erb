@@ -15,18 +15,18 @@
 <div id="account" style="float:right">
 <% if session[:user_id] && User.exists?(session[:user_id]) %>
 <%  username = User.find(session[:user_id]).username %>
-<%= link_to username, :user => username, :controller => "users", :action => "show" %> |
-<%= link_to "Preferences", :controller => "users", :action => "edit" %> |
-<%= link_to "Logout", :controller => "users", :action => "logout" %>
+<%= link_to username, :user => username, :controller => 'users', :action => 'show' %> |
+<%= link_to t 'user.preferences', :controller => 'users', :action => 'edit' %> |
+<%= link_to t 'user.logout', :controller => 'users', :action => 'logout' %>
 <% else %>
-<%= link_to "Signup", :controller => "users", :action => "new" %> |
-<%= link_to "Login", :controller => "users", :action => "login" %>
+<%= link_to t 'user.signup', :controller => 'users', :action => 'new' %> |
+<%= link_to t 'user.login', :controller => 'users', :action => 'login' %>
 <% end %>
 </div>
 </div>
 
 <div id="main">
-<p style="color: green"><%= flash[:notice] %></p>
+<div id="flash"><%= flash[:notice] %></div>
 <%= yield  %>
 </div>
 

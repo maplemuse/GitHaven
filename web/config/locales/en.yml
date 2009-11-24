@@ -3,3 +3,8 @@
 
 en:
   hello: "Hello world"
+  user:
+    preferences: "Preferences"
+    login: "Login"
+    logout: "Logout"
+    signup: "Signup"

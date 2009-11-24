@@ -102,3 +102,7 @@ a:hover { color: #fff; background-color:#000; }
 #background:   #f8b0f8;
 }
 
+#flash {
+    color: red;
+}
+
