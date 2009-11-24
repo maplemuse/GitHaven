@@ -18,7 +18,7 @@ Website: <%=h @user.url %><br />
 <% end %>
 </ul>
 <% if session[:user_id] %>
-<%= button_to "Create repository", :controller => 'repositories', :action => 'new' %>
+<%= button_to "Create repository", {:controller => 'repositories', :action => 'new'}, :method => :get %>
 <% end %>
 
 <%= if session[:user_id]
