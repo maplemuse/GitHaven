@@ -1,10 +1,10 @@
 require 'grit'
 
 class RepositoriesController < ApplicationController
-  before_filter :require_login, :except => :index
+  before_filter :require_login, :except => [:index, :show]
 
   def location
-    return "/home/ben/learningrails/pg/repos/" + @user.username + "/" + @repository.name + ".git"
+    return "/home/ben/learningrails/pg/repos/" + @repository.user.username + "/" + @repository.name + ".git"
   end
 
   # GET /repositories
