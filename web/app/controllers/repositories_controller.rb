@@ -32,7 +32,7 @@ class RepositoriesController < ApplicationController
       redirect_to :action => 'index'
       return false;
     end
-    @host = "meyerhome.net"
+    @host = request.host
     @repo = Grit::Repo.new(location())
     return true
     rescue
