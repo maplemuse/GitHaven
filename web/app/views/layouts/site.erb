@@ -10,7 +10,8 @@
 <body>
 
 <div id="header">
-    𝜩 GitForest
+ 𝜩 
+<%= link_to "GitForest", :controller => 'application' %>
 <div id="account" style="float:right">
 <% if session[:user_id] && User.exists?(session[:user_id]) %>
 <%  username = User.find(session[:user_id]).username %>

@@ -93,3 +93,11 @@ a:hover { color: #fff; background-color:#000; }
   background-color: #ccffff;
 }
 
+#main .list-line-even {
+#background:   #e0f8f8;
+}
+
+#main .list-line-odd {
+#background:   #f8b0f8;
+}
+

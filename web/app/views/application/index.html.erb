@@ -1,0 +1,22 @@
+<% if @user %>
+<center>
+<%= button_to "Sign up now!", new_user_path %>
+</center>
+<% end %>
+
+<div id="repositories">
+<% if !@repositories.empty? %>
+<h2>Repositories</h2>
+<table>
+<% for repository in @repositories %>
+  <tr class="<%= cycle('list-line-odd', 'list-line-even') %>">
+    <td><%=link_to h(repository.user.username), :user => repository.user.username, :controller => 'users', :action => 'show' %></td>
+    <td>/</td>
+    <td><%=link_to h(repository.name), :controller => 'repositories', :action => 'show', :user => repository.user.username, :repo => repository.name %></td>
+    <td>::</td>
+  <td><%=h repository.description %></td>
+  </tr>
+<% end %>
+</table>
+<% end %>
+</div>
