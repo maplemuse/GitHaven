@@ -1,5 +1,6 @@
-<h1>Listing sshkeys</h1>
+<h2>SSH keys:</h2>
 
+<% if !@sshkeys.empty? %>
 <table>
   <tr>
     <th>Name</th>
@@ -14,5 +15,5 @@
 <% end %>
 </table>
 <br />
-
+<%end %>
 <%= button_to "Add Key", new_sshkey_path, :method => :get %>
