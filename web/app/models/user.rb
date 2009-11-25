@@ -2,8 +2,8 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
   is_gravtastic!(:source => "avatar")
-  has_many :repositories
-  has_many :sshkeys
+  has_many :repositories, :dependent => :destroy
+  has_many :sshkeys, :dependent => :destroy
 
   validates_presence_of   :username
   validates_uniqueness_of :username
