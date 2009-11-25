@@ -26,6 +26,7 @@ protected
       flash[:notice] = "Note: to push to a repository you need to <a href='#{url_for(:controller => 'sshkeys', :action => 'new')}'>add a ssh key</a>.";
     end
   rescue
+    session[:user_id] = nil
     @user = nil
   end
 
