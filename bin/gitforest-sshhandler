@@ -6,13 +6,13 @@ cd `dirname $0`/../web/db
 ssh_command="${SSH_ORIGINAL_COMMAND}"
 
 if [ -z "${ssh_command}" ] ; then
-  echo "SSH_ORIGINAL_COMMAND is not set. Please report this error to the sysadmin."
+  echo "SSH_ORIGINAL_COMMAND is not set. Please report this error to the sysadmin." >&2
   exit 1;
 fi
 
 cmd=`echo "${ssh_command}" | grep '^git' | sed -e 's/\ .*//g' | sed -e 's/git.//g'`
 if [[ "${cmd}" != "receive-pack" && "${cmd}" != "upload-pack" ]] ; then
-  echo "Unauthorized command; aborting."
+  echo "Unauthorized command; aborting." >&2
   exit 1;
 fi
 
