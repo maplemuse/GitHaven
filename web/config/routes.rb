@@ -33,7 +33,7 @@ ActionController::Routing::Routes.draw do |map|
       :action => 'show',
       :conditions => { :method => :get }
 
-  map.connect ':user/:repo/tree/:branch/*:path',
+  map.connect ':user/:repo/tree/:branch/*path',
       :controller => 'repositories',
       :action => 'show',
       :conditions => { :method => :get }

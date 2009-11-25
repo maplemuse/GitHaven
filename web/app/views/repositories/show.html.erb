@@ -1,10 +1,43 @@
+<%=
+=begin
+Copyright 2009 Benjamin Meyer
+=end
+%>
 <%= render(:partial => 'repositorytop.html.erb') %>
 <%= render(:partial => 'commitlist.html.erb') %>
 
 <% if @repo %>
+
+<% if @path %>
+<% top_path = "" %>
+<%= link_to h(@repository.name), @repository %>/
+<% for f in @path -%>
+<%= link_to_path(top_path, f) %>
+<% top_path += f; -%> /
+<% end -%>
+<% end %>
+
+
+<% if !@tree.mode || @tree.mode == "040000" %>
 <div id="tree">
-<% for f in @repo.commits.last.tree.contents %>
-<%=    h f.name %><br/>
+<% for f in @tree.contents %>
+<%= link_to_path(@joinedpath, f.name) %>
+<%= "/" if f.mode == "040000" %> <br/>
+<% readmefile = f if f.name == "README"; %>
 <%  end %>
 </div>
+<% else %>
+<% readmefile = @tree %>
+<% end %>
+
+<% if readmefile %>
+<p>
+<%= readmefile.name %>
+<div id="data">
+<pre>
+<%= readmefile.data %>
+</pre>
+</div>
+<% end %>
+
 <% end %>
