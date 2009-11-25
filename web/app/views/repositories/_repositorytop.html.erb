@@ -22,4 +22,6 @@ Public Clone URL: <b>git://<%= @host + ':' + h(@owner.username) + '/' + h(@repos
 Your Clone URL: <b>git@<%= @host + ':' + h(@owner.username) + '/' + h(@repository.name) + '.git' %></b><br />
 </div>
 
-
+<% if !@repo %>
+<%= render(:partial => 'emptyrepo.html.erb') %>
+<% end %>

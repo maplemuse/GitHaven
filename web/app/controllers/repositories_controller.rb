@@ -36,7 +36,6 @@ class RepositoriesController < ApplicationController
     @repo = Grit::Repo.new(location())
     return true
     rescue
-    flash[:notice] = "Sorry, but the repository is currently empty."
     return true
   end
 
