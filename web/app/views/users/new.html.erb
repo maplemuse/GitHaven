@@ -1,9 +1,7 @@
-
-<h2>Sign up</h2><%= link_to '(login)', 'login' %>
+<h2><%= t('user.signup')%></h2><%= link_to ("("+t('user.login')+')'), 'login' %>
 
 <% form_for(@user) do |f| %>
   <%= f.error_messages %>
-
   <p>
     <%= f.label :username %><br />
     <%= f.text_field :username %>
@@ -27,6 +25,6 @@
  
   <p>
     <%= link_to "Terms of Service" %><br />
-    <%= f.submit "Agree and signup!" %>
+    <%= f.submit "Agree and Signup!" %>
   </p>
 <% end %>
