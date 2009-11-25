@@ -28,6 +28,12 @@
   </p>
 <% end %>
 
+<%=
+@sshkeys = @user.sshkeys
+render(:partial => 'sshkeys/show')
+%>
+
+<hr>
 <p>
 <%= button_to 'Delete my Account', @user, :confirm => 'Are you sure?', :method => :delete  %>
 </p>

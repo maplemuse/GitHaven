@@ -1,5 +1,5 @@
 <div id="user">
-<%= image_tag @user.gravatar_url %>
+<%= image_tag @user.gravatar_url(:size => 48) %>
 <h1><%=h @user.username %></h1>
 
 <% if @user.name %>(<%=h @user.name %>)<% end %>
@@ -14,16 +14,12 @@
 <ul id="repositories">
 <% for repo in @user.repositories %>
     <li><%=link_to h(repo.name), :controller => "repositories", :action => "show", :repo => repo.name %>
+    <% if !repo.description.empty? %>
     :: <%= repo.description %>
+    <% end %>
     </li>
 <% end %>
 </ul>
 <% if session[:user_id] %>
-<%= button_to "Create repository", {:controller => 'repositories', :action => 'new'}, :method => :get %>
+<%= button_to "Create New Repository", {:controller => 'repositories', :action => 'new'}, :method => :get %>
 <% end %>
-
-<%= if session[:user_id]
-@sshkeys = @user.sshkeys
-render(:partial => 'sshkeys/show')
-end
-%>
