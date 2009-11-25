@@ -1,11 +1,13 @@
 <% if @commits %>
     <% for commit in @commits %>
     <div class="commit">
-    <%= link_to h(commit.message), :action => 'commit', :sha1 => commit.sha %><br />
+    <%= link_to h(commit.message), {:user => @repository.user.username, :repo => @repository.name, :action => 'commit', :sha1 => commit.sha, :controller => 'repositories'} %><br />
     <%= h commit.author %><br />
     <%= Date::MONTHNAMES[commit.date.mon] %> <%= commit.date.mday %>, <%= commit.date.year %><br />
-    Commit: <%= link_to h(commit.sha), :action => 'commit', :sha1 => commit.sha %><br />
-    Parent: <%= link_to h(commit.parents[0].sha), :action => 'commit', :sha1 => commit.parents[0].sha %><br />
+    Commit: <%= link_to h(commit.sha),
+        {:user => @repository.user.username, :repo => @repository.name, :action => 'commit', :sha1 => commit.sha, :controller => 'repositories'} %><br />
+    Parent: <%= link_to h(commit.parents[0].sha),
+        {:user => @repository.user.username, :repo => @repository.name, :action => 'commit', :sha1 => commit.parents[0].sha, :controller => 'repositories'} %><br />
     </div>
     <% end %>
 <% end %>
