@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :require_login, :except => [:login, :index, :show, :new, :create ]
+
   def login
     session[:user_id] = nil
     if request.post?
@@ -20,7 +22,6 @@ class UsersController < ApplicationController
     redirect_to(:action => 'login')
   end
 
-
   # GET /users
   # GET /users.xml
   def index
@@ -32,22 +33,20 @@ class UsersController < ApplicationController
     end
   end
 
-  def find_username_arg
+  # GET /users/1
+  # GET /users/1.xml
+  def show
     if params[:id]
         @user = User.find(params[:id])
     else
         @user = User.find_by_username(params[:user])
     end
-  end
-
-  # GET /users/1
-  # GET /users/1.xml
-  def show
-    find_username_arg
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user }
     end
+    rescue
+    redirect_to :action => :index
   end
 
   # GET /users/new
@@ -63,12 +62,6 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    session_user = User.find(session[:user_id])
-    if !session_user
-        redirect_to(:action => 'login')
-        return
-    end
-    @user = session_user
   end
 
   # POST /users
@@ -97,8 +90,6 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
-    find_username_arg
-
     respond_to do |format|
       if @user.update_attributes(params[:user])
         flash[:notice] = "Successfully updated user #{@user.username}."
@@ -114,7 +105,6 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.xml
   def destroy
-    find_username_arg
     session[:user_id] = nil
 
     @user.destroy
