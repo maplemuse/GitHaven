@@ -26,11 +26,10 @@ class PermissionsController < ApplicationController
     @repository = @permission.repository
     @permission.user_id = User.find_by_username(params[:user]).id
     @repository.permissions << @permission
-
     respond_to do |format|
       if @repository.save && @permission.save
         flash[:notice] = 'Permission was successfully created.'
-        format.html { redirect_to(@permission) }
+        format.html { redirect_to(edit_repository_url(@repository)) }
         format.xml  { render :xml => @permission, :status => :created, :location => @permission }
       else
         format.html { render :action => "new" }
@@ -47,7 +46,7 @@ class PermissionsController < ApplicationController
     respond_to do |format|
       if @permission.update_attributes(params[:permission])
         flash[:notice] = 'Permission was successfully updated.'
-        format.html { redirect_to(@permission) }
+        format.html { redirect_to(edit_repository_url(@permission.repository)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -60,9 +59,11 @@ class PermissionsController < ApplicationController
   # DELETE /permissions/1.xml
   def destroy
     @permission = Permission.find(params[:id])
+    @repository = @permission.repository
     @permission.destroy
 
     respond_to do |format|
+      format.html { redirect_to(edit_repository_url(@repository)) }
       format.html { redirect_to(permissions_url) }
       format.xml  { head :ok }
     end

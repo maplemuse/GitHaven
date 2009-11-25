@@ -14,6 +14,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :repositories
   map.resources :permissions
 
+  map.connect 'permissions/:action/:repo',
+      :controller => 'permissions',
+      :conditions => { :method => :get }
+
   map.connect ':user',
       :controller => 'users',
       :action => 'show',

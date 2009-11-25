@@ -1,6 +1,4 @@
-<h1>Editing repository</h1>
-
-<%= link_to 'Show', @repository %>
+<h1>Editing <%=link_to h(@repository.name), @repository %> repository</h1>
 
 <% form_for(@repository) do |f| %>
   <%= f.error_messages %>
@@ -21,4 +19,15 @@
   </p>
 <% end %>
 
+<h2>Permissions:</h2>
+<ul>
+<% for permission in @repository.permissions %>
+<li>
+<%= h permission.user.username %>
+<%= link_to '(Remove)', permission, :confirm => 'Are you sure?', :method => :delete %>
+<% end %>
+</ul>
+<%= button_to 'Give another user Write access', { :controller => 'permissions', :repo => @repository.id, :action => 'new'},  :method => :get %>
+
+<hr>
 <%= button_to 'Delete Repository', @repository, :confirm => 'Are you sure?', :method => :delete  %>
