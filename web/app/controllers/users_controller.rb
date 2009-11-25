@@ -115,6 +115,7 @@ class UsersController < ApplicationController
   # DELETE /users/1.xml
   def destroy
     find_username_arg
+    session[:user_id] = nil
 
     @user.destroy
     respond_to do |format|
