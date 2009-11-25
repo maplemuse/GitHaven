@@ -72,7 +72,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        flash[:notice] = "User h(#{@user.username}) was successfully created."
+        flash[:notice] = "User #{h(@user.username)} was successfully created."
         format.html { redirect_to(:action => 'login') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
@@ -101,10 +101,10 @@ class UsersController < ApplicationController
   # DELETE /users/1.xml
   def destroy
     session[:user_id] = nil
-
     @user.destroy
+    flash[:notice] = 'User has been deleted'
     respond_to do |format|
-      format.html { redirect_to(users_url) }
+      format.html { redirect_to(root_url) }
       format.xml  { head :ok }
     end
   end

@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   attr_accessor :password_confirmation
   validates_confirmation_of   :password
   attr_protected :hashed_password
+  validates_format_of :email, :with => /\A.+@.+\Z/, :message => 'Invalid email address'
+  validates_format_of :username, :with => /\A[^\\'"`<>|; \t\n\(\)\[\]\?#\$^&*.]*\Z/, :message => 'Invalid characters'
 
   validate :password_non_blank
 
