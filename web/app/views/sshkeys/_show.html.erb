@@ -10,7 +10,7 @@
   <tr>
     <td><%= h sshkey.name %></td>
     <td><%= link_to '(Edit)', edit_sshkey_path(sshkey) %></td>
-    <td><%= link_to '(Destroy)', sshkey, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to '(Delete)', sshkey, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
