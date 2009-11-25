@@ -4,7 +4,9 @@ class RepositoriesController < ApplicationController
   before_filter :require_login, :except => [:index, :show, :commits, :commit]
 
   def location
-    return "/home/ben/learningrails/pg/repos/" + @repository.user.username + "/" + @repository.name + ".git"
+    config = Rails::Configuration.new
+    location = config.root_path + '/../repos/' + @repository.user.username + '/' + @repository.name + '.git'
+    return location
   end
 
   # GET /repositories

@@ -54,7 +54,7 @@ class SshkeysController < ApplicationController
 private
   def update_authorizedkeys
     config = Rails::Configuration.new
-    location = config.root_path + '/../bin/gitforest-generateauthorizedkeys';
+    location = config.root_path + '/../bin/gitforest-generateauthorizedkeys'
     system(location)
   end
 
