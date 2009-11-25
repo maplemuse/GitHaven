@@ -2,8 +2,7 @@
 <%= render(:partial => 'commitlist.html.erb') %>
 
 <% if @repo %>
-Tree
-<div class="tree">
+<div id="tree">
 <% for f in @repo.commits.last.tree.contents %>
 <%=    h f.name %><br/>
 <%  end %>

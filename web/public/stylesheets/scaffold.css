@@ -70,6 +70,14 @@ a:hover { color: #fff; background-color:#000; }
   border: 1px solid #FFFF66;
 }
 
+#tree {
+  margin-top: 1em;
+  padding: 1em;
+  background-color: #ffcccc;
+  border: 1px solid #FFFF66;
+}
+
+
 #header {
   border-bottom: 1px solid #66ccff;
 }
