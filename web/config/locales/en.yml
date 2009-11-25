@@ -8,3 +8,7 @@ en:
     login: "Login"
     logout: "Logout"
     signup: "Signup"
+  sshkey:
+    updated: "SSHKey successfully updated"
+    created: "SSHKey successfully created"
+    deleted: "SSHKey successfully deleted"
