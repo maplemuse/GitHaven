@@ -2,20 +2,21 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
   is_gravtastic!(:source => "avatar")
+
   has_many :repositories, :dependent => :destroy
   has_many :sshkeys, :dependent => :destroy
 
   validates_presence_of   :username
   validates_uniqueness_of :username
-  validates_presence_of   :email
+  validates_format_of :username, :with => /\A[^\\'"`<>|; \t\n\(\)\[\]\?#\$^&*.\/]*\Z/, :message => 'Invalid characters'
 
-  attr_accessor :password_confirmation
-  validates_confirmation_of   :password
-  attr_protected :hashed_password
-  validates_format_of :email, :with => /\A.+@.+\Z/, :message => 'Invalid email address'
-  validates_format_of :username, :with => /\A[^\\'"`<>|; \t\n\(\)\[\]\?#\$^&*.]*\Z/, :message => 'Invalid characters'
+  validates_presence_of :email
+  validates_format_of   :email, :with => /\A.+@.+\Z/, :message => 'Invalid email address'
 
   validate :password_non_blank
+  attr_accessor :password_confirmation
+  validates_confirmation_of :password
+  attr_protected :hashed_password
 
   def self.authenticate(username, password)
     user = self.find_by_username(username)
