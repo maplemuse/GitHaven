@@ -28,7 +28,7 @@ class PermissionsController < ApplicationController
     @repository.permissions << @permission
 
     respond_to do |format|
-      if @repository.save
+      if @repository.save && @permission.save
         flash[:notice] = 'Permission was successfully created.'
         format.html { redirect_to(@permission) }
         format.xml  { render :xml => @permission, :status => :created, :location => @permission }

@@ -106,7 +106,7 @@ class RepositoriesController < ApplicationController
     @repository = Repository.new(params[:repository])
     @user.repositories << @repository
     respond_to do |format|
-      if @user.save
+      if @user.save && @repository.save
         flash[:notice] = 'Repository was successfully created.'
         format.html { redirect_to(@repository) }
         format.xml  { render :xml => @repository, :status => :created, :location => @repository }
