@@ -9,8 +9,13 @@
 <% if @repo %>
 Branches:
 <% for branch in @repo.branches() %>
-<%= h branch.name %><br />
+<%= link_to h(branch.name) %><br />
 <% end %>
+Tags:
+<% for tag in @repo.tags() %>
+<%= link_to h(tag.name) %><br />
+<% end %>
+
 <% end %>
 
 <div id="repository">
