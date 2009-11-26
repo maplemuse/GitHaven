@@ -53,7 +53,7 @@ class RepositoriesController < ApplicationController
       redirect_to :action => 'index'
     end
     @sha1 = params[:sha1]
-    @commits = @repo.commits(@sha1, 1);
+    @commits = @repo.commits(@sha1, 1)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @repository }
@@ -134,7 +134,7 @@ private
     if !@owner
       flash[:notice] = t('repository.notfound')
       redirect_to root_url
-      return false;
+      return false
     end
     @host = request.host
     @repo = Grit::Repo.new(location())
