@@ -28,5 +28,9 @@ Your Clone URL: <b>git@<%= @host + ':' + h(@owner.username) + '/' + h(@repositor
 </div>
 
 <% if !@repo %>
+<% if @repository.user == @user %>
 <%= render(:partial => 'emptyrepo.html.erb') %>
+<% else %>
+Nothing Here yet.
+<% end %>
 <% end %>
