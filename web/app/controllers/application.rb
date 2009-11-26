@@ -32,6 +32,7 @@ protected
 
   def require_login
     if @user == nil
+        session[:original_uri] = request.request_uri
         logger.error("This action requires that you be logged in.")
         flash[:notice] = "Not logged in."
         redirect_to :controller => 'users', :action => 'login'
