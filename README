@@ -1,2 +1,7 @@
+GitForest is a Git Repository Manager
+
+Requirements
+---
+sudo apt-get install libapache2-mod-passenger
 sudo gem install gravtastic
 
