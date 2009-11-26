@@ -20,7 +20,7 @@ class SshkeysController < ApplicationController
         format.html { redirect_to(:controller => 'users', :action => 'edit', :user => @user.username) }
         format.xml  { render :xml => @sshkey, :status => :created, :location => @sshkey }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => 'new' }
         format.xml  { render :xml => @sshkey.errors, :status => :unprocessable_entity }
       end
     end
@@ -35,7 +35,7 @@ class SshkeysController < ApplicationController
         format.html { redirect_to(:controller => 'users', :action => 'edit', :user => @user.username) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { render :action => 'edit' }
         format.xml  { render :xml => @sshkey.errors, :status => :unprocessable_entity }
       end
     end

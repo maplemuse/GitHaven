@@ -25,7 +25,7 @@ class RepositoriesController < ApplicationController
         @branch = 'master'
         @branch = params[:branch] if params[:branch]
         @path = params[:path] if params[:path]
-        @joinedpath = ""
+        @joinedpath = ''
         @joinedpath = @path.join('/') if @path
         @tree = @repo.commits.last.tree
         @tree = @tree/@joinedpath if @path
@@ -80,7 +80,7 @@ class RepositoriesController < ApplicationController
         format.html { redirect_to(@repository) }
         format.xml  { render :xml => @repository, :status => :created, :location => @repository }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => 'new' }
         format.xml  { render :xml => @repository.errors, :status => :unprocessable_entity }
       end
     end
@@ -98,7 +98,7 @@ class RepositoriesController < ApplicationController
         format.html { redirect_to(@repository) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { render :action => 'edit' }
         format.xml  { render :xml => @repository.errors, :status => :unprocessable_entity }
       end
     end
@@ -126,7 +126,7 @@ private
   def find_repository
     if params[:repo]
       owner = User.find_by_username(params[:user])
-      @repository = Repository.find_by_name(params[:repo], :conditions => ["user_id = ?", owner.id])
+      @repository = Repository.find_by_name(params[:repo], :conditions => ['user_id = ?', owner.id])
     else
       @repository = Repository.find(params[:id])
     end
