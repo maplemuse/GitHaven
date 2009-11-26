@@ -7,7 +7,7 @@ en:
     preferences: "Preferences"
     login: "Login"
     logout: "Logout"
-    signup: "Signup"
+    signup: "Sign Up"
   sshkey:
     updated: "SSHKey successfully updated"
     created: "SSHKey successfully created"
