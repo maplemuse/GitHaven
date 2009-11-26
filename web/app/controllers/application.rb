@@ -23,7 +23,8 @@ protected
   def find_user
     @user = User.find(session[:user_id])
     if @user.sshkeys.count == 0 && !flash[:notice]
-        flash[:notice] = "Note: to push to a repository you need to <a href='#{url_for(:controller => 'sshkeys', :action => 'new')}'>add a ssh key</a>.";
+        link = url_for(:controller => 'sshkeys', :action => 'new')
+        flash[:notice] = t('sshkey.nosshkeyhint', :link => link)
     end
   rescue
     session[:user_id] = nil
@@ -33,8 +34,7 @@ protected
   def require_login
     if @user == nil
         session[:original_uri] = request.request_uri
-        logger.error("This action requires that you be logged in.")
-        flash[:notice] = "Not logged in."
+        flash[:notice] = t('user.accessdenied')
         redirect_to :controller => 'users', :action => 'login'
     end
   end

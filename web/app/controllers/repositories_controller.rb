@@ -132,7 +132,7 @@ private
     end
     @owner = @repository.user
     if !@owner
-      flash[:notice] = "Sorry, but the repository does not exist."
+      flash[:notice] = t('repository.notfound')
       redirect_to root_url
       return false;
     end
@@ -146,7 +146,7 @@ private
   def requires_authorization
     return if !find_repository
     if @owner != @user
-        flash[:notice] = "You do not have permissions to modify this repository."
+        flash[:notice] = t('repository.accessdenied')
         redirect_to root_url
     end
   end

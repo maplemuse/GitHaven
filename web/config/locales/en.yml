@@ -10,11 +10,13 @@ en:
     username: "Username"
     password: "Password"
     loggedout: "Logged out"
+    accessdenied: "This action requires that you be logged in"
     invalid_user_or_password: "Invalid username or password"
     created: "User successfully created: {{username}}"
     updated: "User successfully updated: {{username}}"
     deleted: "User successfully deleted: {{username}}"
   sshkey:
+    nosshkeyhint: "Note: to push to a repository you need to <a href=\"{{link}}\">add a ssh key</a>"
     created: "SSHKey successfully created: {{name}}"
     updated: "SSHKey successfully updated: {{name}}"
     deleted: "SSHKey successfully deleted: {{name}}"
@@ -22,6 +24,8 @@ en:
     created: "Repository successfully created: {{name}}"
     updated: "Repository successfully updated: {{name}}"
     deleted: "Repository successfully deleted: {{name}}"
+    notfound: "Sorry, but we were unable to find that repository"
+    accessdenied: "This action requires that you are the owner of the repository"
   permissions:
     created: "{{username}} has been given permissions to {{repositoryname}}"
     updated: "{{username}}'s permissions for {{repositoryname}} have been updated"
