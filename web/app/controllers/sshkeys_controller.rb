@@ -16,7 +16,7 @@ class SshkeysController < ApplicationController
 
     respond_to do |format|
       if @user.save && @sshkey.save
-        flash[:notice] = t('sshkey.created')
+        flash[:notice] = t('sshkey.created', :name => h(@sshkey.name))
         format.html { redirect_to(:controller => 'users', :action => 'edit', :user => @user.username) }
         format.xml  { render :xml => @sshkey, :status => :created, :location => @sshkey }
       else
@@ -31,7 +31,7 @@ class SshkeysController < ApplicationController
 
     respond_to do |format|
       if @sshkey.update_attributes(params[:sshkey])
-        flash[:notice] = t('sshkey.updated')
+        flash[:notice] = t('sshkey.updated', :name => h(@sshkey.name))
         format.html { redirect_to(:controller => 'users', :action => 'edit', :user => @user.username) }
         format.xml  { head :ok }
       else
@@ -43,8 +43,9 @@ class SshkeysController < ApplicationController
 
   def destroy
     @sshkey = Sshkey.find(params[:id])
+    name = @sshkey.name
     @sshkey.destroy
-    flash[:notice] = t('sshkey.deleted')
+    flash[:notice] = t('sshkey.deleted', :name => h(name))
     respond_to do |format|
       format.html { redirect_to(:controller => 'users', :action => 'edit', :user => @user.username) }
       format.xml  { head :ok }
