@@ -21,3 +21,7 @@ en:
     created: "Repository successfully created: {{name}}"
     updated: "Repository successfully updated: {{name}}"
     deleted: "Repository successfully deleted: {{name}}"
+  permissions:
+    created: "{{username}} has been given permissions to {{repositoryname}}"
+    updated: "{{username}}'s permissions for {{repositoryname}} have been updated"
+    deleted: "{{username}} has been removed from the {{repositoryname}} permissions list"
