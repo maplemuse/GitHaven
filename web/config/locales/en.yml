@@ -17,3 +17,7 @@ en:
     created: "SSHKey successfully created: {{name}}"
     updated: "SSHKey successfully updated: {{name}}"
     deleted: "SSHKey successfully deleted: {{name}}"
+  repository:
+    created: "Repository successfully created: {{name}}"
+    updated: "Repository successfully updated: {{name}}"
+    deleted: "Repository successfully deleted: {{name}}"

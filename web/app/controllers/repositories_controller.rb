@@ -115,7 +115,7 @@ class RepositoriesController < ApplicationController
     @user.repositories << @repository
     respond_to do |format|
       if @user.save && @repository.save
-        flash[:notice] = 'Repository was successfully created.'
+        flash[:notice] = t('repository.created', :name => h(@repository.name))
         format.html { redirect_to(@repository) }
         format.xml  { render :xml => @repository, :status => :created, :location => @repository }
       else
@@ -136,7 +136,7 @@ class RepositoriesController < ApplicationController
 
     respond_to do |format|
       if @repository.update_attributes(params[:repository])
-        flash[:notice] = 'Repository was successfully updated.'
+        flash[:notice] = t('repository.updated', :name => h(@repository.name))
         format.html { redirect_to(@repository) }
         format.xml  { head :ok }
       else
@@ -154,7 +154,9 @@ class RepositoriesController < ApplicationController
     if check_authorization == false
       return
     end
+    name = @repository.name
     @repository.destroy
+    flash[:notice] = t('repository.deleted', :name => h(name))
 
     respond_to do |format|
       format.html { redirect_to(:controller => 'users', :action => 'show', :user => @user.username ) }
