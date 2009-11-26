@@ -5,7 +5,6 @@ class RepositoriesController < ApplicationController
   before_filter :requires_authorization, :only => [:edit, :update, :destroy]
 
   # GET /repositories
-  # GET /repositories.xml
   def index
     @repositories = Repository.find(:all)
     @user = User.find(session[:user_id])
@@ -18,7 +17,6 @@ class RepositoriesController < ApplicationController
   end
 
   # GET /repositories/1
-  # GET /repositories/1.xml
   def show
     return if !find_repository
 
@@ -63,7 +61,6 @@ class RepositoriesController < ApplicationController
   end
 
   # GET /repositories/new
-  # GET /repositories/new.xml
   def new
     @repository = Repository.new
     @owner = @user
@@ -74,7 +71,6 @@ class RepositoriesController < ApplicationController
   end
 
   # POST /repositories
-  # POST /repositories.xml
   def create
     @repository = Repository.new(params[:repository])
     @user.repositories << @repository
@@ -95,7 +91,6 @@ class RepositoriesController < ApplicationController
   end
 
   # PUT /repositories/1
-  # PUT /repositories/1.xml
   def update
     respond_to do |format|
       if @repository.update_attributes(params[:repository])
@@ -110,7 +105,6 @@ class RepositoriesController < ApplicationController
   end
 
   # DELETE /repositories/1
-  # DELETE /repositories/1.xml
   def destroy
     name = @repository.name
     @repository.destroy

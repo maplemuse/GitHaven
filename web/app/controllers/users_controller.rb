@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_filter :require_login, :except => [:login, :index, :show, :new, :create ]
 
+  # GET /login
   def login
     session[:user_id] = nil
     if request.post?
@@ -16,6 +17,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET /logout
   def logout
     session[:user_id] = nil
     flash[:notice] = "Logged out"
@@ -23,7 +25,6 @@ class UsersController < ApplicationController
   end
 
   # GET /users
-  # GET /users.xml
   def index
     @users = User.find(:all, :order => :name)
 
@@ -34,7 +35,6 @@ class UsersController < ApplicationController
   end
 
   # GET /users/1
-  # GET /users/1.xml
   def show
     @user = User.find(params[:id]) if params[:id]
     @user = User.find_by_username(params[:user]) if params[:user]
@@ -45,7 +45,6 @@ class UsersController < ApplicationController
   end
 
   # GET /users/new
-  # GET /users/new.xml
   def new
     @user = User.new
 
@@ -60,7 +59,6 @@ class UsersController < ApplicationController
   end
 
   # POST /users
-  # POST /users.xml
   def create
     @user = User.new(params[:user])
     if !params[:sshkey].empty?
@@ -77,14 +75,13 @@ class UsersController < ApplicationController
         format.html { redirect_to( :controller => 'users', :action => 'show', :user => @user.username)  }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => 'new' }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end
   end
 
   # PUT /users/1
-  # PUT /users/1.xml
   def update
     respond_to do |format|
       if @user.update_attributes(params[:user])
@@ -92,14 +89,13 @@ class UsersController < ApplicationController
         format.html { redirect_to(@user) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { render :action => 'edit' }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end
   end
 
   # DELETE /users/1
-  # DELETE /users/1.xml
   def destroy
     username = @user.username
     @user.destroy
