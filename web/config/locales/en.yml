@@ -9,6 +9,8 @@ en:
     signup: "Sign Up"
     username: "Username"
     password: "Password"
+    loggedout: "Logged out"
+    invalid_user_or_password: "Invalid username or password"
     created: "User successfully created: {{username}}"
     updated: "User successfully updated: {{username}}"
     deleted: "User successfully deleted: {{username}}"

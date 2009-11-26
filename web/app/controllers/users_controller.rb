@@ -12,7 +12,7 @@ class UsersController < ApplicationController
         session[:original_uri] = nil
         redirect_to(uri || { :action => 'show', :id => user.id } )
       else
-        flash.now[:notice] = "Invalid user/password combination"
+        flash.now[:notice] = t('user.invalid_user_or_password')
       end
     end
   end
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   # GET /logout
   def logout
     session[:user_id] = nil
-    flash[:notice] = "Logged out"
+    flash[:notice] = t('user.loggedout')
     redirect_to(:action => 'login')
   end
 
