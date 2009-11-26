@@ -22,8 +22,8 @@ class ApplicationController < ActionController::Base
 protected
   def find_user
     @user = User.find(session[:user_id])
-    if @user.sshkeys.count == 0
-      flash[:notice] = "Note: to push to a repository you need to <a href='#{url_for(:controller => 'sshkeys', :action => 'new')}'>add a ssh key</a>.";
+    if @user.sshkeys.count == 0 && !flash[:notice]
+        flash[:notice] = "Note: to push to a repository you need to <a href='#{url_for(:controller => 'sshkeys', :action => 'new')}'>add a ssh key</a>.";
     end
   rescue
     session[:user_id] = nil
