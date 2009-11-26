@@ -72,7 +72,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        flash[:notice] = "User #{h(@user.username)} was successfully created."
+        flash[:notice] = t('user.created', :username => h(@user.username))
         session[:user_id] = @user.id
         format.html { redirect_to( :controller => 'users', :action => 'show', :user => @user.username)  }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
@@ -88,7 +88,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        flash[:notice] = "Successfully updated user #{@user.username}."
+        flash[:notice] = t('user.updated', :username => h(@user.username))
         format.html { redirect_to(@user) }
         format.xml  { head :ok }
       else
@@ -101,8 +101,9 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.xml
   def destroy
+    username = @user.username
     @user.destroy
-    flash[:notice] = 'User has been deleted'
+    flash[:notice] = t('user.deleted', :username => h(username))
     respond_to do |format|
       format.html { redirect_to(root_url) }
       format.xml  { head :ok }
