@@ -3,6 +3,7 @@
 Copyright 2009 Benjamin Meyer
 =end
 %>
+<%= page_heading (@repository.user.username + "'s " + @repository.name + " at " + @branch) %>
 <%= render(:partial => 'repositorytop.html.erb') %>
 <%= render(:partial => 'commitlist.html.erb') %>
 
