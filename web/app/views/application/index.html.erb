@@ -1,12 +1,14 @@
 <% if !@user %>
+<div id="signup" style="padding-top: 5em;">
 <center>
-<%= button_to "Sign up now!", 'signup', :method => 'get' %>
+<%= button_to t('user.signup'), 'signup', :method => 'get' %>
 </center>
+</div>
 <% end %>
 
 <div id="repositories">
 <% if !@repositories.empty? %>
-<h2>Repositories</h2>
+<h2>Repositories Hosted on GitForest</h2>
 <table>
 <% for repository in @repositories %>
   <tr class="<%= cycle('list-line-odd', 'list-line-even') %>">
