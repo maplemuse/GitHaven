@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
 
   def index
-    @repositories = Repository.find(:all, :limit => 10)
+    @repositories = Repository.find(:all)
   end
 
 protected
