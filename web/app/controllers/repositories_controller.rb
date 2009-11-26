@@ -20,9 +20,9 @@ class RepositoriesController < ApplicationController
   def show
     return if !find_repository
 
+    @branch = 'master'
     if @repo
         @commits = @repo.commits('master', 1)
-        @branch = 'master'
         @branch = params[:branch] if params[:branch]
         @path = params[:path] if params[:path]
         @joinedpath = ''
