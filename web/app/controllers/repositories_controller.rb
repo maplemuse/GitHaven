@@ -131,16 +131,16 @@ private
       @repository = Repository.find(params[:id])
     end
     @owner = @repository.user
-    if !@owner
-      flash[:notice] = t('repository.notfound')
-      redirect_to root_url
-      return false
-    end
     @host = request.host
     @repo = Grit::Repo.new(location())
     return true
     rescue
-    return true
+    if !@repository || !@owner || !@repo
+      flash[:notice] = t('repository.notfound')
+      redirect_to root_url
+      return false
+    end
+    return true;
   end
 
   def requires_authorization
