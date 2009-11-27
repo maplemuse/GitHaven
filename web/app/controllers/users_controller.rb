@@ -36,12 +36,15 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
+    @user = nil
     @user = User.find(params[:id]) if params[:id]
     @user = User.find_by_username(params[:user]) if params[:user]
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user }
     end
+    rescue
+    redirect_to(uri || { :action => 'index' } )
   end
 
   # GET /users/new
