@@ -38,12 +38,11 @@ class RepositoriesController < ApplicationController
 
   def commits
     return if !find_repository
-    if @repo
-        @commits = @repo.commits('master', 20)
-    end
+    @commits = @repo.commits('master', 20)
     respond_to do |format|
       format.html
       format.xml  { render :xml => @repository }
+      format.atom { render :layout => false }
     end
   end
 

@@ -1,3 +1,7 @@
+<% content_for :header_tags do %>
+  <%= auto_discovery_link_tag(:atom, :user => @repository.user.username, :repo => @repository.name, :action => 'commits', :format => 'atom') %>
+<% end %>
+
 <%= page_heading ("Commits for " + @repository.user.username + "'s " + @repository.name) %>
 <%= render(:partial => 'repositorytop.html.erb') %>
 <%= render(:partial => 'commitlist.html.erb') %>

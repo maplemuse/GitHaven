@@ -43,6 +43,11 @@ ActionController::Routing::Routes.draw do |map|
       :action => 'commits',
       :conditions => { :method => :get }
 
+  map.connect ':user/:repo/commits.:format',
+      :controller => 'repositories',
+      :action => 'commits',
+      :conditions => { :method => :get }
+
   map.connect ':user/:repo/commit/:sha1',
       :controller => 'repositories',
       :action => 'commit',
