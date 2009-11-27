@@ -134,7 +134,7 @@ private
     @repo = Grit::Repo.new(location())
     return true
     rescue
-    if !@repository || !@owner || !@repo
+    if !@repository || !@owner
       flash[:notice] = t('repository.notfound')
       redirect_to root_url
       return false
