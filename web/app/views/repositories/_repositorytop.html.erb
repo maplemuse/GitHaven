@@ -1,7 +1,7 @@
 <div id="repoheader">
   <%= link_to 'Source', :action => 'show' %>
   | <%= link_to 'Commits', :controller => 'repositories', :action => 'commits', :repo => @repository.name, :user => @repository.user.username %>
-  <% if @owner == @user -%>
+  <% if @owner == @loggedinuser -%>
   | <%= link_to 'Admin', edit_repository_path(@repository) %>
   <% end -%>
 </div>
@@ -28,7 +28,7 @@ Your Clone URL: <b>git@<%= @host + ':' + h(@owner.username) + '/' + h(@repositor
 </div>
 
 <% if !@repo %>
-<% if @repository.user == @user %>
+<% if @repository.user == @loggedinuser %>
 <%= render(:partial => 'emptyrepo.html.erb') %>
 <% else %>
 Nothing Here yet.

@@ -36,7 +36,6 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    @user = nil
     @user = User.find(params[:id]) if params[:id]
     @user = User.find_by_username(params[:user]) if params[:user]
     respond_to do |format|
@@ -59,6 +58,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @user = @loggedinuser
   end
 
   # POST /users
@@ -87,7 +87,7 @@ class UsersController < ApplicationController
   # PUT /users/1
   def update
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @loggedinuser.update_attributes(params[:user])
         flash[:notice] = t('user.updated', :username => h(@user.username))
         format.html { redirect_to(@user) }
         format.xml  { head :ok }
@@ -100,8 +100,8 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
-    username = @user.username
-    @user.destroy
+    username = @loggedinuser.username
+    @loggedinuser.destroy
     flash[:notice] = t('user.deleted', :username => h(username))
     respond_to do |format|
       format.html { redirect_to(root_url) }

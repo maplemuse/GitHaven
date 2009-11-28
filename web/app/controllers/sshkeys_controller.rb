@@ -11,12 +11,12 @@ class SshkeysController < ApplicationController
 
   def create
     @sshkey = Sshkey.new(params[:sshkey])
-    @user.sshkeys << @sshkey
+    @loggedinuser.sshkeys << @sshkey
 
     respond_to do |format|
-      if @user.save && @sshkey.save
+      if @loggedinuser.save && @sshkey.save
         flash[:notice] = t('sshkey.created', :name => h(@sshkey.name))
-        format.html { redirect_to(:controller => 'users', :action => 'edit', :user => @user.username) }
+        format.html { redirect_to(:controller => 'users', :action => 'edit', :user => @loggedinuser.username) }
         format.xml  { render :xml => @sshkey, :status => :created, :location => @sshkey }
       else
         format.html { render :action => 'new' }
@@ -31,7 +31,7 @@ class SshkeysController < ApplicationController
     respond_to do |format|
       if @sshkey.update_attributes(params[:sshkey])
         flash[:notice] = t('sshkey.updated', :name => h(@sshkey.name))
-        format.html { redirect_to(:controller => 'users', :action => 'edit', :user => @user.username) }
+        format.html { redirect_to(:controller => 'users', :action => 'edit', :user => @loggedinuser.username) }
         format.xml  { head :ok }
       else
         format.html { render :action => 'edit' }

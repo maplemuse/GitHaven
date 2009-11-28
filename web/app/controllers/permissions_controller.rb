@@ -5,7 +5,7 @@ class PermissionsController < ApplicationController
   # GET /permissions/new
   def new
     @repository = Repository.find(params[:repo])
-    if @repository.user != @user
+    if @repository.user != @loggedinuser
         redirect_to(edit_repository_url(@repository))
         return
     end
@@ -82,7 +82,7 @@ class PermissionsController < ApplicationController
 private
   def require_authorization
     @permission = Permission.find(params[:id]) if !@permission
-    if @permission.repository.user != @user
+    if @permission.repository.user != @loggedinuser
         redirect_to(edit_repository_url(@permission.repository))
         return false
     end

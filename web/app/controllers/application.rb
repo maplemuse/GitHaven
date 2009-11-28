@@ -2,7 +2,7 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
-  before_filter :find_user
+  before_filter :find_logged_in_user
   layout 'site'
   helper :all # include all helpers, all the time
 
@@ -17,23 +17,23 @@ class ApplicationController < ActionController::Base
 
   def index
     @repositories = Repository.find(:all)
-    @repositories.delete_if { |x| !x.authorized(@user) }
+    @repositories.delete_if { |x| !x.authorized(@loggedinuser) }
   end
 
 protected
-  def find_user
-    @user = User.find(session[:user_id])
-    if @user.sshkeys.count == 0 && !flash[:notice]
+  def find_logged_in_user
+    @loggedinuser = User.find(session[:user_id])
+    if @loggedinuser.sshkeys.empty? && !flash[:notice]
         link = url_for(:controller => 'sshkeys', :action => 'new')
         flash[:notice] = t('sshkey.nosshkeyhint', :link => link)
     end
   rescue
     session[:user_id] = nil
-    @user = nil
+    @loggedinuser = nil
   end
 
   def require_login
-    if @user == nil
+    if @loggedinuser == nil
         session[:original_uri] = request.request_uri
         flash[:notice] = t('user.accessdenied')
         redirect_to :controller => 'users', :action => 'login'

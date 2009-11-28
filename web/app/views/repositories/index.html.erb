@@ -16,7 +16,7 @@
     <td><%=h repository.description %></td>
     <td><%=h repository.defaultbranch %></td>
     <td><%= link_to 'Show', :action => "show", :user => repository.user.username, :repo => repository.name %></td>
-<% if repository.user == @user %>
+<% if repository.user == @loggedinuser %>
     <td><%= link_to 'Edit', edit_repository_path(repository) %></td>
     <td><%= link_to 'Destroy', repository, :confirm => 'Are you sure?', :method => :delete %></td>
 <% end %>

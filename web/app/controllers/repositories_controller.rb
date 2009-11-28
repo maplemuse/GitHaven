@@ -7,9 +7,6 @@ class RepositoriesController < ApplicationController
   # GET /repositories
   def index
     @repositories = Repository.find(:all)
-    @user = User.find(session[:user_id])
-    rescue
-      @user = nil
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @repositories }
@@ -62,7 +59,7 @@ class RepositoriesController < ApplicationController
   # GET /repositories/new
   def new
     @repository = Repository.new
-    @owner = @user
+    @owner = @repository.user
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @repository }
@@ -72,7 +69,7 @@ class RepositoriesController < ApplicationController
   # POST /repositories
   def create
     @repository = Repository.new(params[:repository])
-    @user.repositories << @repository
+    @loggedinuser.repositories << @repository
 
     permission = Permission.new
     permission.mode = "ro"
@@ -81,7 +78,7 @@ class RepositoriesController < ApplicationController
     @repository.permissions << permission
 
     respond_to do |format|
-      if @user.save && @repository.save && permission.save
+      if @loggedinuser.save && @repository.save && permission.save
         flash[:notice] = t('repository.created', :name => h(@repository.name))
         format.html { redirect_to(@repository) }
         format.xml  { render :xml => @repository, :status => :created, :location => @repository }
@@ -117,7 +114,7 @@ class RepositoriesController < ApplicationController
     flash[:notice] = t('repository.deleted', :name => h(name))
 
     respond_to do |format|
-      format.html { redirect_to(:controller => 'users', :action => 'show', :user => @user.username ) }
+      format.html { redirect_to(:controller => 'users', :action => 'show', :user => @loggedinuser.username ) }
       format.xml  { head :ok }
     end
   end
@@ -138,7 +135,7 @@ private
     end
     @owner = @repository.user
     @host = request.host
-    if !@repository.authorized(@user)
+    if !@repository.authorized(@loggedinuser)
       flash[:notice] = t('repository.accessdenied')
       redirect_to root_url
       return false
@@ -156,7 +153,7 @@ private
 
   def requires_authorization
     return if !find_repository
-    if @owner != @user
+    if @owner != @loggedinuser
         flash[:notice] = t('repository.notowner')
         redirect_to root_url
     end
