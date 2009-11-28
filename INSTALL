@@ -1,0 +1,41 @@
+#!/bin/bash -ex
+
+echo "for now open this file and manually run it one step at at time :)"
+exit 1
+
+if [ `whoami` != 'root' ] ; then
+    echo "Please run this script as root"
+    exit 1
+fi
+
+echo "Installing dependencies"
+apt-get install \
+  git-core \
+  openssh-server \
+  libapache2-mod-passenger \
+  adduser
+
+echo "Adding user git"
+adduser \
+    --system \
+    --shell /bin/sh \
+    --gecos 'git version control' \
+    --group \
+    --disabled-password \
+    --home /var/git \
+    git
+
+echo "coping gitforest to ~/git/gitforest"
+cd `dirname $0`
+pkg=`pwd`
+cp -rf `pwd` ~git/gitforest/
+
+echo "Copying apache thing over"
+cp 099-gitforest /etc/apache2/sites-available/
+
+cd ~git/gitforest/web/
+rake db:migrate
+RAILS_ENV=production rake db:migrate
+
+#./sript/server
+#cp bin/gitforest-* /usr/loca/bin

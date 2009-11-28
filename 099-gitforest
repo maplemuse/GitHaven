@@ -1,0 +1,9 @@
+<VirtualHost *:80>
+    ServerName localhost
+    DocumentRoot ~git/gitforest/web/public
+
+<Directory ~git/gitforest/web/public>
+    Order allow,deny
+    Allow from all
+</Directory>
+</VirtualHost>
