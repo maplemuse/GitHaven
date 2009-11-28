@@ -1,6 +1,5 @@
 class SshkeysController < ApplicationController
   before_filter :require_login
-  after_filter :update_authorizedkeys, :except => [:new, :edit]
 
   def new
     @sshkey = Sshkey.new
@@ -47,16 +46,9 @@ class SshkeysController < ApplicationController
     @sshkey.destroy
     flash[:notice] = t('sshkey.deleted', :name => h(name))
     respond_to do |format|
-      format.html { redirect_to(:controller => 'users', :action => 'edit', :user => @user.username) }
+      format.html { redirect_to(:controller => 'users', :action => 'edit', :user => @loggedinuser.username) }
       format.xml  { head :ok }
     end
-  end
-
-private
-  def update_authorizedkeys
-    config = Rails::Configuration.new
-    location = config.root_path + '/../bin/gitforest-generateauthorizedkeys'
-    system(location)
   end
 
 end
