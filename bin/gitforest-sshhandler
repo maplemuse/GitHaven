@@ -24,11 +24,18 @@ elif [ "${cmd}" = "upload-pack" ] ; then
   gitforest-checkpermissions "read" "${user_id}" "${repopath}"
 fi
 
-cd `dirname $0`/../repos
+cd `dirname $0`/../
+
+# Create the repos directory if it doesn't exists
+if [ ! -d repos ] ; then
+  mkdir repos
+fi
+cd repos
+
+# Create the repo if it doesn't exists
 if [ ! -d ${repopath} ] ; then
     mkdir -p $repopath
-    cd $repopath
-    git init --bare
+    (cd $repopath; git init --bare -q)
 fi
 
 git-shell -c "$SSH_ORIGINAL_COMMAND"
