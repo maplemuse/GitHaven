@@ -1,6 +1,8 @@
 #!/bin/sh -e
 #
 
+sleep 1
+
 root=`dirname $0`
 keyfile="$HOME/.ssh/authorized_keys"
 command="$root/gitforest-sshhandler"

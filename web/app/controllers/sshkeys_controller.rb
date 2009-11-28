@@ -14,7 +14,7 @@ class SshkeysController < ApplicationController
     @loggedinuser.sshkeys << @sshkey
 
     respond_to do |format|
-      if @loggedinuser.save && @sshkey.save
+      if @loggedinuser.save
         flash[:notice] = t('sshkey.created', :name => h(@sshkey.name))
         format.html { redirect_to(:controller => 'users', :action => 'edit', :user => @loggedinuser.username) }
         format.xml  { render :xml => @sshkey, :status => :created, :location => @sshkey }
