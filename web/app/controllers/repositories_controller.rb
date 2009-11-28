@@ -73,8 +73,15 @@ class RepositoriesController < ApplicationController
   def create
     @repository = Repository.new(params[:repository])
     @user.repositories << @repository
+
+    permission = Permission.new
+    permission.mode = "ro"
+    everyone = User.find_by_username(I18n.t('user.all'))
+    permission.user_id = everyone.id
+    @repository.permissions << permission
+
     respond_to do |format|
-      if @user.save && @repository.save
+      if @user.save && @repository.save && permission.save
         flash[:notice] = t('repository.created', :name => h(@repository.name))
         format.html { redirect_to(@repository) }
         format.xml  { render :xml => @repository, :status => :created, :location => @repository }
@@ -131,6 +138,11 @@ private
     end
     @owner = @repository.user
     @host = request.host
+    if !@repository.authorized(@user)
+      flash[:notice] = t('repository.accessdenied')
+      redirect_to root_url
+      return false
+    end
     @repo = Grit::Repo.new(location())
     return true
     rescue
@@ -145,7 +157,7 @@ private
   def requires_authorization
     return if !find_repository
     if @owner != @user
-        flash[:notice] = t('repository.accessdenied')
+        flash[:notice] = t('repository.notowner')
         redirect_to root_url
     end
   end

@@ -8,11 +8,6 @@ if [[ -z "${access}" || -z "${user_id}" ]] ; then
   exit 1
 fi
 
-if [ "${access}" = "read" ] ; then
-  # Everyone has read access
-  exit 0
-fi
-
 # repositories should come in user/repo.git
 reponame="${3}"
 repo_owner=`echo $reponame | sed -e 's_\(.*\)/\(.*\).git_\1_g'`
@@ -20,13 +15,32 @@ repo_name=`echo $reponame | sed -e 's_\(.*\)/\(.*\).git_\2_g'`
 repoowner_id=`gitforest-idfromusername $repo_owner`
 repo_id=`gitforest-idfromreponame $repo_name`
 
-# The owner of the repo can always modify the repo
+# The owner of the repo can can always access the repo
 if [ "${user_id}" = "${repoowner_id}" ] ; then
   exit 0
 fi
 
+EVERYONE="1"
+if [ "${access}" = "read" ] ; then
+  good=`gitforest-permissionsforuserid $user_id | grep $repo_id`
+  if [ -n "${good}" ] ; then
+    exit 0
+  fi
+  good=`gitforest-permissionsforuserid "${EVERYONE}" | grep $repo_id`
+  if [ -n "${good}" ] ; then
+    exit 0
+  fi
+
+  echo "You do not have read access to $reponame.  Access is denied";
+  exit 1
+fi
+
 if [ "${access}" = "write" ] ; then
   good=`gitforest-permissionsforuserid $user_id | grep $repo_id`
+  if [ "${good}" = "${repo_id}|rw" ] ; then
+    exit 0
+  fi
+  good=`gitforest-permissionsforuserid "${EVERYONE}" | grep $repo_id`
   if [ "${good}" = "${repo_id}|rw" ] ; then
     exit 0
   fi

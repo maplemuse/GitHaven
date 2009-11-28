@@ -29,7 +29,7 @@
 <%= link_to '(Remove)', permission, :confirm => 'Are you sure?', :method => :delete %>
 <% end %>
 </ul>
-<%= button_to 'Give another user Write access', { :controller => 'permissions', :repo => @repository.id, :action => 'new'},  :method => :get %>
+<%= button_to 'Add another permission', { :controller => 'permissions', :repo => @repository.id, :action => 'new'},  :method => :get %>
 
 <hr>
 <%= button_to 'Delete Repository', @repository, :confirm => 'Are you sure?', :method => :delete  %>

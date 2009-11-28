@@ -3,6 +3,7 @@
 
 en:
   user:
+    all: "Everyone"
     preferences: "Preferences"
     login: "Login"
     logout: "Logout"
@@ -25,7 +26,8 @@ en:
     updated: "Repository successfully updated: {{name}}"
     deleted: "Repository successfully deleted: {{name}}"
     notfound: "Sorry, but we were unable to find that repository"
-    accessdenied: "This action requires that you are the owner of the repository"
+    notowner: "This action requires that you are the owner of the repository"
+    accessdenied: "This action requires that you have permissions to view the repository"
   permissions:
     created: "{{username}} has been given permissions to {{repositoryname}}"
     updated: "{{username}}'s permissions for {{repositoryname}} have been updated"

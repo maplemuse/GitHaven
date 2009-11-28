@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
 
   def index
     @repositories = Repository.find(:all)
+    @repositories.delete_if { |x| !x.authorized(@user) }
   end
 
 protected

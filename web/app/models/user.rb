@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   attr_protected :hashed_password
 
   def self.authenticate(username, password)
+    # Never allow the Everyone user to login, everyone is really just a pretend group
+    return nil if username == I18n.t('user.all')
     user = self.find_by_username(username)
     if user
       expected_password = encrypted_password(password, user.salt)
@@ -54,4 +56,11 @@ private
     errors.add(:password, 'Missing password') if hashed_password.blank?
   end
 
+  if !User.exists?(:username => I18n.t('user.all'))
+    everyone = User.new
+    everyone.username = I18n.t('user.all')
+    everyone.email = "everyone@gitforest.com"
+    everyone.password = "12345"
+    everyone.save
+  end
 end
