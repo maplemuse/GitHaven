@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :require_login, :except => [:login, :index, :show, :new, :create ]
+  before_filter :require_login, :except => [:login, :show, :new, :create ]
 
   # GET /login
   def login
