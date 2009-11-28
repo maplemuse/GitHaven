@@ -44,7 +44,7 @@ class UsersController < ApplicationController
       format.xml  { render :xml => @user }
     end
     rescue
-    redirect_to(uri || { :action => 'index' } )
+    redirect_to(:action => 'index' )
   end
 
   # GET /users/new
