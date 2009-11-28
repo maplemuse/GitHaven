@@ -17,7 +17,9 @@ cd $root/../web/db
 sqlite3 development.sqlite3 'select user_id,key from sshkeys' | while read row ; do
     user=`echo $row | awk -F'|' '{ print $1 }'`
     key=`echo $row | awk -F'|' '{ print $2 }'`
-    echo "command=\"$command $user\",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty $key" >> $keyfile
+    if [ ! -z "${key}" ] ; then
+        echo "command=\"$command $user\",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty $key" >> $keyfile
+    fi
 done
 
 # Make the file rw for this user only
