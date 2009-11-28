@@ -25,6 +25,7 @@
 <% for permission in @repository.permissions %>
 <li>
 <%= h permission.user.username %>
+[<%= permission.mode %>]
 <%= link_to '(Remove)', permission, :confirm => 'Are you sure?', :method => :delete %>
 <% end %>
 </ul>

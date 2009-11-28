@@ -27,7 +27,7 @@ fi
 
 if [ "${access}" = "write" ] ; then
   good=`gitforest-permissionsforuserid $user_id | grep $repo_id`
-  if [ "${good}" = "${repo_id}" ] ; then
+  if [ "${good}" = "${repo_id}|rw" ] ; then
     exit 0
   fi
 
