@@ -39,6 +39,9 @@ class PermissionsController < ApplicationController
         format.xml  { render :xml => @permission.errors, :status => :unprocessable_entity }
       end
     end
+    rescue
+        flash[:notice] = "error"
+        redirect_to(edit_repository_url(@repository))
   end
 
   # GET /permissions/1/edit
