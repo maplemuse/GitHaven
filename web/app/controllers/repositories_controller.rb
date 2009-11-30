@@ -125,7 +125,7 @@ private
   end
 
   def find_repository
-    if params[:repo]
+    if params[:repo] && params[:user]
       owner = User.find_by_username(params[:user])
       @repository = Repository.find_by_name(params[:repo], :conditions => ['user_id = ?', owner.id])
     else
