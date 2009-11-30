@@ -8,6 +8,7 @@ Copyright 2009 Benjamin Meyer
 <%= render(:partial => 'repositorytop.html.erb') %>
 
 <div id="repopage">
+Looking at: <%=h @branch %>
 <%= render(:partial => 'commitlist.html.erb') %>
 
 <% if @repo %>
@@ -36,7 +37,7 @@ Copyright 2009 Benjamin Meyer
 
 <% if readmefile %>
 <p>
-<%= readmefile.name %>
+<%=h readmefile.name %>
 <div id="data">
 <%= h(readmefile.data).gsub(/\n/, '<br/>') %>
 </div>
