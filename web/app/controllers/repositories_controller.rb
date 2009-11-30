@@ -35,7 +35,8 @@ class RepositoriesController < ApplicationController
 
   def commits
     return if !find_repository
-    @commits = @repo.commits('master', 20)
+    @branch = params[:branch] if params[:branch] else 'master'
+    @commits = @repo.commits(@branch, 20)
     respond_to do |format|
       format.html
       format.xml  { render :xml => @repository }

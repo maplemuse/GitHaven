@@ -3,11 +3,16 @@
 <% if @repo %>
 Branches:<br />
 <% for branch in @repo.branches() %>
-<%= link_to h(branch.name) %><br />
+<%= "<b>→" if branch.name == @branch %>
+<%= link_to h(branch.name), :user => @repository.user.username, :repo => @repository.name, :controller => 'repositories', :action => 'show', :branch => branch.name %><br />
+<%= "</b>" if branch.name == @branch %>
 <% end %>
+<br />
 Tags:<br />
 <% for tag in @repo.tags() %>
-<%= link_to h(tag.name) %><br />
+<%= "<b>→" if tag.name == @branch %>
+<%= link_to h(tag.name), :user => @repository.user.username, :repo => @repository.name, :controller => 'repositories', :action => 'show', :branch => tag.name %><br />
+<%= "</b>" if tag.name == @branch %>
 <% end %>
 <% end %>
 </div>
