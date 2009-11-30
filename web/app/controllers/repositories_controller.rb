@@ -19,12 +19,12 @@ class RepositoriesController < ApplicationController
 
     @branch = 'master'
     if @repo
-        @commits = @repo.commits('master', 1)
         @branch = params[:branch] if params[:branch]
         @path = params[:path] if params[:path]
+        @commits = @repo.commits(@branch, 1)
         @joinedpath = ''
         @joinedpath = @path.join('/') if @path
-        @tree = @repo.commits.last.tree
+        @tree = @repo.commits.first.tree
         @tree = @tree/@joinedpath if @path
     end
     respond_to do |format|
