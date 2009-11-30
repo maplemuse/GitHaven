@@ -16,17 +16,18 @@ Your Clone URL: <b>git@<%= @host + ':' + h(@owner.username) + '/' + h(@repositor
 </div>
 <hr>
 
+<div id="tags">
 <% if @repo %>
-Branches:
+Branches:<br />
 <% for branch in @repo.branches() %>
 <%= link_to h(branch.name) %><br />
 <% end %>
-Tags:
+Tags:<br />
 <% for tag in @repo.tags() %>
 <%= link_to h(tag.name) %><br />
 <% end %>
-
 <% end %>
+</div>
 
 <% if !@repo %>
 <% if @repository.user == @loggedinuser %>

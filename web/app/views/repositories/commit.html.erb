@@ -1,6 +1,11 @@
+<% content_for :header_tags do %>
+  <%= auto_discovery_link_tag(:atom, :user => @repository.user.username, :repo => @repository.name, :action => 'commits', :format => 'atom') %>
+<% end %>
 <%= page_heading ("Commit " + @commits.first.sha + " in " + @repository.user.username + "'s " + @repository.name) %>
 <%= render(:partial => 'repositorytop.html.erb') %>
+<div id="repopage">
 <%= render(:partial => 'commitlist.html.erb') %>
 <pre>
 <%=h @commits.first.to_patch %>
 </pre>
+</div>

@@ -3,8 +3,11 @@
 Copyright 2009 Benjamin Meyer
 =end
 %>
+
 <%= page_heading (@repository.user.username + "'s " + @repository.name + " at " + @branch) %>
 <%= render(:partial => 'repositorytop.html.erb') %>
+
+<div id="repopage">
 <%= render(:partial => 'commitlist.html.erb') %>
 
 <% if @repo %>
@@ -42,3 +45,6 @@ Copyright 2009 Benjamin Meyer
 <% end %>
 
 <% end %>
+
+</div>
+

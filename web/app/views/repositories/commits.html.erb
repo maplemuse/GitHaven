@@ -4,6 +4,7 @@
 
 <%= page_heading ("Commits for " + @repository.user.username + "'s " + @repository.name) %>
 <%= render(:partial => 'repositorytop.html.erb') %>
+<div id="repopage">
 <%= render(:partial => 'commitlist.html.erb') %>
-
 TODO link to next bunch
+</div>

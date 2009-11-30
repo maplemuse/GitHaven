@@ -120,3 +120,18 @@ a:hover { color: #fff; background-color:#000; }
     border: 1px solid gray;
 }
 
+#branches, #tags {
+    float: right;
+    font-size: 6px;
+    line-height: 8px;
+    width: 8%;
+    margin: .5em;
+    padding: .5em;
+    border: 1px solid gray;
+}
+
+#repopage {
+    float: left;
+    width: 90%;
+}
+
