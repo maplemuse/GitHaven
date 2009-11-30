@@ -11,40 +11,36 @@ Copyright 2009 Benjamin Meyer
 Looking at: <%=h @branch %>
 <%= render(:partial => 'commitlist.html.erb') %>
 
-<% if @repo %>
+<% if @repo -%>
+    <% if @path -%>
+        <% top_path = "" %>
+        <%= link_to h(@repository.name), @repository %>/
+        <% for f in @path -%>
+            <%= link_to_path(top_path, f) %>
+            <% top_path += f; -%> /
+        <% end -%>
+    <% end -%>
 
-<% if @path %>
-<% top_path = "" %>
-<%= link_to h(@repository.name), @repository %>/
-<% for f in @path -%>
-<%= link_to_path(top_path, f) %>
-<% top_path += f; -%> /
+
+    <% if !@tree.mode || @tree.mode == "040000" -%>
+        <div id="tree">
+        <% for f in @tree.contents %>
+            <%= link_to_path(@joinedpath, f.name) %>
+            <%= "/" if f.mode == "040000" %> <br/>
+            <% readmefile = f if f.name == "README"; %>
+        <%  end -%>
+        </div>
+    <% else -%>
+        <% readmefile = @tree %>
+    <% end -%>
+
+    <% if readmefile -%>
+        <div id="filename"><%=h readmefile.name %></div>
+        <div id="data">
+        <%= h(readmefile.data).gsub(/\n/, '<br/>') %>
+        </div>
+    <% end -%>
+
 <% end -%>
-<% end %>
-
-
-<% if !@tree.mode || @tree.mode == "040000" %>
-<div id="tree">
-<% for f in @tree.contents %>
-<%= link_to_path(@joinedpath, f.name) %>
-<%= "/" if f.mode == "040000" %> <br/>
-<% readmefile = f if f.name == "README"; %>
-<%  end %>
-</div>
-<% else %>
-<% readmefile = @tree %>
-<% end %>
-
-<% if readmefile %>
-<div id="filename">
-<%=h readmefile.name %>
-</div>
-<div id="data">
-<%= h(readmefile.data).gsub(/\n/, '<br/>') %>
-</div>
-<% end %>
-
-<% end %>
-
 </div>
 
