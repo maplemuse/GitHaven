@@ -88,12 +88,12 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @loggedinuser.update_attributes(params[:user])
-        flash[:notice] = t('user.updated', :username => h(@user.username))
-        format.html { redirect_to(@user) }
+        flash[:notice] = t('user.updated', :username => h(@loggedinuser.username))
+        format.html { redirect_to(@loggedinuser) }
         format.xml  { head :ok }
       else
         format.html { render :action => 'edit' }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => @loggedinuser.errors, :status => :unprocessable_entity }
       end
     end
   end
