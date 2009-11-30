@@ -14,7 +14,7 @@ module RepositoriesHelper
   end
 
   def link_to_repository(repository)
-    link_to h(repository.name), :controller => 'repositories', :action => 'show', :repo => repository.name
+    link_to h(repository.name), :controller => 'repositories', :action => 'show', :repo => repository.name, :user => repository.user.username
   end
 
 end
