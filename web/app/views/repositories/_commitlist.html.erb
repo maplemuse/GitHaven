@@ -1,13 +1,27 @@
-<% if @commits %>
-    <% for commit in @commits %>
-    <div class="commit">
-    <%= link_to h(commit.message), {:user => @repository.user.username, :repo => @repository.name, :action => 'commit', :sha1 => commit.sha, :controller => 'repositories'} %><br />
-    <%= h commit.author %><br />
-    <%= Date::MONTHNAMES[commit.date.mon] %> <%= commit.date.mday %>, <%= commit.date.year %><br />
-    Commit: <%= link_to h(commit.sha),
-        {:user => @repository.user.username, :repo => @repository.name, :action => 'commit', :sha1 => commit.sha, :controller => 'repositories'} %><br />
-    Parent: <%= link_to h(commit.parents[0].sha),
-        {:user => @repository.user.username, :repo => @repository.name, :action => 'commit', :sha1 => commit.parents[0].sha, :controller => 'repositories'} %><br />
+<% if @commits -%>
+  <% date = Time.now %>
+  <% for commit in @commits -%>
+    <% if @commits.count != 1 && date.day != commit.date.day -%>
+    <div class="date">
+    <% date = commit.date -%>
+        <%= Date::MONTHNAMES[commit.date.mon] %> <%= commit.date.mday %>, <%= commit.date.year %><br />
     </div>
-    <% end %>
+    <% end -%>
+    <div class="commit">
+    <div class="commit_links" style="float:right">
+   <%= link_to "parent",
+        {:user => @repository.user.username, :repo => @repository.name, :action => 'commit', :sha1 => commit.parents[0].sha, :controller => 'repositories'} %> |
+ <%= link_to "tree",
+        {:user => @repository.user.username, :repo => @repository.name, :action => 'show', :branch => commit.parents[0].sha, :controller => 'repositories'} %>
+    </div>
+    <%= image_tag(gravatar_url_for(commit.author.email, "&size=16"), :size => "16x16") %>
+    <%= mail_to commit.author.email, h(commit.author), :class => "commit_author" %> Committed <%= link_to h(commit.id_abbrev),
+        {:user => @repository.user.username, :repo => @repository.name, :action => 'commit', :sha1 => commit.sha, :controller => 'repositories'} %>
+    @ <%= sprintf("%02.0f", commit.date.hour) + ":" + sprintf("%02.0f", commit.date.min) %>
+        <br />
+    <div class="commit_message"><%= link_to h(commit.message),
+        {:user => @repository.user.username, :repo => @repository.name, :action => 'commit', :sha1 => commit.sha, :controller => 'repositories'} %>
+    </div>
+  </div>
+  <% end %>
 <% end %>

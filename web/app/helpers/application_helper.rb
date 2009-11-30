@@ -9,4 +9,10 @@ def page_heading(text)
   content_tag(:h1, content_for(:title){ text })
 end
 
+  require 'digest/md5'
+
+  def gravatar_url_for(email, options)
+      "http://www.gravatar.com/avatar.php?gravatar_id=" + Digest::MD5.hexdigest(email) + options
+  end
+
 end
