@@ -137,7 +137,7 @@ a:hover { color: #fff; background-color:#000; }
 }
 #data {
     margin-bottom: 1em;
-    padding: 1em .5em;
+    padding: .5em;
     border: 1px solid gray;
     margin-top: 0;
 }
