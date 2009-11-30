@@ -38,9 +38,7 @@ Copyright 2009 Benjamin Meyer
 <p>
 <%= readmefile.name %>
 <div id="data">
-<pre>
-<%= readmefile.data %>
-</pre>
+<%= h(readmefile.data).gsub(/\n/, '<br/>') %>
 </div>
 <% end %>
 
