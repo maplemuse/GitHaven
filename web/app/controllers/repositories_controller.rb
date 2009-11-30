@@ -17,9 +17,7 @@ class RepositoriesController < ApplicationController
   def show
     return if !find_repository
 
-    @branch = 'master'
     if @repo
-        @branch = params[:branch] if params[:branch]
         @path = params[:path] if params[:path]
         @commits = @repo.commits(@branch, 1)
         @joinedpath = ''
@@ -35,7 +33,6 @@ class RepositoriesController < ApplicationController
 
   def commits
     return if !find_repository
-    @branch = params[:branch] if params[:branch] else 'master'
     @commits = @repo.commits(@branch, 20)
     respond_to do |format|
       format.html
@@ -142,6 +139,11 @@ private
       return false
     end
     @repo = Grit::Repo.new(location())
+
+    @branch = @repository.defaultbranch
+    @branch = params[:branch] if params[:branch]
+    @branch = 'master' if !@branch || @branch.empty?
+
     return true
     rescue
     if !@repository || !@owner
