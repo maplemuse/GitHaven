@@ -1,3 +1,12 @@
+<div id="repository">
+<%= link_to_user(@owner) %> / <b> <%= link_to_repository(@repository) %></b><br />
+<% if !@repository.description.empty? %>
+<%= t('repository.description') -%>: <%=h @repository.description %><br />
+<% end %>
+<!-- Public Clone URL: <b>git://<%= @host + ':' + h(@owner.username) + '/' + h(@repository.name) + '.git' %></b><br /> -->
+Your Clone URL: <b>git@<%= @host + ':' + h(@owner.username) + '/' + h(@repository.name) + '.git' %></b><br />
+</div>
+
 <div id="repoheader">
   <%= link_to 'Source', :action => 'show' %>
   | <%= link_to 'Commits', :controller => 'repositories', :action => 'commits', :repo => @repository.name, :user => @repository.user.username %>
@@ -6,6 +15,7 @@
   <% end -%>
 </div>
 <hr>
+
 <% if @repo %>
 Branches:
 <% for branch in @repo.branches() %>
@@ -17,15 +27,6 @@ Tags:
 <% end %>
 
 <% end %>
-
-<div id="repository">
-<%= link_to h(@owner.username), :controller => 'users', :action => 'show', :user => @owner.username %>
-/ <b><%= link_to h(@repository.name), :controller => 'repositories', :action => 'show', :repo => @repository.name %></b><br />
-Description: <%=h @repository.description %><br />
-Homepage: <%=h @repository.url %><br />
-Public Clone URL: <b>git://<%= @host + ':' + h(@owner.username) + '/' + h(@repository.name) + '.git' %></b><br />
-Your Clone URL: <b>git@<%= @host + ':' + h(@owner.username) + '/' + h(@repository.name) + '.git' %></b><br />
-</div>
 
 <% if !@repo %>
 <% if @repository.user == @loggedinuser %>
