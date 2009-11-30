@@ -52,6 +52,14 @@ a:hover { color: #fff; background-color:#000; }
   list-style: square;
 }
 
+#repositoryheader {
+  width: 100%;
+  clear: both;
+  border-bottom: 1px solid black;
+  margin: 1em 0;
+  padding: .5em 0;
+}
+
 #repository {
   padding: 1em;
   background-color: #ccffcc;

@@ -7,11 +7,11 @@
 Your Clone URL: <b>git@<%= @host + ':' + h(@owner.username) + '/' + h(@repository.name) + '.git' %></b><br />
 </div>
 
-<div id="repoheader">
-  <%= link_to 'Source', :action => 'show', :branch => @branch %>
+<div id="repositoryheader">
+  | <%= link_to 'Source', :action => 'show', :branch => @branch %>
   | <%= link_to 'Commits', :controller => 'repositories', :action => 'commits', :repo => @repository.name, :user => @repository.user.username, :branch => @branch %>
   <% if @owner == @loggedinuser -%>
   | <%= link_to 'Admin', edit_repository_path(@repository) %>
   <% end -%>
+  |
 </div>
-<hr>
