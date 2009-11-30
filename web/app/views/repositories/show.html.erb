@@ -36,8 +36,9 @@ Looking at: <%=h @branch %>
 <% end %>
 
 <% if readmefile %>
-<p>
+<div id="filename">
 <%=h readmefile.name %>
+</div>
 <div id="data">
 <%= h(readmefile.data).gsub(/\n/, '<br/>') %>
 </div>
