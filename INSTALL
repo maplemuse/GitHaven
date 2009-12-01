@@ -25,17 +25,17 @@ adduser \
     --home /var/git \
     git
 
-echo "coping gitforest to ~/git/gitforest"
+echo "coping githaven to ~/git/githaven"
 cd `dirname $0`
 pkg=`pwd`
-cp -rf `pwd` ~git/gitforest/
+cp -rf `pwd` ~git/githaven/
 
 echo "Copying apache thing over"
-cp 099-gitforest /etc/apache2/sites-available/
+cp 099-githaven /etc/apache2/sites-available/
 
-cd ~git/gitforest/web/
+cd ~git/githaven/web/
 rake db:migrate
 RAILS_ENV=production rake db:migrate
 
 #./sript/server
-#cp bin/gitforest-* /usr/loca/bin
+#cp bin/githaven-* /usr/loca/bin

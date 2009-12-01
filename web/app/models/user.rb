@@ -59,7 +59,7 @@ private
   if !User.exists?(:username => I18n.t('user.all'))
     everyone = User.new
     everyone.username = I18n.t('user.all')
-    everyone.email = "everyone@gitforest.com"
+    everyone.email = "everyone@githaven.com"
     everyone.password = "12345"
     everyone.save
   end

@@ -57,7 +57,7 @@ Rails::Initializer.run do |config|
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
-    :session_key => '_pg_session',
+    :session_key => '_githaven_session',
     :secret      => '620ae224806fc6b35287b7f58d32bdbc596955462ed686cbac3bd70722ab1562ebee072e1cf8080a4d64eee47cf0e8d0e46cf2f1c8c351ff2576a5fcf9a90266'
   }
 

@@ -19,9 +19,9 @@ fi
 user_id="${1}"
 repopath=`echo $ssh_command | sed -e 's/.* //g' -e s/\'//g`
 if [ "${cmd}" = "receive-pack" ] ; then
-  gitforest-checkpermissions "write" "${user_id}" "${repopath}"
+  githaven-checkpermissions "write" "${user_id}" "${repopath}"
 elif [ "${cmd}" = "upload-pack" ] ; then
-  gitforest-checkpermissions "read" "${user_id}" "${repopath}"
+  githaven-checkpermissions "read" "${user_id}" "${repopath}"
 fi
 
 cd `dirname $0`/../

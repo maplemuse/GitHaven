@@ -12,7 +12,7 @@
 
 <div id="header">
  𝜩 
-<%= link_to "GitForest", :controller => 'application' %>
+<%= link_to "GitHaven", :controller => 'application' %>
 <div id="account" style="float:right">
 <% if session[:user_id] && User.exists?(session[:user_id]) %>
 <%  username = User.find(session[:user_id]).username %>
@@ -33,7 +33,7 @@ Help
 </div>
 
 <div id="footer">
-<a href="http://www.example.com">GitForest</a> is Copyright <a href="mailto:ben@meyerhome.net">Benjamin Meyer</a> 2009
+<a href="http://www.githaven.com">GitHaven</a> is Copyright <a href="mailto:ben@meyerhome.net">Benjamin Meyer</a> 2009
 </div>
 
 </body>
