@@ -1,0 +1,11 @@
+#!/bin/sh -e
+db="development.sqlite3"
+if [ ! -n "${RAILS_ENV}" ] ; then
+    if [ "${RAILS_ENV}" = "production" ] ; then
+      db="production.sqlite3"
+    fi
+fi
+if [ ! -f "${db}" ] ; then
+    db=""
+fi
+echo $db

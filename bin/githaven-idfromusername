@@ -1,7 +1,8 @@
 #!/bin/bash -e
 name=$1
 table="users"
-id=`sqlite3 development.sqlite3 "select id,username from ${table}" | grep "${name}$" | sed -e s/\|"${name}$"//g`
+dbfile=`githaven-db`
+id=`sqlite3 "${dbfile}" "select id,username from ${table}" | grep "${name}$" | sed -e s/\|"${name}$"//g`
 if [ -z "$id" ] ; then
     echo "Unknown user: $name" >&2
     exit 1

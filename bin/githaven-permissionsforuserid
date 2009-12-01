@@ -1,3 +1,4 @@
 #!/bin/sh -e
 user_id=$1
-sqlite3 development.sqlite3 "select user_id,repository_id,mode from permissions"  | grep "^${user_id}|" | sed -e s/^"${user_id}"\|//g
+dbfile=`githaven-db`
+sqlite3 "${dbfile}" "select user_id,repository_id,mode from permissions"  | grep "^${user_id}|" | sed -e s/^"${user_id}"\|//g
