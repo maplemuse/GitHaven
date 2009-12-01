@@ -33,7 +33,9 @@ class RepositoriesController < ApplicationController
 
   def commits
     return if !find_repository
-    @commits = @repo.commits(@branch, 20)
+    if @repo
+        @commits = @repo.commits(@branch, 20)
+    end
     respond_to do |format|
       format.html
       format.xml  { render :xml => @repository }
@@ -138,11 +140,11 @@ private
       redirect_to root_url
       return false
     end
-    @repo = Grit::Repo.new(location())
-
     @branch = @repository.defaultbranch
     @branch = params[:branch] if params[:branch]
     @branch = 'master' if !@branch || @branch.empty?
+
+    @repo = Grit::Repo.new(location())
 
     return true
     rescue
