@@ -1,6 +1,6 @@
 <%= page_heading @user.username %>
 <div id="user">
-<%= image_tag @user.gravatar_url(:size => 48) %>
+<%= image_tag(gravatar_url_for(@user.avatar_email, "&size=48"), :size => "48x48") %>
 <h1><%=h @user.username %></h1>
 
 <% if @user.name %>(<%=h @user.name %>)<% end %>

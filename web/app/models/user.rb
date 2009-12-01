@@ -1,8 +1,6 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  is_gravtastic!(:source => "avatar")
-
   has_many :repositories, :dependent => :destroy
   has_many :sshkeys, :dependent => :destroy
 
@@ -40,6 +38,14 @@ class User < ActiveRecord::Base
     return if pwd.blank?
     create_new_salt
     self.hashed_password = User.encrypted_password(self.password, self.salt)
+  end
+
+  def avatar_email
+    puts self.email
+    if self.avatar && !self.avatar.empty?
+      return self.avatar
+    end
+    return self.email
   end
 
 private
