@@ -1,0 +1,27 @@
+#!/bin/sh -ex
+
+# For each running app this is different
+mkdir log
+mkdir tmp
+
+for d in `echo "app doc public test script vendor Rakefile"` ; do
+    ln -s /opt/githaven/web/$d $d
+done
+
+# config is special
+mkdir config
+for d in `ls -1 /opt/githaven/web/config` ; do
+    ln -s /opt/githaven/web/config/$d config/$d
+done
+cd config
+rm database.yml
+cp /opt/githaven/web/config/database.yml database.yml
+cat database.yml | sed -e "s:db:$PWD/../db:g" > database.yml2
+mv -f database.yml2 database.yml
+cd -
+
+# We only care about the migrate directory, the rest will be generated
+mkdir db
+ln -s /opt/githaven/web/db/migrate db/migrate
+rake db:migrate
+RAILS_ENV=production rake db:migrate
