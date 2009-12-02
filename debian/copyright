@@ -1,0 +1,26 @@
+This package was debianized by Benjamin Meyer <ben@meyerhome.net> on
+Wed, 02 Dec 2009 00:29:30 -0500.
+
+It was downloaded from http://githaven.com
+
+Upstream Author(s):
+
+    Benjamin Meyer
+
+Copyright:
+
+    <Copyright (C) 2009 Benjamin C Meyer>
+
+License:
+
+    <Put the license of the package here indented by 4 spaces>
+
+The Debian packaging is:
+
+    Copyright (C) 2009 Benjamin Meyer <ben@meyerhome.net>
+
+and is licensed under the GPL version 3, 
+see `/usr/share/common-licenses/GPL-3'.
+
+# Please also look if there are files or directories which have a
+# different copyright/license attached and list them here.

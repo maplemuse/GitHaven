@@ -1,0 +1,77 @@
+#!/bin/sh -x
+# postinst script for githaven
+#
+# see: dh_installdeb(1)
+
+set -e
+
+#DEBHELPER#
+
+. /usr/share/debconf/confmodule
+
+case "${1}" in
+    configure)
+        db_version 2.0
+
+        db_get githaven/username
+        _USERNAME="${RET:-git}"
+        db_get githaven/directory
+        _HOMEDIR="${RET:-/var/git}"
+
+        db_stop
+
+        if ! getent passwd | grep -q "^${_USERNAME}:"
+        then
+            adduser \
+              --system \
+              --shell /bin/sh \
+              --gecos 'git repository hosting' \
+              --group \
+              --disabled-password \
+              --no-create-home \
+              --home ${_HOMEDIR} \
+              --quiet \
+              ${_USERNAME}
+        else
+            echo "User (${_USERNAME}) already exists, user was not created."
+        fi
+
+        if [ ! -d "${_HOMEDIR}" ] ; then
+            mkdir -p "${_HOMEDIR}"
+            chown ${_USERNAME}:${_USERNAME} --recursive ${_HOMEDIR}
+
+            mkdir -p ${_HOMEDIR}/githaven
+            cd ${_HOMEDIR}/githaven
+            githaven-makedomaininstall
+
+            mkdir -p ${_HOMEDIR}/.ssh
+            chmod o+w ${_HOMEDIR}/.ssh
+        else
+            echo
+            echo "githaven directory (${_HOMEDIR}) already exists, doing nothing."
+            echo "Make sure the directory is recursively owned by (${_USERNAME})."
+        fi
+
+        tmp=`mktemp`
+        cat /etc/apache2/sites-available/099-githaven | sed -e "s:\ ~git:\ ${_HOMEDIR}:g" > $tmp
+        mv $tmp /etc/apache2/sites-available/099-githaven
+
+        a2dissite default
+        a2ensite 099-githaven
+        /etc/init.d/apache2 restart
+
+        echo
+        echo "Please visit help.githaven.com for information about how to use githaven."
+        ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+        ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+exit 0

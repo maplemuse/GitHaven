@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+db_input low githaven/username || true
+db_go
+
+db_input low githaven/directory || true
+db_go
+
+db_stop
