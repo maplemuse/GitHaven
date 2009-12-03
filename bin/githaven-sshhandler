@@ -2,6 +2,10 @@
 
 cd $HOME/githaven/db
 
+if [[ `whoami` = "git" && -z "$RAILS_ENV" ]] ; then
+    export RAILS_ENV="production"
+fi
+
 ssh_command="${SSH_ORIGINAL_COMMAND}"
 
 if [ -z "${ssh_command}" ] ; then
