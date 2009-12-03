@@ -32,7 +32,9 @@ case "$1" in
         rmdir --ignore-fail-on-non-empty "${_HOMEDIR}"
     fi
 
+    a2dissite 099-githaven
     a2ensite default
+    /etc/init.d/apache2 restart
 
     ;;
 
