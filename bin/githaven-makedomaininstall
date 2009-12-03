@@ -6,6 +6,8 @@ WEBROOT="/usr/share/githaven/web"
 mkdir log
 mkdir tmp
 chmod o+w log tmp
+touch log/development.log log/production.log
+chmod o+w log/*
 
 # Create the top level directories, but symlink the files inside them
 # rails has issues if you symlink the top level directories
