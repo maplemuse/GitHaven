@@ -1,7 +1,6 @@
 #!/bin/bash -e
 
-export PATH=$PATH:`dirname $0`
-cd `dirname $0`/../web/db
+cd $HOME/githaven/db
 
 ssh_command="${SSH_ORIGINAL_COMMAND}"
 
@@ -24,15 +23,15 @@ elif [ "${cmd}" = "upload-pack" ] ; then
   githaven-checkpermissions "read" "${user_id}" "${repopath}"
 fi
 
-cd `dirname $0`/../
+cd $HOME
 
-# Create the repos directory if it doesn't exists
+# Create the repos directory if it does not exists
 if [ ! -d repos ] ; then
   mkdir repos
 fi
 cd repos
 
-# Create the repo if it doesn't exists
+# Create the repo if it does not exists
 if [ ! -d ${repopath} ] ; then
     mkdir -p $repopath
     (cd $repopath; git init --bare -q)

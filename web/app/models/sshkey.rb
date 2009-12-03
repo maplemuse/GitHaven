@@ -9,8 +9,6 @@ class Sshkey < ActiveRecord::Base
   validates_uniqueness_of :key, :scope => :user_id
 
   def update_authorizedkeys
-    config = Rails::Configuration.new
-    location = config.root_path + '/../bin/githaven-generateauthorizedkeys &'
-    system(location)
+    system('githaven-generateauthorizedkeys &')
   end
 end

@@ -3,9 +3,12 @@
 
 sleep 1
 
-root=`dirname $0`
+root=`pwd`
+if [ ! -d "${HOME}" ] ; then
+  HOME="/var/git"
+fi
 keyfile="$HOME/.ssh/authorized_keys"
-command="${root}/githaven-sshhandler"
+command="githaven-sshhandler"
 
 tempfile=`mktemp`
 
@@ -15,7 +18,7 @@ echo "# $command [user]" >> ${tempfile}
 echo "# To find out what a username for a id is run usernamefromid [id]" >> ${tempfile}
 echo "#" >> ${tempfile}
 
-cd ${root}/../web/db
+cd ${root}/db
 dbfile=`githaven-db`
 sqlite3 "${dbfile}" 'select user_id,key from sshkeys' | while read row ; do
     user=`echo $row | awk -F'|' '{ print $1 }'`
