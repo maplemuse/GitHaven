@@ -43,9 +43,12 @@ case "${1}" in
             mkdir -p ${_HOMEDIR}/githaven
             cd ${_HOMEDIR}/githaven
             githaven-makedomaininstall
+            chown git * -r
 
             mkdir -p ${_HOMEDIR}/.ssh
-            chmod o+w ${_HOMEDIR}/.ssh
+            chown git ${_HOMEDIR}/.ssh
+            chgrp nogroup ${_HOMEDIR}/.ssh
+            chmod 0771 ${_HOMEDIR}/.ssh
         else
             echo
             echo "githaven directory (${_HOMEDIR}) already exists, doing nothing."
