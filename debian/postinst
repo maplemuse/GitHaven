@@ -52,9 +52,8 @@ case "${1}" in
             echo "Make sure the directory is recursively owned by (${_USERNAME})."
         fi
 
-        tmp=`mktemp`
-        cat /etc/apache2/sites-available/099-githaven | sed -e "s:\ ~git:\ ${_HOMEDIR}:g" > $tmp
-        mv $tmp /etc/apache2/sites-available/099-githaven
+        apache="/etc/apache2/sites-available/"
+        cat /usr/share/githaven/099-githaven | sed -e "s:\ ~git:\ ${_HOMEDIR}:g" > $apache/099-githaven
 
         a2dissite default
         a2ensite 099-githaven
