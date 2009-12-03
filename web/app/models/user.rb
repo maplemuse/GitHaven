@@ -56,17 +56,19 @@ private
 
   def create_new_salt
     self.salt = self.object_id.to_s + rand.to_s
+    check_for_everyone
   end
 
   def password_non_blank
     errors.add(:password, 'Missing password') if hashed_password.blank?
   end
 
-  if !User.exists?(:username => I18n.t('user.all'))
-    everyone = User.new
-    everyone.username = I18n.t('user.all')
-    everyone.email = "everyone@githaven.com"
-    everyone.password = "12345"
-    everyone.save
+  def check_for_everyone
+    if !User.exists?(:username => I18n.t('user.all'))
+      everyone = User.new
+      everyone.username = I18n.t('user.all')
+      everyone.password = ""
+      everyone.save(false)
+    end
   end
 end
