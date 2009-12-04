@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   attr_accessor :password_confirmation
   validates_confirmation_of :password
   attr_protected :hashed_password
+  attr_protected :username
 
   def self.authenticate(username, password)
     # Never allow the Everyone user to login, everyone is really just a pretend group
@@ -64,11 +65,13 @@ private
   end
 
   def check_for_everyone
-    if !User.exists?(:username => I18n.t('user.all'))
-      everyone = User.new
-      everyone.username = I18n.t('user.all')
-      everyone.password = ""
-      everyone.save(false)
-    end
+    create_user_everyone if User.count == 0
+  end
+
+  def create_user_everyone
+    everyone = User.new
+    everyone.username = I18n.t('user.all')
+    everyone.password = ""
+    everyone.save(false)
   end
 end
