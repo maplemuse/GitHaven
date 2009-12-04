@@ -146,6 +146,12 @@ private
 
     @repo = Grit::Repo.new(location())
 
+    @branches = @repo.branches()
+    @branches = @branches.sort_by { |a| a.name }
+
+    @tags = @repo.tags()
+    @tags = @tags.sort_by { |a| a.name }
+
     return true
     rescue
     if !@repository || !@owner

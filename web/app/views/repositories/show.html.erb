@@ -40,7 +40,7 @@ Looking at: <%=h @branch %>
             end
             %></td>
             <td><%= link_to_path(@joinedpath, f.name) %><%= '/' if f.mode == "040000" %></td>
-            <% most_recent_commit = @repo.log(@branch, @joinedpath + f.name).first %>
+            <% most_recent_commit = @repo.log(@branch, @joinedpath + f.name, :max_count => 1 ).first %>
             <% puts most_recent_commit %>
             <td><%= print_date(most_recent_commit.date) %></td>
             <td><%= link_to print_short_commit_message(most_recent_commit.message),

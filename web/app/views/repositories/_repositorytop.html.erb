@@ -1,22 +1,28 @@
 <%= render(:partial => 'repositorytopbar.html.erb') %>
 <div id="tags">
-<% if @repo -%>
-<% if !@repo.branches().empty? -%>
-    Branches<br />
-<% for branch in @repo.branches() -%>
-    <%= "<b>→" if branch.name == @branch -%><%= link_to h(branch.name), :user => @repository.user.username, :repo => @repository.name, :controller => 'repositories', :action => 'show', :branch => branch.name %><br /><%= "</b>" if branch.name == @branch -%>
+<% if !@branches.empty? -%>
+    <div id="tags_branches">
+    Branches
+    <ul>
+<% for branch in @branches -%>
+    <li <%= "id=current" if branch.name == @branch %>><%= "→" if branch.name == @branch -%><%= link_to h(branch.name), :user => @repository.user.username, :repo => @repository.name, :controller => 'repositories', :action => 'show', :branch => branch.name %>
 <% end -%>
+    </ul>
+    </div>
 <% end -%>
 
-<% if !@repo.tags().empty? -%>
-<br />
-    Tags<br />
-<% for tag in @repo.tags() -%>
-    <%= "<b>→" if tag.name == @branch -%><%= link_to h(tag.name), :user => @repository.user.username, :repo => @repository.name, :controller => 'repositories', :action => 'show', :branch => tag.name %><br /><%= "</b>" if tag.name == @branch -%>
+<% if !@tags.empty? -%>
+    <div id="tags_tags">
+    Tags
+    <ul>
+<% for tag in @tags -%>
+        <li <%= "id=current" if branch.name == @branch %>><%= "→" if tag.name == @branch -%><%= link_to h(tag.name), :user => @repository.user.username, :repo => @repository.name, :controller => 'repositories', :action => 'show', :branch => tag.name %>
 <% end -%>
-<% end -%>
+    </ul>
+    </div>
 <% end -%>
 </div>
+
 <% if !@repo -%>
 <% if @repository.user == @loggedinuser -%>
 <%= render(:partial => 'emptyrepo.html.erb') -%>
