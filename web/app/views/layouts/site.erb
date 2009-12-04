@@ -11,25 +11,24 @@
 <body>
 
 <div id="header">
- 𝜩 
-<%= link_to "GitHaven", :controller => 'application' %>
-<div id="account" style="float:right">
-<% if session[:user_id] && User.exists?(session[:user_id]) %>
-<%  username = User.find(session[:user_id]).username %>
-<%= link_to h(username), :user => username, :controller => 'users', :action => 'show' %> |
-<%= link_to t('user.preferences'), :controller => 'users', :action => 'edit' %> |
-<%= link_to t('user.logout'), :controller => 'users', :action => 'logout' %> |
-<% else %>
-<%= link_to t('user.signup'), :controller => 'users', :action => 'new' %> |
-<%= link_to t('user.login'), :controller => 'users', :action => 'login' %> |
-<% end %>
-Help
-</div>
+    𝜩 
+    <%= link_to 'GitHaven', :controller => 'application' %>
+    <div id="account">
+<% if @loggedinuser -%>
+        <%= link_to h(@loggedinuser.username), :user => @loggedinuser.username, :controller => 'users', :action => 'show' %> |
+        <%= link_to t('user.preferences'), :controller => 'users', :action => 'edit' %> |
+        <%= link_to t('user.logout'), :controller => 'users', :action => 'logout' %> |
+<% else -%>
+        <%= link_to t('user.signup'), :controller => 'users', :action => 'new' %> |
+        <%= link_to t('user.login'), :controller => 'users', :action => 'login' %> |
+<% end -%>
+        Help
+    </div>
 </div>
 
 <div id="main">
 <div id="flash"><%= flash[:notice] %></div>
-<%= yield  %>
+<%= yield  -%>
 </div>
 
 <div id="footer">
