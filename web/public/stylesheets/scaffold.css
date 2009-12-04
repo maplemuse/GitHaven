@@ -62,6 +62,10 @@ a:hover { color: #fff; background-color:#000; }
   border: 1px solid #33ff99;
   margin-top: 1em;
   margin-bottom: 0;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -webkit-border-top-left-radius: 5px;
 }
 
 #repository_actions {
@@ -88,6 +92,10 @@ a:hover { color: #fff; background-color:#000; }
     margin-top: -1px;
     margin-right: 1px;
     background-color: #ccffcc;
+    -moz-border-radius-bottomleft: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
 }
 
 #repository_actions li#repository_admin {
