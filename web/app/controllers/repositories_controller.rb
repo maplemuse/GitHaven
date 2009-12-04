@@ -22,7 +22,7 @@ class RepositoriesController < ApplicationController
         @commits = @repo.commits(@branch, 1)
         @joinedpath = ''
         @joinedpath = @path.join('/') if @path
-        @tree = @repo.commits.first.tree
+        @tree = @repo.commits(@branch).first.tree
         @tree = @tree/@joinedpath if @path
     end
     respond_to do |format|
