@@ -1,7 +1,7 @@
 Template: githaven/username
 Type: string
 Default: git
-_Description: Dedicated account on the system for githaven:
+Description: Dedicated account on the system for githaven.
  Repositories are managed by githaven under a single system account.
  Individual users login with ssh keys.  This user name is part
  of the url command users use to clone repositories such as
@@ -13,7 +13,7 @@ _Description: Dedicated account on the system for githaven:
 Template: githaven/directory
 Type: string
 Default: /var/git
-_Description: Home directory for the user where git repositories and the website will be stored.
+Description: Home directory where repositories and the website will be stored.
  Please specify the directory where githaven will manage store repositories and
  the web application's files
  .

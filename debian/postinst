@@ -37,27 +37,39 @@ case "${1}" in
         fi
 
         if [ ! -d "${_HOMEDIR}" ] ; then
-            mkdir -p "${_HOMEDIR}"
+            mkdir -p ${_HOMEDIR}
+            mkdir -p ${_HOMEDIR}/.ssh -m 700
 
             mkdir -p ${_HOMEDIR}/githaven
             cd ${_HOMEDIR}/githaven
+            set +e
             githaven-makedomaininstall
+            if [ $? -ne 0 ] ; then
+                echo "There was a problem configuring GitHaven, aborting"
+                rm -rf "${_HOMEDIR}"
+                return 1
+            fi
+            set -e
             cd -
 
-            mkdir -p ${_HOMEDIR}/.ssh -m 700
             chown ${_USERNAME}:${_USERNAME} --no-dereference --recursive ${_HOMEDIR}
         else
+            if [ -d ${_HOMEDIR}/githaven/db ] ; then
+                #cd ${_HOMEDIR}/githaven/
+                #rake db:migrate
+                #RAILS_ENV=production rake db:migrate
+            fi
             echo
             echo "githaven directory (${_HOMEDIR}) already exists, doing nothing."
             echo "Make sure the directory is recursively owned by (${_USERNAME})."
         fi
 
         apache="/etc/apache2/sites-available/"
-        cat /usr/share/githaven/099-githaven | sed -e "s:\ ~git:\ ${_HOMEDIR}:g" > $apache/099-githaven
+        cat /usr/share/githaven/099-githaven | sed -e "s:\ ~git:\ ${_HOMEDIR}:g" > $apache/099-${_USERNAME}-githaven
 
         a2dissite default
-        a2ensite 099-githaven
-        /etc/init.d/apache2 restart
+        a2ensite 099-${_USERNAME}-githaven
+        apache2ctl restart
 
         echo
         echo "GitHaven is now installed and should be running at \"`hostname`\" in your web browser."
