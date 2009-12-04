@@ -3,10 +3,8 @@
 Copyright 2009 Benjamin Meyer
 =end
 %>
-
 <%= page_heading (@repository.user.username + "'s " + @repository.name + " at " + @branch) %>
 <%= render(:partial => 'repositorytop.html.erb') %>
-
 <div id="repopage">
 Looking at: <%=h @branch %>
 <%= render(:partial => 'commitlist.html.erb') %>

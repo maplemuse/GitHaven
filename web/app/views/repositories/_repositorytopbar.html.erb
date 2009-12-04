@@ -1,17 +1,16 @@
 <div id="repository">
-<%= link_to_user(@owner) %> / <b> <%= link_to_repository(@repository) %></b><br />
-<% if !@repository.description.empty? %>
-<%= t('repository.description') -%>: <%=h @repository.description %><br />
-<% end %>
-<!-- Public Clone URL: <b>git://<%= @host + ':' + h(@owner.username) + '/' + h(@repository.name) + '.git' %></b><br /> -->
-Your Clone URL: <b>git@<%= @host + ':' + h(@owner.username) + '/' + h(@repository.name) + '.git' %></b><br />
+    <%= link_to_user(@owner) %> / <b> <%= link_to_repository(@repository) %></b><br />
+<% if !@repository.description.empty? -%>
+    <%= t('repository.description') -%>: <%=h @repository.description %><br />
+<% end -%>
+    <!-- Public Clone URL: <b>git://<%= @host + ':' + h(@owner.username) + '/' + h(@repository.name) + '.git' %></b><br /> -->
+    Your Clone URL: <b>git@<%= @host + ':' + h(@owner.username) + '/' + h(@repository.name) + '.git' %></b><br />
 </div>
-
-<div id="repositoryheader">
-  | <%= link_to 'Source', :action => 'show', :branch => @branch %>
-  | <%= link_to 'Commits', :controller => 'repositories', :action => 'commits', :repo => @repository.name, :user => @repository.user.username, :branch => @branch %>
-  <% if @owner == @loggedinuser -%>
-  | <%= link_to 'Admin', edit_repository_path(@repository) %>
-  <% end -%>
-  |
+<div id="repository_actions">
+    <ul>
+        <li><%= link_to 'Source', :action => 'show', :branch => @branch %></li>
+        <li><%= link_to 'Commits', :controller => 'repositories', :action => 'commits', :repo => @repository.name, :user => @repository.user.username, :branch => @branch %></li>
+        <% if @owner == @loggedinuser -%><li id="repository_admin"><%= link_to 'Admin', edit_repository_path(@repository) %></li><% end %>
+        <br />
+    </ul>
 </div>
