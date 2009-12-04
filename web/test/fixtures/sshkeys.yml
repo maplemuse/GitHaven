@@ -1,11 +1,21 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
-  key: MyString
+  name: One
+  key: one
   user_id: 1
 
 two:
-  name: MyString
-  key: MyString
+  name: Two
+  key: two
   user_id: 1
+
+oneA:
+  name: One
+  key: one
+  user_id: 2
+
+three:
+  name: Three
+  key: three
+  user_id: 2
