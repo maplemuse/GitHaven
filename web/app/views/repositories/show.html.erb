@@ -11,9 +11,9 @@ Looking at: <%=h @branch %>
 
 <% if @repo -%>
     <div id="tree_path">
-    <% if @path -%>
         <% top_path = "" %>
         <%= link_to h(@repository.name), @repository %>/
+    <% if @path -%>
         <% for f in @path -%>
             <%= link_to_path(top_path, f) %>
             <% top_path += f; -%> /
