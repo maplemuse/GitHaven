@@ -16,7 +16,7 @@
     Tags
     <ul>
 <% for tag in @tags -%>
-        <li <%= "id=current" if branch.name == @branch %>><%= "→" if tag.name == @branch -%><%= link_to h(tag.name), :user => @repository.user.username, :repo => @repository.name, :controller => 'repositories', :action => 'show', :branch => tag.name %>
+        <li <%= "id=current" if tag.name == @branch %>><%= "→" if tag.name == @branch -%><%= link_to h(tag.name), :user => @repository.user.username, :repo => @repository.name, :controller => 'repositories', :action => 'show', :branch => tag.name %>
 <% end -%>
     </ul>
     </div>
