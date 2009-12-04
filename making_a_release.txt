@@ -9,7 +9,7 @@ version="0.0.0"
 git tag -a $version -m "Version $version"
 git archive --format=tar --prefix=githaven-$version/ $version | gzip > githaven-$version.tar.gz
 
-tempdir=`mktemp -d`
+tempdir=`mktemp -d /tmp/tmp.githaven.XXXXXXXXXX`
 cp githaven-$version.tar.gz $tempdir
 cd $tempdir
 tar -zxf githaven-$version.tar.gz
