@@ -60,7 +60,7 @@ case "${1}" in
         /etc/init.d/apache2 restart
 
         echo
-        echo "Please visit help.githaven.com for information about how to use githaven."
+        echo "GitHaven is now installed and should be running at \"`hostname`\" in your web browser."
         ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
