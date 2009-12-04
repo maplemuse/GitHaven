@@ -5,9 +5,7 @@ WEBROOT="/usr/share/githaven/web"
 # For each running app these two directories are different and not shared
 mkdir log
 mkdir tmp
-chmod o+w log tmp
 touch log/development.log log/production.log
-chmod o+w log/*
 
 # Create the top level directories, but symlink the files inside them
 # rails has issues if you symlink the top level directories
@@ -16,7 +14,6 @@ for d in `echo "config app doc public test script vendor db"` ; do
     for f in `ls -1 "${WEBROOT}"/$d` ; do
         ln -s "${WEBROOT}"/$d/$f $d/$f
     done
-    chmod o+w $d
 done
 for f in `echo "Rakefile"` ; do
     ln -s "${WEBROOT}"/$f $f
@@ -25,4 +22,3 @@ done
 # Create the initial db
 rake db:reset
 RAILS_ENV=production rake db:reset
-chmod o+w db/*.sqlite3

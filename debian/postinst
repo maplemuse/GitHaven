@@ -38,17 +38,14 @@ case "${1}" in
 
         if [ ! -d "${_HOMEDIR}" ] ; then
             mkdir -p "${_HOMEDIR}"
-            chown ${_USERNAME}:${_USERNAME} --recursive ${_HOMEDIR}
 
             mkdir -p ${_HOMEDIR}/githaven
             cd ${_HOMEDIR}/githaven
             githaven-makedomaininstall
-            chown git * -r
+            cd -
 
-            mkdir -p ${_HOMEDIR}/.ssh
-            chown git ${_HOMEDIR}/.ssh
-            chgrp nogroup ${_HOMEDIR}/.ssh
-            chmod 0771 ${_HOMEDIR}/.ssh
+            mkdir -p ${_HOMEDIR}/.ssh -m 700
+            chown ${_USERNAME}:${_USERNAME} --no-dereference --recursive ${_HOMEDIR}
         else
             echo
             echo "githaven directory (${_HOMEDIR}) already exists, doing nothing."

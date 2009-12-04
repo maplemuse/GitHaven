@@ -30,5 +30,5 @@ done
 
 mv -fu "${tempfile}" "${keyfile}"
 
-# Make the file rw for this user/group only
-chmod 0660 "${keyfile}"
+# Make the file rw for this user only
+chmod 0600 "${keyfile}"
