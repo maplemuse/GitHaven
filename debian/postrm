@@ -35,6 +35,7 @@ case "$1" in
     a2dissite 099-githaven
     a2ensite default
     /etc/init.d/apache2 restart
+    rm /etc/apache2/sites-available/099-githaven
 
     ;;
 
