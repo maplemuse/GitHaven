@@ -154,6 +154,8 @@ private
 
     return true
     rescue
+    @branches = []
+    @tags = []
     if !@repository || !@owner
       flash[:notice] = t('repository.notfound')
       redirect_to root_url
