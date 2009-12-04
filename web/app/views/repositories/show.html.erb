@@ -32,18 +32,18 @@ Looking at: <%=h @branch %>
         <% for f in @tree.contents %>
             <% readmefile = f if f.name == "README"; %>
             <tr class="<%= cycle('contents-line-odd', 'contents-line-even') %>">
-            <td><%=
+            <td class="tree_image"><%=
             if f.mode == "040000"
                 image_tag "folder.png", :alt => "Folder"
             else
                 image_tag "text-generic.png", :alt => "File"
             end
             %></td>
-            <td><%= link_to_path(@joinedpath, f.name) %><%= '/' if f.mode == "040000" %></td>
+            <td class="tree_name"><%= link_to_path(@joinedpath, f.name) %><%= '/' if f.mode == "040000" %></td>
             <% most_recent_commit = @repo.log(@branch, @joinedpath + f.name, :max_count => 1 ).first %>
             <% puts most_recent_commit %>
-            <td><%= print_date(most_recent_commit.date) %></td>
-            <td><%= link_to print_short_commit_message(most_recent_commit.message),
+            <td class="tree_date"><%= print_date(most_recent_commit.date) %></td>
+            <td class="tree_message"><%= link_to print_short_commit_message(most_recent_commit.message),
             {:user => @repository.user.username, :repo => @repository.name, :action => 'commit', :sha1 => most_recent_commit.sha, :controller => 'repositories'}, :class => "tree_commit_message" %></td>
             </tr>
         <%  end -%>

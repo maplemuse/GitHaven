@@ -149,6 +149,7 @@ a:hover { color: #fff; background-color:#000; }
 
 .tree_commit_message {
     text-decoration: none;
+    font-family: Courier New;
 }
 
 .commit_author {
@@ -161,6 +162,7 @@ a:hover { color: #fff; background-color:#000; }
 }
 
 #tree {
+  font-size: small;
   background: #f8f8f8;
   margin-bottom: 1em;
   width: 100%;
@@ -169,6 +171,7 @@ a:hover { color: #fff; background-color:#000; }
   cellpadding: 0;
   padding: 0;
 }
+
 #tree td {
    padding: 0;
 }
