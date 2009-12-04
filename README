@@ -1,6 +1,5 @@
-GitHaven is a Git Repository Manager
+GitHaven is a web application to manage Git repositories with a web browser.
 
-Requirements
----
-apt-get install \
-  git-core libapache2-mod-passenger
+GitHaven is designed to be easily installed and upgraded so you can run it anywhere you want.  Packaged as a Debian archive GitHaven can be installed on a Linux server inside your firewall where there will be no chance of code being accidentally leaking onto the internet.
+
+You can find out more at http://githaven.com/
