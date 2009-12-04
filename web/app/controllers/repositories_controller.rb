@@ -45,15 +45,14 @@ class RepositoriesController < ApplicationController
 
   def commit
     return if !find_repository
-    if !params[:sha1]
-      redirect_to :action => 'index'
-    end
     @sha1 = params[:sha1]
     @commits = @repo.commits(@sha1, 1)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @repository }
     end
+    rescue
+      redirect_to root_url
   end
 
   # GET /repositories/new
@@ -80,7 +79,7 @@ class RepositoriesController < ApplicationController
     respond_to do |format|
       if @loggedinuser.save && @repository.save && permission.save
         flash[:notice] = t('repository.created', :name => h(@repository.name))
-        format.html { redirect_to(@repository) }
+        format.html { redirect_to(:controller => 'repositories', :user => @repository.user.username, :repo => @repository.name, :action => 'show') }
         format.xml  { render :xml => @repository, :status => :created, :location => @repository }
       else
         format.html { render :action => 'new' }
@@ -98,7 +97,7 @@ class RepositoriesController < ApplicationController
     respond_to do |format|
       if @repository.update_attributes(params[:repository])
         flash[:notice] = t('repository.updated', :name => h(@repository.name))
-        format.html { redirect_to(@repository) }
+        format.html { redirect_to(:controller => 'repositories', :user => @repository.user.username, :repo => @repository.name, :action => 'show') }
         format.xml  { head :ok }
       else
         format.html { render :action => 'edit' }
