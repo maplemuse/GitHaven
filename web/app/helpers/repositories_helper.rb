@@ -17,4 +17,15 @@ module RepositoriesHelper
     link_to h(repository.name), :controller => 'repositories', :action => 'show', :repo => repository.name, :user => repository.user.username
   end
 
+  def print_date(date)
+    return String(Date::MONTHNAMES[date.mon]) + " " + String(date.mday) + ", " + String(date.year)
+  end
+
+  def print_short_commit_message(message, length = 50)
+    if (message.length < length)
+        message
+    else
+        message.slice(0, length) + "..."
+    end
+  end
 end

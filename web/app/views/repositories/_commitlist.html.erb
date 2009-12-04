@@ -4,7 +4,7 @@
     <% if @commits.count != 1 && date.day != commit.date.day -%>
     <div class="date">
     <% date = commit.date -%>
-        <%= Date::MONTHNAMES[commit.date.mon] %> <%= commit.date.mday %>, <%= commit.date.year %><br />
+    <%= print_date(commit.date) %>
     </div>
     <% end -%>
     <div class="commit">
@@ -19,7 +19,7 @@
         {:user => @repository.user.username, :repo => @repository.name, :action => 'commit', :sha1 => commit.sha, :controller => 'repositories'} %>
     @ <%= sprintf("%02.0f", commit.date.hour) + ":" + sprintf("%02.0f", commit.date.min) %>
         <br />
-    <div class="commit_message"><%= link_to h(commit.message),
+    <div class="commit_message"><%= link_to h(print_short_commit_message(commit.message, 200)),
         {:user => @repository.user.username, :repo => @repository.name, :action => 'commit', :sha1 => commit.sha, :controller => 'repositories'} %>
     </div>
   </div>
