@@ -1,0 +1,13 @@
+#!/bin/bash -e
+
+which aspell > /dev/null
+if [ ! $? -eq 0 ] ; then
+    echo "aspell not installed"
+else
+    warnings=`cat $1 | grep -v '^#.*' | aspell list`
+    if [ ! -z "${warnings}" ] ; then
+        echo "Possible spelling errors detected in the commit message:"
+        echo "Use commit --amend to fix any actual mistakes"
+        echo "${warnings}";
+    fi
+fi

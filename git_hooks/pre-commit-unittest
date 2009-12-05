@@ -1,0 +1,27 @@
+#!/bin/bash -ex
+#
+# Check that existing autotests for files that are being commited are not currently failing
+#
+
+unset GIT_DIR
+dir=`dirname $0`
+for file in `git diff-index --name-only HEAD | grep web/app` ; do
+    file=`echo $file | sed -e s:web/app/::g`
+    if echo $file | grep models > /dev/null
+    then
+        object=`echo $file | sed -e s:models/::g -e s:\.rb::g`
+        echo "--checking autotest for: $object--"
+        ruby -I web/test web/test/unit/${object}_test.rb
+        continue
+    fi
+    if echo $file | egrep "views" > /dev/null
+    then
+        #rake
+        object=`echo $file | sed -e s:views/::g -e s:/.*::g`
+        echo "--checking autotest for: $object--"
+        ruby -I web/test web/test/functional/${object}_controller_test.rb
+        continue
+    fi
+    echo "Don't know how to test $file"
+    exit 1
+done
