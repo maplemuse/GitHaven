@@ -17,14 +17,14 @@ class SshkeysControllerTest < ActionController::TestCase
     assert_template 'new'
   end
 
-  test "should create sshkey" do
+  test 'should create sshkey' do
     assert_difference('Sshkey.count', 0) do
       post :create, :sshkey => { }
     end
     assert_not_nil flash[:notice]
     assert_redirected_to 'login'
   end
-  test "create_w_login" do
+  test 'create_w_login' do
     assert_difference('Sshkey.count') do
       post :create, {:sshkey => {:name => 'Default', :key => 'x' }}, {:user_id => users(:one).id}
     end
@@ -33,37 +33,37 @@ class SshkeysControllerTest < ActionController::TestCase
     assert_redirected_to :controller => 'users', :user => users(:one).username
   end
 
-  test "edit" do
+  test 'edit' do
     get :edit, :id => sshkeys(:one).id
     assert_not_nil flash[:notice]
     assert_redirected_to 'login'
   end
-  test "edit_w_login" do
+  test 'edit_w_login' do
     get :edit, {:id => sshkeys(:one).id}, {:user_id => users(:one).id}
     assert_response :success
     assert_nil flash[:notice]
     assert_not_nil assigns(:sshkey)
   end
 
-  test "update" do
+  test 'update' do
     get :update, :id => sshkeys(:one).id
     assert_not_nil flash[:notice]
     assert_redirected_to 'login'
   end
-  test "update_w_login" do
+  test 'update_w_login' do
     get :update, {:id => sshkeys(:one).id, :sshkey => {}}, {:user_id => users(:one).id}
     assert_not_nil flash[:notice]
     assert_redirected_to :controller => 'users', :user => users(:one).username
   end
 
-  test "destroy" do
+  test 'destroy' do
     assert_difference('Sshkey.count', 0) do
       delete :destroy, :id => sshkeys(:one).id
     end
     assert_not_nil flash[:notice]
     assert_redirected_to 'login'
   end
-  test "destroy_w_login " do
+  test 'destroy_w_login ' do
     assert_difference('Sshkey.count', -1) do
       delete :destroy, {:id => sshkeys(:one).id}, {:user_id => users(:one).id}
     end
