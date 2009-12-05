@@ -71,7 +71,7 @@ private
   def create_user_everyone
     everyone = User.new
     everyone.username = I18n.t('user.all')
-    everyone.password = ""
+    everyone.password = ''
     everyone.save(false)
   end
 end
