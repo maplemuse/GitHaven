@@ -3,7 +3,9 @@
 one:
   repository_id: 1
   user_id: 1
+  mode: r
 
 two:
   repository_id: 1
   user_id: 1
+  mode: r

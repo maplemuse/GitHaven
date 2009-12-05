@@ -1,5 +1,3 @@
-require 'grit'
-
 class RepositoriesController < ApplicationController
   before_filter :require_login, :only => [:new, :create, :edit, :update, :destroy]
   before_filter :requires_authorization, :only => [:edit, :update, :destroy]
@@ -58,7 +56,6 @@ class RepositoriesController < ApplicationController
   # GET /repositories/new
   def new
     @repository = Repository.new
-    @owner = @repository.user
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @repository }
@@ -67,23 +64,24 @@ class RepositoriesController < ApplicationController
 
   # POST /repositories
   def create
-    @repository = Repository.new(params[:repository])
-    @loggedinuser.repositories << @repository
+    repository = Repository.new(params[:repository])
+    @loggedinuser.repositories << repository
 
     permission = Permission.new
-    permission.mode = "ro"
+    permission.mode = 'ro'
     everyone = User.find_by_username(I18n.t('user.all'))
     permission.user_id = everyone.id
-    @repository.permissions << permission
+    repository.permissions << permission
 
     respond_to do |format|
-      if @loggedinuser.save && @repository.save && permission.save
-        flash[:notice] = t('repository.created', :name => h(@repository.name))
-        format.html { redirect_to(:controller => 'repositories', :user => @repository.user.username, :repo => @repository.name, :action => 'show') }
-        format.xml  { render :xml => @repository, :status => :created, :location => @repository }
+      if @loggedinuser.save && repository.save && permission.save
+        flash[:notice] = t('repository.created', :name => h(repository.name))
+        format.html { redirect_to(:controller => 'repositories', :user => repository.user.username, :repo => repository.name, :action => 'show') }
+        format.xml  { render :xml => repository, :status => :created, :location => repository }
       else
+        @repository = repository
         format.html { render :action => 'new' }
-        format.xml  { render :xml => @repository.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => repository.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -119,11 +117,6 @@ class RepositoriesController < ApplicationController
   end
 
 private
-  def location
-    config = Rails::Configuration.new
-    location = config.root_path + '/../repos/' + @repository.user.username + '/' + @repository.name + '.git'
-    return location
-  end
 
   def find_repository
     if params[:repo] && params[:user]
@@ -143,7 +136,7 @@ private
     @branch = params[:branch] if params[:branch]
     @branch = 'master' if !@branch || @branch.empty?
 
-    @repo = Grit::Repo.new(location())
+    @repo = Grit::Repo.new(@repository.location())
 
     @branches = @repo.branches()
     @branches = @branches.sort_by { |a| a.name }
@@ -166,6 +159,7 @@ private
   def requires_authorization
     return if !find_repository
     if @owner != @loggedinuser
+        @repository = nil
         flash[:notice] = t('repository.notowner')
         redirect_to root_url
     end
