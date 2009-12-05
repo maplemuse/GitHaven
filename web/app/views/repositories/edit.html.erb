@@ -16,7 +16,9 @@
   </p>
   <p>
     <%= f.label :defaultbranch %><br />
-    <%= f.text_field :defaultbranch %>
+    <%= f.select :defaultbranch,
+        @branches.map {|u| [u.name, u.name]},
+        :prompt => "Select a branch" %>
   </p>
   <p>
     <%= f.submit "Update" %>
