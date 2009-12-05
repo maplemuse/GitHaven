@@ -13,7 +13,7 @@ Creating a new Repository?
   git commit -m "initial commit"
   git remote add origin git@<%= @host %>:<%=@repository.user.username%>/<%=@repository.name%>.git
   git push origin master
-      
+
 Make sure you have the following set on your computer:
   git config --global user.name "<%= @loggedinuser.name %>"
   git config --global user.email <%= @loggedinuser.email %>
