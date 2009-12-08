@@ -18,7 +18,7 @@ class Repository < ActiveRecord::Base
     return false
   end
 
-  def self.location
+  def location
     config = Rails::Configuration.new
     location = config.root_path + '/../repos/' + user.username + '/' + name + '.git'
     return location
