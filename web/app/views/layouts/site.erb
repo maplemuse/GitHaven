@@ -6,13 +6,13 @@
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title><%= page_title %></title>
   <%= stylesheet_link_tag 'scaffold' %>
+  <%= stylesheet_link_tag(controller.controller_name) %>
   <%= yield :header_tags %>
 </head>
 <body>
 
 <div id="header">
-    𝜩 
-    <%= link_to 'GitHaven', :controller => 'application' %>
+<%= link_to (image_tag 'githaven.png', :id => 'logo'), :controller => 'application' %>
     <div id="account">
 <% if @loggedinuser -%>
         <%= link_to h(@loggedinuser.username), :user => @loggedinuser.username, :controller => 'users', :action => 'show' %> |

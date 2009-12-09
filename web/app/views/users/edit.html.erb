@@ -1,5 +1,5 @@
-<%= page_heading t('user.preferences') %>
-<h1><%= t('user.preferences') %></h1>
+<%= page_heading h @user.username + ' ' + t('user.preferences') %>
+<h1><%= h @user.username + ' ' + t('user.preferences') %></h1>
 
 <% form_for(@user) do |f| %>
   <%= f.error_messages %>
@@ -30,7 +30,6 @@
 render(:partial => 'sshkeys/show')
 %>
 
-<hr>
-<p>
+<div id="delete_button">
 <%= button_to 'Delete my Account', @user, :confirm => 'Are you sure?', :method => :delete  %>
-</p>
+</div>

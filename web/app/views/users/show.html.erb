@@ -2,25 +2,16 @@
 <div id="user">
 <%= image_tag(gravatar_url_for(@user.avatar_email, "&size=48"), :size => "48x48") %>
 <h1><%=h @user.username %></h1>
-
-<% if @user.name %>(<%=h @user.name %>)<% end %>
-
+<div id="user_info">
 <% if @user.name %>Name: <%=h @user.name %><br /><% end %>
 <% if @user.email %>Email: <%=h @user.email %><br /><% end %>
 <% if @user.url %>Website: <%=h @user.url %><br /><% end %>
 </div>
+</div>
 
+<% @repositories = @user.repositories %>
+<%= render(:partial => 'repositories/index') -%>
 
-<h2>Repositories:</h2>
-<ul id="repositories">
-<% for repo in @user.repositories %>
-    <li><%=link_to h(repo.name), :controller => "repositories", :action => "show", :repo => repo.name %>
-    <% if !repo.description.empty? %>
-    :: <%= repo.description %>
-    <% end %>
-    </li>
-<% end %>
-</ul>
 <% if session[:user_id] %>
 <%= button_to "Create New Repository", {:controller => 'repositories', :action => 'new'}, :method => :get %>
 <% end %>

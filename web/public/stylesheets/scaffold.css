@@ -4,6 +4,27 @@ body {
     color: #333;
 }
 
+#signup {
+    padding-top: 3em;
+    text-align: center;
+}
+
+#hello {
+    text-align: center;
+}
+
+#logo {
+  border: 0px;
+}
+
+a { color: rgb(67, 161, 212); }
+
+
+img#big_logo {
+  padding-top: 1em;
+  padding-bottom: .5em;
+}
+
 body, p, ol, ul, td {
 }
 
@@ -11,10 +32,6 @@ pre {
   background-color: #eee;
   padding: 10px;
 }
-
-a { color: #000; }
-a:visited { color: #666; }
-a:hover { color: #fff; background-color:#000; }
 
 .fieldWithErrors {
   padding: 2px;
@@ -54,6 +71,20 @@ a:hover { color: #fff; background-color:#000; }
 #errorExplanation ul li {
   font-size: 12px;
   list-style: square;
+}
+
+#repositories {
+    width: 70%;
+    margin-right:auto;margin-left:auto;width:760px;
+    border-top: 1px solid black;
+    padding-top: .5em;
+    margin-top: 1em;
+    text-align: left;
+}
+
+#repositories table {
+    margin-top: .25em;
+    border: 1px solid #f8f8f8;
 }
 
 #repository {
@@ -105,6 +136,10 @@ a:hover { color: #fff; background-color:#000; }
 
 #repository_actions br {
     clear: left;
+}
+
+#tags_branches {
+    margin-top: 1em;
 }
 
 #tags ul {
@@ -167,13 +202,17 @@ a:hover { color: #fff; background-color:#000; }
   margin-bottom: 1em;
   width: 100%;
   border: 1px solid #e8e8e8;
-  cellspacing: 0;
-  cellpadding: 0;
+  border-spacing: 0;
   padding: 0;
+}
+
+#tree tr {
+  height: 1.8em;
 }
 
 #tree td {
    padding: 0;
+   padding-left: 2px;
 }
 
 .contents-line-even {
@@ -184,27 +223,32 @@ a:hover { color: #fff; background-color:#000; }
 }
 
 #header {
-  border-bottom: 1px solid #66ccff;
+  font-family: Arial;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid black;
 }
 
 #main {
-    height: auto !important;
     margin: 1em;
     padding-bottom: 1.4em;
-}
 
-#footer {
-  height: 1.4em;
-  clear: both;
-  bottom: 0px;
-  width: 100%;
-  position: fixed;
-  border-top: 1px solid #66ccff;
+    margin-right:auto;
+    margin-left:auto;
+    width: 760px;
 }
 
 #footer, #header {
+  font-size: small;
   padding: .25em .5em;
-  background-color: #ccffff;
+}
+
+#footer {
+  clear: both;
+  bottom: 0px;
+  width: auto;
+  text-align: right;
+  border-top: 1px solid black;
+  font-size: 8pt;
 }
 
 #main .list-line-even {
@@ -229,15 +273,22 @@ a:hover { color: #fff; background-color:#000; }
 #branches, #tags {
     float: right;
     font-size: 12px;
-    width: 12%;
-    margin: .5em;
     padding: .5em;
     border: 1px solid gray;
     background: #f8f8f8;
+    width: 11%;
 }
 
 #repopage {
     float: left;
-    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 87%;
+    margin: 0;
+    padding: 0;
+}
+
+#delete_button {
+    float: right;
 }
 

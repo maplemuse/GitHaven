@@ -1,6 +1,6 @@
 <%= render(:partial => 'repositorytopbar.html.erb') %>
 <%= page_heading "Edit Repository" %>
-<h2>Editing <%=h(@repository.name) %> repository</h2>
+<h2><%=h(@repository.name) %> settings</h2>
 
 <% form_for(@repository) do |f| %>
   <%= f.error_messages %>
@@ -15,17 +15,17 @@
     <%= f.text_field :description %>
   </p>
   <p>
-    <%= f.label :defaultbranch %><br />
+    <%= f.label 'Default branch' %><br />
     <%= f.select :defaultbranch,
         @branches.map {|u| [u.name, u.name]},
         :prompt => "Select a branch" %>
   </p>
   <p>
-    <%= f.submit "Update" %>
+    <%= f.submit 'Update settings' %>
   </p>
 <% end %>
 
-<h2>Permissions:</h2>
+<h2>Repository Permissions</h2>
 <ul>
 <% for permission in @repository.permissions %>
 <li>
@@ -36,5 +36,6 @@
 </ul>
 <%= button_to 'Add another permission', { :controller => 'permissions', :repo => @repository.id, :action => 'new'},  :method => :get %>
 
-<hr>
+<div id="delete_button">
 <%= button_to 'Delete Repository', @repository, :confirm => 'Are you sure?', :method => :delete  %>
+</div>

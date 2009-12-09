@@ -1,29 +1,5 @@
-<%= page_heading "Repositories" %>
-<h1>Listing repositories</h1>
-
-<table>
-  <tr>
-    <th>Owner</th>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Defaultbranch</th>
-  </tr>
-
-<% for repository in @repositories %>
-  <tr>
-    <td><%=h repository.user_id %></td>
-    <td><%=h repository.name %></td>
-    <td><%=h repository.description %></td>
-    <td><%=h repository.defaultbranch %></td>
-    <td><%= link_to 'Show', :action => "show", :user => repository.user.username, :repo => repository.name %></td>
-<% if repository.user == @loggedinuser %>
-    <td><%= link_to 'Edit', edit_repository_path(repository) %></td>
-    <td><%= link_to 'Destroy', repository, :confirm => 'Are you sure?', :method => :delete %></td>
+<%= page_heading 'Repositories' %>
+<%= render(:partial => 'repositories/index') -%>
+<% if session[:user_id] %>
+<%= button_to "Create New Repository", {:controller => 'repositories', :action => 'new'}, :method => :get %>
 <% end %>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New repository', new_repository_path %>

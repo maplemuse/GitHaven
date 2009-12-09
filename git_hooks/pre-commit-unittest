@@ -18,6 +18,9 @@ for file in `git diff-index --name-only HEAD | grep web/app` ; do
     then
         #rake
         object=`echo $file | sed -e s:views/::g -e s:/.*::g`
+        if [ ! -f "web/test/functional/${object}_controller_test.rb" ] ; then
+            continue
+        fi
         echo "--checking autotest for: $object--"
         ruby -I web/test web/test/functional/${object}_controller_test.rb
         continue

@@ -1,5 +1,6 @@
 <%= render(:partial => 'repositorytopbar.html.erb') %>
 <div id="tags">
+@<%=h @branch %>
 <% if !@branches.empty? -%>
     <div id="tags_branches">
     Branches
