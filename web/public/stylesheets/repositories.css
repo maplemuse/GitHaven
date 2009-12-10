@@ -2,3 +2,12 @@
     width: auto !important;
     margin: 1em;
 }
+
+.commits_next_previous {
+    float: left;
+    margin: .5em;
+    margin-left: 0;
+    padding: .25em;
+    border: 1px solid gray;
+    background-color: #f8f8f8;
+}

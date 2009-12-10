@@ -31,8 +31,11 @@ class RepositoriesController < ApplicationController
 
   def commits
     return if !find_repository
+    @start_at = 0
+    @start_at = params[:start_at].to_i if params[:start_at]
     if @repo
-        @commits = @repo.commits(@branch, 20)
+        @commits = @repo.commits(@branch, 20 + @start_at)
+        @commits = @commits.slice(@start_at, 20);
     end
     respond_to do |format|
       format.html
