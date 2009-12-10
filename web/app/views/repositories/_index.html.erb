@@ -1,3 +1,4 @@
+<% @repositories.delete_if { |x| !x.authorized(@loggedinuser) } %>
 <% if !@repositories.empty? %>
 <div id="repositories">
 <table id="tree">

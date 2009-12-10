@@ -11,6 +11,7 @@ class Repository < ActiveRecord::Base
   validate :existing_branch_name
 
   def authorized(user)
+    return true if user && self.user == user
     permissions.each { |p|
       return true if user && p.user_id == user.id
       return true if p.user.username == I18n.t('user.all')

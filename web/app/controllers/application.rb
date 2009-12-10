@@ -17,7 +17,6 @@ class ApplicationController < ActionController::Base
 
   def index
     @repositories = Repository.find(:all)
-    @repositories.delete_if { |x| !x.authorized(@loggedinuser) }
     rescue
     flash[:notice] = "Installation not complete, run 'rake db:migrate'"
     @repositories = []
