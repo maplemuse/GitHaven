@@ -91,8 +91,6 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @loggedinuser.update_attributes(params[:user])
-        puts @loggedinuser.valid?
-        puts @loggedinuser.email
         flash[:notice] = t('user.updated', :username => h(@loggedinuser.username))
         format.html { redirect_to( :controller => 'users', :action => 'show', :user => @loggedinuser.username)  }
         format.xml  { head :ok }

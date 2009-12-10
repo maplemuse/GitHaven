@@ -40,7 +40,6 @@ Copyright 2009 Benjamin Meyer
             %></td>
             <td class="tree_name"><%= link_to_path(@joinedpath, f.name) %><%= '/' if f.mode == "040000" %></td>
             <% most_recent_commit = @repo.log(@branch, @joinedpath + f.name, :max_count => 1 ).first %>
-            <% puts most_recent_commit %>
             <td class="tree_date"><%= print_date(most_recent_commit.date) %></td>
             <td class="tree_message"><%= link_to print_short_commit_message(most_recent_commit.message),
             {:user => @repository.user.username, :repo => @repository.name, :action => 'commit', :sha1 => most_recent_commit.sha, :controller => 'repositories'}, :class => "tree_commit_message" %></td>

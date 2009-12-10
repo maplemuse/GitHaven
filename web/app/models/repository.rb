@@ -30,7 +30,6 @@ private
     if self.defaultbranch.empty?
         return
     end
-    puts self.defaultbranch
 
     repo = Grit::Repo.new(location)
     branches = repo.branches()
@@ -40,8 +39,6 @@ private
           found = true
         end
     end
-    puts self.defaultbranch
-    puts found
     errors.add(:defaultbranch, 'does not exists in the repository') if !found
     rescue
   end
