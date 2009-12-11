@@ -76,3 +76,7 @@ Rails::Initializer.run do |config|
   # Please note that observers generated using script/generate observer need to have an _observer suffix
   # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
 end
+ActionMailer::Base.delivery_method = :sendmail
+
+ExceptionNotifier.sender_address = %("GitHaven Exception Error" <exceptions@githaven.com>)
+ExceptionNotifier.exception_recipients = %w(exceptions@githaven.com)
