@@ -4,8 +4,10 @@
 <% form_for(@permission) do |f| %>
   <%= f.error_messages %>
   <%= f.hidden_field(:repository_id) %>
-  <%= f.hidden_field(:user_id) %>
-  User: <input id="user" type="text" name="user">
+  User:
+  <%= f.select :user_id,
+    @users.map {|u| [u.name, u.id]},
+        :prompt => "Select a user" %>
   <%= f.label :mode, "Type:" %>
   <%= f.select :mode,
       Permission::MODES,

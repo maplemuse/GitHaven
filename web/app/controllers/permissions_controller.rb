@@ -10,6 +10,7 @@ class PermissionsController < ApplicationController
         return
     end
 
+    @users = User.find(:all)
     @permission = Permission.new
     @permission.repository = @repository
 
@@ -25,10 +26,9 @@ class PermissionsController < ApplicationController
     return if !require_authorization
 
     @repository = @permission.repository
-    @permission.user_id = User.find_by_username(params[:user]).id
     @repository.permissions << @permission
     respond_to do |format|
-      if @repository.save && @permission.save
+      if @permission.save
         flash[:notice] = t('permissions.created',
                             :username => h(@permission.user.username),
                             :repositoryname => h(@permission.repository.name))
