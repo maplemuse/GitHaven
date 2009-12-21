@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 #
 # Check that existing autotests for files that are being commited are not currently failing
 #
