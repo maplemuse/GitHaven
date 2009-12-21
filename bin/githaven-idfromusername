@@ -1,5 +1,9 @@
 #!/bin/bash -e
 name=$1
+if [ -z "$name" ] ; then
+  echo "Error: name not specified" >&2
+  exit 1
+fi
 table="users"
 dbfile=`githaven-db`
 id=`sqlite3 "${dbfile}" "select id,username from ${table}" | grep "${name}$" | sed -e s/\|"${name}$"//g`

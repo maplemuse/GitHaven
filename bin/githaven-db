@@ -6,6 +6,7 @@ if [ -n "${RAILS_ENV}" ] ; then
     fi
 fi
 if [ ! -f "${db}" ] ; then
-    db=""
+    echo "Error: Unable to find database" >&2
+    exit 1
 fi
 echo $db
