@@ -3,7 +3,7 @@ module RepositoriesHelper
     link = "<a href=\"\/";
     link += h(@repository.user.username) + '/';
     link += h(@repository.name) + '/tree/' + h(@branch) + '/';
-    link += (h(path) + '/') if !path.empty?
+    link += h(path) if !path.empty?
     link += h(name)
     link += "\">" + h(name) + "</a>"
     link

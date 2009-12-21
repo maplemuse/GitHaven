@@ -21,7 +21,7 @@ Copyright 2009 Benjamin Meyer
     </div>
 
 
-    <% if !@tree.mode || @tree.mode == "040000" -%>
+    <% if @tree && (!@tree.mode || @tree.mode == "040000") -%>
         <table id="tree">
         <th></th>
         <th>Name</th>
