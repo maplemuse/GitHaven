@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+# Check that existing autotests for files that are being commited are not currently failing
+#
+
+unset GIT_DIR
+dir=`dirname $0`
+for file in `git diff-index --cached --name-only HEAD` ; do
+    head -n 1 $file | grep "sh" | grep '^#!/' > /dev/null
+    if [ $? -eq 0 ] ; then
+        echo "Checking $file for bash errors"
+        set -e
+        bash -n $file
+        set +x
+    fi
+done
