@@ -66,6 +66,11 @@ ActionController::Routing::Routes.draw do |map|
       :action => 'commit',
       :conditions => { :method => :get }
 
+  map.connect ':user/:repo/archive/:branch',
+      :controller => 'repositories',
+      :action => 'archive',
+      :conditions => { :method => :get }
+
   # Default Routes
   #map.connect ':controller/:action/:id'
   #map.connect ':controller/:action/:id.:format'

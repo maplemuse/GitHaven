@@ -1,12 +1,15 @@
 <%= render(:partial => 'repositorytopbar.html.erb') %>
 <div id="tags">
 @<%=h @branch %>
+<%= link_to '⇩', { :user => @repository.user.username, :repo => @repository.name, :controller => 'repositories', :action => 'archive', :branch => @branch }, :id => 'download_archive' -%>
 <% if !@branches.empty? -%>
     <div id="tags_branches">
     Branches
     <ul>
 <% for branch in @branches -%>
-    <li <%= "id=current" if branch.name == @branch %>><%= "→" if branch.name == @branch -%><%= link_to h(branch.name), :user => @repository.user.username, :repo => @repository.name, :controller => 'repositories', :action => 'show', :branch => branch.name %>
+    <li <%= "id=current" if branch.name == @branch %>>
+    <%= "→" if branch.name == @branch -%>
+    <%= link_to h(branch.name), :user => @repository.user.username, :repo => @repository.name, :controller => 'repositories', :action => 'show', :branch => branch.name %>
 <% end -%>
     </ul>
     </div>
@@ -17,7 +20,9 @@
     Tags
     <ul>
 <% for tag in @tags -%>
-        <li <%= "id=current" if tag.name == @branch %>><%= "→" if tag.name == @branch -%><%= link_to h(tag.name), :user => @repository.user.username, :repo => @repository.name, :controller => 'repositories', :action => 'show', :branch => tag.name %>
+        <li <%= "id=current" if tag.name == @branch %>>
+        <%= "→" if tag.name == @branch -%>
+        <%= link_to h(tag.name), :user => @repository.user.username, :repo => @repository.name, :controller => 'repositories', :action => 'show', :branch => tag.name %>
 <% end -%>
     </ul>
     </div>

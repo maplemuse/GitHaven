@@ -56,6 +56,12 @@ class RepositoriesController < ApplicationController
       redirect_to root_url
   end
 
+  def archive
+    return if !find_repository
+    send_data(@repo.archive_tar_gz(@branch),
+        :filename => @repository.user.username + "-" + @repository.name + "-" + @branch + ".tar.gz");
+  end
+
   # GET /repositories/new
   def new
     @repository = Repository.new
