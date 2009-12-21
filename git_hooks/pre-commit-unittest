@@ -25,6 +25,5 @@ for file in `git diff-index --name-only HEAD | grep web/app` ; do
         ruby -I web/test web/test/functional/${object}_controller_test.rb
         continue
     fi
-    echo "Don't know how to test $file"
-    exit 1
+    echo "*** I Don't know how to test $file ***"
 done
