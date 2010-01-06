@@ -1,3 +1,9 @@
+githaven (0.0.1-1) unstable; urgency=low
+
+  * Improved UI
+
+ -- Benjamin Meyer <ben@meyerhome.net>  Wed, 06 Jan 2010 01:21:30 -0500
+
 githaven (0.0.0-1) unstable; urgency=low
 
   * Initial release
