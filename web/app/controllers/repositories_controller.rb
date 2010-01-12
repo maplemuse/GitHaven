@@ -58,6 +58,11 @@ class RepositoriesController < ApplicationController
 
   def archive
     return if !find_repository
+    if !@repo
+        flash[:notice] = t('repository.notfound')
+        redirect_to(:controller => 'repositories', :user => @repository.user.username, :repo => @repository.name, :action => 'show')
+        return
+    end
     send_data(@repo.archive_tar_gz(@branch),
         :filename => @repository.user.username + "-" + @repository.name + "-" + @branch + ".tar.gz");
   end
