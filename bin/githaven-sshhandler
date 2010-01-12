@@ -20,7 +20,7 @@ if [[ "${cmd}" != "receive-pack" && "${cmd}" != "upload-pack" ]] ; then
 fi
 
 user_id="${1}"
-repopath=`echo $ssh_command | sed -e 's/.* //g' -e s/\'//g`
+repopath=`echo ${ssh_command} | sed -e 's/.* //g' -e s/\'//g`
 if [ "${cmd}" = "receive-pack" ] ; then
   githaven-checkpermissions "write" "${user_id}" "${repopath}"
 elif [ "${cmd}" = "upload-pack" ] ; then
@@ -36,9 +36,9 @@ fi
 cd repos
 
 # Create the repo if it does not exists
-if [ ! -d ${repopath} ] ; then
-    mkdir -p $repopath
-    (cd $repopath; git init --bare -q)
+if [ ! -d "${repopath}" ] ; then
+    mkdir -p "${repopath}"
+    (cd "${repopath}"; git init --bare -q)
 fi
 
-git-shell -c "$SSH_ORIGINAL_COMMAND"
+git-shell -c "${SSH_ORIGINAL_COMMAND}"

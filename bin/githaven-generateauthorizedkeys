@@ -24,7 +24,7 @@ sqlite3 "${dbfile}" 'select user_id,key from sshkeys' | while read row ; do
     user=`echo $row | awk -F'|' '{ print $1 }'`
     key=`echo $row | awk -F'|' '{ print $2 }'`
     if [ ! -z "${key}" ] ; then
-        echo "command=\"${command} ${user}\",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty $key" >> $tempfile
+        echo "command=\"${command} ${user}\",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty "${key}"" >> $tempfile
     fi
 done
 
