@@ -1,6 +1,7 @@
 atom_feed do |feed|
   feed.title "#{@repository.user.username}/#{@repository.name} commits"
-  feed.updated @commits.first.date
+  return if !@commits
+  feed.updated @commits.first.date if @commits.first
   for commit in @commits
     feed.entry(commit, :url => "commit/" + commit.sha) do |entry|
       entry.title commit.message.split('\n').first
