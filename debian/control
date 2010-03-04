@@ -10,7 +10,7 @@ Package: githaven
 Architecture: all
 Depends:
  ${shlibs:Depends}, ${misc:Depends}, adduser, git-core (>= 1:1.5.0),
- openssh-server, libapache2-mod-passenger, git-daemon-run, ruby, rake, rails, sqlite3
+ openssh-server, libapache2-mod-passenger, git-daemon-run, ruby, rake, rails (>= 2.2), sqlite3, libdifflcs-ruby1.8
 Description: git repository hosting with web frontend
  This package aims to make git hosting a simple process.  It has a web frontend where users
  can create accounts and manage repositories.
