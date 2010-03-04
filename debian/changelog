@@ -1,3 +1,12 @@
+githaven (0.0.4-1) unstable; urgency=low
+
+  * Add two missing dependencies that were discovered when installing on
+    Debian lenny.
+  * Move flash escaping to the view to resolve a runtime issue.
+
+ -- Benjamin Meyer <ben@meyerhome.net>  Thu, 05 Mar 2010 03:30:00 -0500
+
+
 githaven (0.0.3-1) unstable; urgency=low
 
   * Remove sendmail dependency
