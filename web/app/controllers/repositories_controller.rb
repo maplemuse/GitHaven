@@ -89,7 +89,7 @@ class RepositoriesController < ApplicationController
 
     respond_to do |format|
       if @loggedinuser.save && repository.save && permission.save
-        flash[:notice] = t('repository.created', :name => h(repository.name))
+        flash[:notice] = t('repository.created', :name => repository.name)
         format.html { redirect_to(:controller => 'repositories', :user => repository.user.username, :repo => repository.name, :action => 'show') }
         format.xml  { render :xml => repository, :status => :created, :location => repository }
       else
@@ -108,7 +108,7 @@ class RepositoriesController < ApplicationController
   def update
     respond_to do |format|
       if @repository.update_attributes(params[:repository])
-        flash[:notice] = t('repository.updated', :name => h(@repository.name))
+        flash[:notice] = t('repository.updated', :name => @repository.name)
         format.html { redirect_to(:controller => 'repositories', :user => @repository.user.username, :repo => @repository.name, :action => 'show') }
         format.xml  { head :ok }
       else
@@ -122,7 +122,7 @@ class RepositoriesController < ApplicationController
   def destroy
     name = @repository.name
     @repository.destroy
-    flash[:notice] = t('repository.deleted', :name => h(name))
+    flash[:notice] = t('repository.deleted', :name => name)
 
     respond_to do |format|
       format.html { redirect_to(:controller => 'users', :action => 'show', :user => @loggedinuser.username ) }

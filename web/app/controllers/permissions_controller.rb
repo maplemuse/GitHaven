@@ -30,8 +30,8 @@ class PermissionsController < ApplicationController
     respond_to do |format|
       if @permission.save
         flash[:notice] = t('permissions.created',
-                            :username => h(@permission.user.username),
-                            :repositoryname => h(@permission.repository.name))
+                            :username => @permission.user.username,
+                            :repositoryname => @permission.repository.name)
         format.html { redirect_to(edit_repository_url(@repository)) }
         format.xml  { render :xml => @permission, :status => :created, :location => @permission }
       else
@@ -53,8 +53,8 @@ class PermissionsController < ApplicationController
     respond_to do |format|
       if @permission.update_attributes(params[:permission])
         flash[:notice] = t('permissions.updated',
-                            :username => h(@permission.user.username),
-                            :repositoryname => h(@permission.repository.name))
+                            :username => @permission.user.username,
+                            :repositoryname => @permission.repository.name)
         format.html { redirect_to(edit_repository_url(@permission.repository)) }
         format.xml  { head :ok }
       else
@@ -70,8 +70,8 @@ class PermissionsController < ApplicationController
     @repository = @permission.repository
     @permission.destroy
     flash[:notice] = t('permissions.deleted',
-                        :username => h(username),
-                        :repositoryname => h(@repository.name))
+                        :username => username,
+                        :repositoryname => @repository.name)
     respond_to do |format|
       format.html { redirect_to(edit_repository_url(@repository)) }
       format.html { redirect_to(permissions_url) }
