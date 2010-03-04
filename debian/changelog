@@ -1,3 +1,11 @@
+githaven (0.0.3-1) unstable; urgency=low
+
+  * Remove sendmail dependency
+  * Fix two crashes
+
+ -- Benjamin Meyer <ben@meyerhome.net>  Wed, 04 Mar 2010 02:00:00 -0500
+
+
 githaven (0.0.2-1) unstable; urgency=low
 
   * Frozen ruby packages

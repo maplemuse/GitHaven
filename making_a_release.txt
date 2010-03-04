@@ -18,7 +18,7 @@ dpkg-buildpackage -rfakeroot
 
 echo $tempdir
 
-WEB=~/public_html/githaven-debian-repository
+WEB=~/githaven.com/githaven-debian-repository
 cp $tempdir/githaven*.deb $WEB/binary/
 cd $WEB
 dpkg-scanpackages binary /dev/null | gzip -9c > binary/Packages.gz
