@@ -15,7 +15,7 @@ Copyright 2009 Benjamin Meyer
     <% if @path -%>
         <% for f in @path -%>
             <%= link_to_path(top_path, f) %>
-            <% top_path += f; -%> /
+            <% top_path += f + '/'; -%> /
         <% end -%>
     <% end -%>
     </div>
