@@ -53,7 +53,12 @@ Copyright 2009 Benjamin Meyer
     <% if readmefile -%>
         <div id="filename"><%=h readmefile.name %></div>
         <div id="data">
-        <%= h(readmefile.data).gsub(/\n/, '<br/>') %>
+        <% if readmefile.name.match(/(png$|jpg$|jpeg$|gif$)/) %>
+            <img alt="<%= readmefile.name -%>"
+                 src="<%= ('/' + @repository.user.username + '/' + @repository.name + '/raw/' + @branch + '/' + @joinedpath) -%>">
+        <% else %>
+            <%= h(readmefile.data).gsub(/\n/, '<br/>') %>
+        <% end %>
         </div>
     <% end -%>
 

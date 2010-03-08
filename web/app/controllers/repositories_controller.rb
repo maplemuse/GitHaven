@@ -14,19 +14,21 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1
   def show
     return if !find_repository
-
-    if @repo
-        @path = params[:path] if params[:path]
-        @commits = @repo.commits(@branch, 1)
-        @joinedpath = ''
-        @joinedpath = @path.join('/') if @path
-        @tree = @repo.commits(@branch).first.tree
-        @tree = @tree/@joinedpath if @path
-    end
+    find_path
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @repository }
     end
+  end
+
+  def raw
+    return if !find_repository
+    find_path
+
+    send_data @tree.data,
+            :type     => @tree.mime_type(),
+            :filename => @tree.name,
+            :disposition => 'inline'
   end
 
   def commits
@@ -131,6 +133,16 @@ class RepositoriesController < ApplicationController
   end
 
 private
+  def find_path
+    if @repo
+        @path = params[:path] if params[:path]
+        @commits = @repo.commits(@branch, 1)
+        @joinedpath = ''
+        @joinedpath = @path.join('/') if @path
+        @tree = @repo.commits(@branch).first.tree
+        @tree = @tree/@joinedpath if @path
+    end
+  end
 
   def find_repository
     if params[:repo] && params[:user]

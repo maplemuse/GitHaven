@@ -45,6 +45,12 @@ ActionController::Routing::Routes.draw do |map|
       :conditions => { :method => :get },
       :requirements => {:branch => /[^\/]*/ }
 
+  map.connect ':user/:repo/raw/:branch/*path',
+      :controller => 'repositories',
+      :action => 'raw',
+      :conditions => { :method => :get },
+      :requirements => {:branch => /[^\/]*/ }
+
   map.connect ':user/:repo/commits',
       :controller => 'repositories',
       :action => 'commits',
