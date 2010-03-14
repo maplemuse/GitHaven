@@ -166,6 +166,8 @@ private
 
     @branches = @repo.branches()
     @branches = @branches.sort_by { |a| a.name }
+    # In the event that @branch doesn't exists pick the first one
+    @branch = @branches.first.name if (@branches.index(@branch) == nil)
 
     @tags = @repo.tags()
     @tags = @tags.sort_by { |a| a.name }
