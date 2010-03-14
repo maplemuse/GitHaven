@@ -141,6 +141,11 @@ private
         @joinedpath = @path.join('/') if @path
         @tree = @repo.commits(@branch).first.tree
         @tree = @tree/@joinedpath if @path
+        if !@tree
+            @path = ""
+            @joinedpath = ""
+            @tree = @repo.commits(@branch).first.tree
+        end
     end
   end
 
