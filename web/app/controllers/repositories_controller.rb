@@ -197,7 +197,7 @@ private
 
     find_path
 
-    return true
+    return (@tree != nil)
     rescue
     @branches = []
     @tags = []
