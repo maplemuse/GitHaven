@@ -42,7 +42,6 @@ class User < ActiveRecord::Base
   end
 
   def avatar_email
-    puts self.email
     if self.avatar && !self.avatar.empty?
       return self.avatar
     end
