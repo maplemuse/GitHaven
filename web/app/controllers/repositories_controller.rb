@@ -14,7 +14,6 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1
   def show
     return if !find_repository
-    find_path
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @repository }
@@ -23,7 +22,6 @@ class RepositoriesController < ApplicationController
 
   def raw
     return if !find_repository
-    find_path
 
     send_data @tree.data,
             :type     => @tree.mime_type(),
@@ -135,7 +133,6 @@ class RepositoriesController < ApplicationController
 private
   def find_path
     if @repo
-        @path = params[:path] if params[:path]
         @commits = @repo.commits(@branch, 1)
         @joinedpath = ''
         @joinedpath = @path.join('/') if @path
@@ -150,6 +147,7 @@ private
   end
 
   def find_repository
+    @path = params[:path] if params[:path]
     if params[:repo] && params[:user]
       owner = User.find_by_username(params[:user])
       @repository = Repository.find_by_name(params[:repo], :conditions => ['user_id = ?', owner.id])
@@ -168,14 +166,36 @@ private
     @branch = 'master' if !@branch || @branch.empty?
 
     @repo = Grit::Repo.new(@repository.location())
-
     @branches = @repo.branches()
     @branches = @branches.sort_by { |a| a.name }
-    # In the event that @branch doesn't exists pick the first one
-    @branch = @branches.first.name if (@branches.index(@branch) == nil)
+
+    # In the event that @branch doesn't exists first check
+    # to see if the branch name has a / in it which would
+    # cause it to be split into part of the path
+    if (@branches.index(@branch) == nil)
+        @tpath = @path
+        @tpath.each { |p|
+            @branch += '/' + p;
+            @tpath.delete(p)
+            if !(@branch.index(@branch) == nil)
+                @path = @tpath
+                break;
+            end
+        } if @path
+    end
+    # Then look for master and then just choose the first one
+    if (@branches.index(@branch) == nil)
+        if (@branches.index('master'))
+            @branch = 'master'
+        else
+            @branch = @branches.first.name
+        end
+    end
 
     @tags = @repo.tags()
     @tags = @tags.sort_by { |a| a.name }
+
+    find_path
 
     return true
     rescue
