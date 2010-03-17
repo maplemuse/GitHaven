@@ -1,11 +1,13 @@
-#!/bin/bash -e
-#
-# Check that existing autotests for files that are being commited are not currently failing
-#
+#!/bin/bash
 
-unset GIT_DIR
-dir=`dirname $0`
-for file in `git diff-index --cached --name-only HEAD | grep web/app` ; do
+set -e
+
+function test_file
+{
+    file="${1}"
+    echo $file | grep 'web/app' || return 0
+    unset GIT_DIR
+    dir=`dirname $0`
     file=`echo $file | sed -e s:web/app/::g`
     if echo $file | grep models > /dev/null
     then
@@ -26,4 +28,15 @@ for file in `git diff-index --cached --name-only HEAD | grep web/app` ; do
         continue
     fi
     echo "*** I Don't know how to test $file ***"
-done
+}
+
+case "${1}" in
+    --about )
+        echo "Check that existing autotests for files that are being commited are not currently failing"
+        ;;
+    * )
+        for file in `git diff-index --cached --name-only HEAD` ; do
+            test_file "${file}"
+        done
+        ;;
+esac

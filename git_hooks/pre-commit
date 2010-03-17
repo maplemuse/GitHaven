@@ -1,4 +1,0 @@
-#!/bin/bash -e
-for cmd in $GIT_DIR/hooks/pre-commit-* ; do
-    $cmd
-done
