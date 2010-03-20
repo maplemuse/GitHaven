@@ -76,8 +76,8 @@ pre {
 }
 
 #repositories {
-    width: 70%;
-    margin-right:auto;margin-left:auto;width:760px;
+    width: 600px;
+    margin-right:auto;margin-left:auto;
     border-top: 1px solid black;
     padding-top: .5em;
     margin-top: 1em;
@@ -211,6 +211,10 @@ pre {
     font-family: Courier New;
 }
 
+#tree td.tree_message {
+    width: 97%;
+}
+
 .commit_author {
     text-decoration: none;
 }
@@ -236,8 +240,11 @@ pre {
 }
 
 #tree td {
-   padding: 0;
-   padding-left: 2px;
+  padding: 0;
+  padding-left: 2px;
+  padding-right: 2px;
+  white-space:nowrap;
+  width: 1%;
 }
 
 .contents-line-even {
