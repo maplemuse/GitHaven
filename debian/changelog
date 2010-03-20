@@ -1,3 +1,9 @@
+githaven (0.0.6-1) unstable; urgency=low
+ 
+  * Unbreak branch selection
+ 
+ -- Benjamin Meyer <ben@meyerhome.net>  Fri, 19 Mar 2010 22:50:00 -0500
+
 githaven (0.0.5-1) unstable; urgency=low
 
   * Tweak the colors

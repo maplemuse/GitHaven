@@ -6,7 +6,7 @@
 #rake rails:unfreeze
 
 # update web/app/views/layouts/site.erb meta tag
-version="0.0.5"
+version="0.0.6"
 git tag -a "v$version" -m "Version $version"
 git archive --format=tar --prefix=githaven-$version/ "v$version" | gzip > githaven-$version.tar.gz
 
