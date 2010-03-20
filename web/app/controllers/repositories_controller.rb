@@ -191,7 +191,7 @@ private
         } if @path
     end
     # Then look for master and then just choose the first one
-    if (has_branch(@branch))
+    if (!has_branch(@branch))
         if (@branches.index('master'))
             @branch = 'master'
         else
