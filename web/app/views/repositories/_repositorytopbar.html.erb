@@ -1,4 +1,5 @@
 <div id="repository">
+    <%= image_tag (@repository.public ? 'public.png' : 'private.png'), :class => 'repo_public_private' %>
     <%= link_to_user(@owner) %> / <b> <%= link_to_repository(@repository) %></b><br />
 <% if !@repository.description.empty? -%>
     <%= t('repository.description') -%>: <%=h @repository.description %><br />

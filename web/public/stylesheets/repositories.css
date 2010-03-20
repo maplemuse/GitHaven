@@ -15,3 +15,7 @@
 .commits_next_previous a {
     text-decoration: none;
 }
+
+img.repo_public_private {
+    float: right;
+}

@@ -25,6 +25,10 @@ class Repository < ActiveRecord::Base
     return location
   end
 
+  def public
+    return authorized(I18n.t('user.all'))
+  end
+
 private
   def existing_branch_name
     if self.defaultbranch.empty?
