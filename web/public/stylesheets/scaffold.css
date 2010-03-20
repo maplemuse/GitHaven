@@ -17,7 +17,9 @@ body {
   border: 0px;
 }
 
-a { color: rgb(67, 161, 212); }
+a {
+    color: #04356C;
+}
 
 
 img#big_logo {
@@ -89,8 +91,8 @@ pre {
 
 #repository {
   padding: .5em;
-  background-color: #ccffcc;
-  border: 1px solid #33ff99;
+  background-color: #FFE2B5;
+  border: 1px solid #A67833;
   margin-top: 1em;
   margin-bottom: 0;
   -moz-border-radius-topleft: 5px;
@@ -115,14 +117,14 @@ pre {
 
 #repository_actions li {
     float: left;
-    border: 1px solid #33ff99;
+    border: 1px solid #A67833;
     margin: 0;
     padding: .3em;
     padding-left: .5em;
     padding-right: .5em;
     margin-top: -1px;
     margin-right: 1px;
-    background-color: #ccffcc;
+    background-color: #FFE2B5;
     -moz-border-radius-bottomleft: 5px;
     -moz-border-radius-bottomright: 5px;
     -webkit-border-bottom-right-radius: 5px;
@@ -176,11 +178,21 @@ pre {
 .date {
     margin: 1em 0em .25em 1em;
 }
+
 .commit {
   padding: .75em;
-  background-color: #FFFFCC;
-  border: 1px solid #FFFF66;
+  background-color: #FFF8EC;
+  border: 1px solid #A67833;
   margin-bottom: -1px;
+}
+
+.commit_links {
+    float:right;
+}
+
+.commit_header {
+    padding-bottom: .25em;
+    border-bottom: 1px solid #BFB8AC;
 }
 
 .commit_message {
@@ -190,6 +202,8 @@ pre {
 
 .commit_message a {
     text-decoration: none;
+    color: black;
+    white-space: pre-wrap;
 }
 
 .tree_commit_message {
@@ -214,6 +228,7 @@ pre {
   border: 1px solid #e8e8e8;
   border-spacing: 0;
   padding: 0;
+  text-align: left;
 }
 
 #tree tr {

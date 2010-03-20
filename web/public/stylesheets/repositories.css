@@ -11,3 +11,7 @@
     border: 1px solid gray;
     background-color: #f8f8f8;
 }
+
+.commits_next_previous a {
+    text-decoration: none;
+}
