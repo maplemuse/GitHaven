@@ -146,6 +146,13 @@ private
     end
   end
 
+  def has_branch(branch)
+    @branches.each { |b|
+        return true if b.name == branch
+    }
+    return nil
+  end
+
   def find_repository
     @path = params[:path] if params[:path]
     if params[:repo] && params[:user]
@@ -172,19 +179,19 @@ private
     # In the event that @branch doesn't exists first check
     # to see if the branch name has a / in it which would
     # cause it to be split into part of the path
-    if (@branches.index(@branch) == nil)
+    if (!has_branch(@branch))
         @tpath = @path
         @tpath.each { |p|
             @branch += '/' + p;
             @tpath.delete(p)
-            if !(@branch.index(@branch) == nil)
+            if (has_branch(@branch))
                 @path = @tpath
                 break;
             end
         } if @path
     end
     # Then look for master and then just choose the first one
-    if (@branches.index(@branch) == nil)
+    if (has_branch(@branch))
         if (@branches.index('master'))
             @branch = 'master'
         else
