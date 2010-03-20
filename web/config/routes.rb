@@ -77,6 +77,11 @@ ActionController::Routing::Routes.draw do |map|
       :action => 'archive',
       :conditions => { :method => :get }
 
+  map.connect ':user/:repo.git/*path',
+      :controller => 'repositories',
+      :action => 'httpgit',
+      :conditions => { :method => :get }
+
   # Default Routes
   #map.connect ':controller/:action/:id'
   #map.connect ':controller/:action/:id.:format'

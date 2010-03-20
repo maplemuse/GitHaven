@@ -29,6 +29,20 @@ class RepositoriesController < ApplicationController
             :disposition => 'inline'
   end
 
+  def httpgit
+    @repository = Repository.find_by_name(params[:repo])
+    return if !@repository || !@repository.public
+
+    @path = ''
+    @path = params[:path].join('/') if params[:path]
+    filename = @repository.location() + '/' + @path
+    if File.exists?(filename)
+        send_file filename
+    else
+        render :nothing => true, :status => :not_found
+    end
+  end
+
   def commits
     return if !find_repository
     @start_at = 0
@@ -163,6 +177,7 @@ private
     end
     @owner = @repository.user
     @host = request.host
+    @request = request
     if !@repository.authorized(@loggedinuser)
       flash[:notice] = t('repository.accessdenied')
       redirect_to root_url

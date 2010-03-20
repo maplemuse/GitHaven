@@ -4,8 +4,15 @@
 <% if !@repository.description.empty? -%>
     <%= t('repository.description') -%>: <%=h @repository.description %><br />
 <% end -%>
-    <!-- Public Clone URL: <b>git://<%= @host + ':' + h(@owner.username) + '/' + h(@repository.name) + '.git' %></b><br /> -->
+    <%
+    if @repository.public
+    %>
+    Public Clone URL: <b>http://<%= @host + @request.port_string() + '/' + h(@owner.username) + '/' + h(@repository.name) + '.git' %></b><br />
+    <%
+    end%>
+<% if @loggedinuser -%>
     Your Clone URL: <b>git@<%= @host + ':' + h(@owner.username) + '/' + h(@repository.name) + '.git' %></b><br />
+<% end -%>
 </div>
 <div id="repository_actions">
     <ul>
