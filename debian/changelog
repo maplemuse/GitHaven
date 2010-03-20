@@ -1,3 +1,21 @@
+githaven (0.0.5-1) unstable; urgency=low
+
+  * Tweak the colors
+  * Show newlines in commit messages.
+  * Fix branch/path detection
+  * Include the version in the webpage
+  * Remove accidental puts that was left behind
+  * Be safer when the repo 'tree' can't be found
+  * Add an empty css file for the application controller
+  * Don't let web spiders download tarballs of the repositories
+  * Bump the year in the copyright
+  * Fix the links that make up the current path.
+  * Add a raw command to view the raw contents of a file in a branch/path of a repository.
+  * Enhanced the viewer when it is a jpeg/gif/png to show the image inline rather than the raw data.
+
+ -- Benjamin Meyer <ben@meyerhome.net>  Fri, 19 Mar 2010 22:30:00 -0500
+
+
 githaven (0.0.4-1) unstable; urgency=low
 
   * Add two missing dependencies that were discovered when installing on
