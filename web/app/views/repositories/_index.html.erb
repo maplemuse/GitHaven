@@ -16,6 +16,11 @@ end
     <td>/</td>
     <td><%=link_to h(repository.name), :controller => 'repositories', :action => 'show', :user => repository.user.username, :repo => repository.name %></td>
     <td class="tree_name"><%=h repository.description %></td>
+    <td>
+    <% repository.tags.each { |t| %>
+    <%= "[" + link_to(h(t.tag), :controller => 'tags', :action => 'show', :tag => t.tag) + "]" %>
+    <% } %>
+    </td>
   </tr>
 <% end %>
 </table>

@@ -7,12 +7,23 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'logout',      :controller => 'users', :action => 'logout'
   map.connect 'signup',      :controller => 'users', :action => 'new'
   map.connect 'preferences', :controller => 'users', :action => 'edit'
- 
+
+
+  map.connect 'tags/:tag',
+      :controller => 'tags',
+      :action => 'show',
+      :conditions => { :method => :get }
+
+  map.connect 'tags/:action/:repo',
+      :controller => 'tags',
+      :conditions => { :method => :get }
+
   # RESTful Routes
   map.resources :users
   map.resources :sshkeys
   map.resources :repositories
   map.resources :permissions
+  map.resources :tags
 
   map.connect 'permissions/:action/:repo',
       :controller => 'permissions',

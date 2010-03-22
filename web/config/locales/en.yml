@@ -34,3 +34,6 @@ en:
     created: "{{username}} has been given permissions to {{repositoryname}}"
     updated: "{{username}}'s permissions for {{repositoryname}} have been updated"
     deleted: "{{username}} has been removed from the {{repositoryname}} permissions list"
+  tag:
+    created: "{{tag}} has been added to {{repositoryname}}'s list of tags"
+    deleted: "{{tag}} has been removed from the {{repositoryname}}'s tag list"

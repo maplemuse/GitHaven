@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091127225010) do
+ActiveRecord::Schema.define(:version => 20100322041308) do
 
   create_table "permissions", :force => true do |t|
     t.integer  "repository_id",                   :null => false
@@ -27,12 +27,20 @@ ActiveRecord::Schema.define(:version => 20091127225010) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "url"
+    t.integer  "tag_id"
   end
 
   create_table "sshkeys", :force => true do |t|
     t.string   "name"
     t.text     "key",        :null => false
     t.integer  "user_id",    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tags", :force => true do |t|
+    t.integer  "repository_id"
+    t.string   "tag"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

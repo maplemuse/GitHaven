@@ -25,6 +25,19 @@
   </p>
 <% end %>
 
+<hr>
+<h2>Repository Tags</h2>
+<ul>
+<% for tag in @repository.tags %>
+<li>
+<%= h tag.tag %>
+<%= link_to '(Remove)', tag, :confirm => 'Are you sure?', :method => :delete %>
+<% end %>
+</ul>
+<%= button_to 'Add another tag', { :controller => 'tags', :action => 'new', :repo => @repository.id},  :method => :get %>
+
+
+<hr>
 <h2>Repository Permissions</h2>
 <ul>
 <% for permission in @repository.permissions %>
