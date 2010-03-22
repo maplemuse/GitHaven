@@ -4,6 +4,43 @@ body {
     color: #333;
 }
 
+a {
+    color: #04356C;
+}
+
+#header, #footer {
+  font-size: small;
+  padding: .25em .5em;
+}
+
+#footer {
+  clear: both;
+  bottom: 0px;
+  width: auto;
+  text-align: right;
+  border-top: 1px solid black;
+  font-size: 8pt;
+}
+
+#logo {
+  border: 0px;
+}
+
+#header {
+  font-family: Arial;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid black;
+}
+
+#main {
+    margin: 1em;
+    padding-bottom: 1.4em;
+
+    margin-right:auto;
+    margin-left:auto;
+    width: 760px;
+}
+
 #signup {
     padding-top: 3em;
     text-align: center;
@@ -13,22 +50,12 @@ body {
     text-align: center;
 }
 
-#logo {
-  border: 0px;
-}
-
-a {
-    color: #04356C;
-}
-
-
 img#big_logo {
   padding-top: 1em;
   padding-bottom: .5em;
 }
 
-body, p, ol, ul, td {
-}
+
 
 pre {
   background-color: #eee;
@@ -252,35 +279,6 @@ pre {
 }
 .contents-line-odd {
     background: #e8e8e8;
-}
-
-#header {
-  font-family: Arial;
-  background-color: #f8f8f8;
-  border-bottom: 1px solid black;
-}
-
-#main {
-    margin: 1em;
-    padding-bottom: 1.4em;
-
-    margin-right:auto;
-    margin-left:auto;
-    width: 760px;
-}
-
-#footer, #header {
-  font-size: small;
-  padding: .25em .5em;
-}
-
-#footer {
-  clear: both;
-  bottom: 0px;
-  width: auto;
-  text-align: right;
-  border-top: 1px solid black;
-  font-size: 8pt;
 }
 
 #main .list-line-even {
