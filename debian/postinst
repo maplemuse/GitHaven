@@ -61,11 +61,12 @@ case "${1}" in
 
             chown ${_USERNAME}:${_USERNAME} --no-dereference --recursive ${_HOMEDIR}
         else
-            #if [ -d ${_HOMEDIR}/githaven/db ] ; then
-                #cd ${_HOMEDIR}/githaven/
-                #rake db:migrate
-                #RAILS_ENV=production rake db:migrate
-            #fi
+            if [ -d ${_HOMEDIR}/githaven/db ] ; then
+                cd ${_HOMEDIR}/githaven/
+                rake db:migrate
+                RAILS_ENV=production rake db:migrate
+                cd -
+            fi
             echo
             echo "githaven directory (${_HOMEDIR}) already exists, doing nothing."
             echo "Make sure the directory is recursively owned by (${_USERNAME})."
