@@ -1,3 +1,21 @@
+githaven (0.0.7-1) unstable; urgency=low
+
+  * Add a shell script to update the application version in various locations.
+  * Add the ability to add tags to repositories.
+  * Change my email to point to my githaven.com email address
+  * List users by the user name (bob2000) and not the by the real name (Bob Henderson)
+  * Sort the repository list by user and then repo alphabetically. Also tweak the css id on the items to use the correct value.
+  * Show an icon for every user that can commit
+  * Tweak css file to match githaven.com's css file.
+  * Disable listing the commits date and last message and this is extremely expensive.
+  * Use % rather than px in the css to work better on different size screens.
+  * Tweak the main repository listings
+  * Add the ability to clone and fetch using the http protocol
+  * Add an icon to the repository showing of 'Everyone' has access to that repository.
+  * Remove stock Rails icon
+
+ -- Benjamin Meyer <ben@meyerhome.net>  Sun, 28 Mar 2010 23:36:16 -0400
+
 githaven (0.0.6-1) unstable; urgency=low
  
   * Unbreak branch selection
