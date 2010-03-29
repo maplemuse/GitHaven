@@ -23,9 +23,11 @@ Copyright 2009 Benjamin Meyer
 
     <% if @tree && (!@tree.mode || @tree.mode == "040000") -%>
         <table id="tree">
-        <th></th>
-        <th></th>
-        <th>Name</th>
+        <tr>
+            <th></th>
+            <th></th>
+            <th>Name</th>
+        </tr>
         <% @joinedpath += '/' if !@joinedpath.empty? %>
         <% for f in @tree.contents %>
             <% readmefile = f if f.name == "README"; %>

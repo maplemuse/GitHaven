@@ -28,6 +28,5 @@
         <li><%= link_to 'Source', :action => 'show', :branch => @branch %></li>
         <li><%= link_to 'Commits', :controller => 'repositories', :action => 'commits', :repo => @repository.name, :user => @repository.user.username, :branch => @branch %></li>
         <% if @owner == @loggedinuser -%><li id="repository_admin"><%= link_to 'Admin', edit_repository_path(@repository) %></li><% end %>
-        <br />
     </ul>
 </div>

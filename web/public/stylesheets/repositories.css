@@ -19,3 +19,7 @@
 img.repo_public_private {
     float: right;
 }
+
+div#repository_actions {
+    padding-bottom: 1.5em;
+}

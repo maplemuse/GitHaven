@@ -5,14 +5,17 @@
 <%= page_heading ("Commits for " + @repository.user.username + "'s " + @repository.name) %>
 <%= render(:partial => 'repositorytop.html.erb') %>
 <div id="repopage">
-<%= render(:partial => 'commitlist.html.erb') %>
-<% if @start_at > 0 %>
-<div class="commits_next_previous">
-<%= link_to 'Previous 20 Commits', :start_at => @start_at - 20 %>
-</div>
-<% end %>
-<% if @commits && @commits.count == 20 %>
-<div class="commits_next_previous">
-<%= link_to 'Next 20 Commits', :start_at => @start_at + 20%>
-<% end %>
+    <%= render(:partial => 'commitlist.html.erb') %>
+
+    <% if @start_at > 0 -%>
+        <div class="commits_next_previous">
+        <%= link_to 'Previous 20 Commits', :start_at => @start_at - 20 %>
+        </div>
+    <% end -%>
+
+    <% if @commits && @commits.count == 20 -%>
+        <div class="commits_next_previous">
+        <%= link_to 'Next 20 Commits', :start_at => @start_at + 20%>
+        </div>
+    <% end -%>
 </div>
