@@ -5,8 +5,8 @@
 # ln -s /usr/share/rails rails
 #rake rails:unfreeze
 
-# update web/app/views/layouts/site.erb meta tag
-version="0.0.6"
+# run generate
+version="0.0.7"
 git tag -a "v$version" -m "Version $version"
 git archive --format=tar --prefix=githaven-$version/ "v$version" | gzip > githaven-$version.tar.gz
 
@@ -25,4 +25,3 @@ cd $WEB
 dpkg-scanpackages binary /dev/null | gzip -9c > binary/Packages.gz
 dpkg-scansources source /dev/null | gzip -9c > source/Sources.gz
 scp -r $WEB/ toybin.org:~/www/githaven/
-

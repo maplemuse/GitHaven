@@ -1,0 +1,24 @@
+#!/bin/sh
+
+cver="0.0.7"
+lver="0.0.6"
+
+file=`mktemp`
+
+cat web/app/views/layouts/site.erb | sed -e s/$lver/$cver/g > $file
+mv -f $file web/app/views/layouts/site.erb
+
+echo "githaven (${cver}-1) unstable; urgency=low" > $file
+echo "" >> $file
+git log v${lver}..HEAD --pretty=format:%s | sed -e 's/^/  * /g' >> $file
+echo "" >> $file
+echo "" >> $file
+echo -n " -- Benjamin Meyer <ben@meyerhome.net>  " >> $file
+date --rfc-2822 >> $file
+echo "" >> $file
+
+cat debian/changelog >> $file
+
+mv $file debian/changelog -f
+
+echo "Bump version numbers to $cver and generate the changelog for the next release."
