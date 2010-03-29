@@ -224,7 +224,7 @@ pre {
 
 .commit_message {
   padding-top: .5em;
-  font-family: Courier New;
+  font-family: "Courier New";
 }
 
 .commit_message a {
@@ -235,7 +235,7 @@ pre {
 
 .tree_commit_message {
     text-decoration: none;
-    font-family: Courier New;
+    font-family: "Courier New";
 }
 
 #tree td.tree_name {
@@ -281,17 +281,10 @@ pre {
     background: #e8e8e8;
 }
 
-#main .list-line-even {
-#background:   #e0f8f8;
-}
-
-#main .list-line-odd {
-#background:   #f8b0f8;
-}
-
 #flash {
     color: red;
 }
+
 #data {
     margin-bottom: 1em;
     padding: .5em;
