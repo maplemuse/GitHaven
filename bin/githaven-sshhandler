@@ -41,4 +41,4 @@ if [ ! -d "${repopath}" ] ; then
     (cd "${repopath}"; git init --bare -q; git update-server-info)
 fi
 
-nice git-shell -c "${SSH_ORIGINAL_COMMAND}"
+nice git shell -c "${SSH_ORIGINAL_COMMAND}"
