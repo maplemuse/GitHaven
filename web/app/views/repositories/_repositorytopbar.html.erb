@@ -1,8 +1,9 @@
 <div id="repository">
     <%= image_tag (@repository.public ? 'public.png' : 'private.png'), :class => 'repo_public_private' %>
     <% @repository.permissions.each { |p| %>
-    <%= image_tag(gravatar_url_for(p.user.email, "&size=16"), :size => "16x16", :class => 'repo_public_private', :alt => p.user.username) if p.user.email && p.user.username%>
+    <%= image_tag(gravatar_url_for(p.user.email, "&size=16"), :size => "16x16", :class => 'repo_public_private', :title => p.user.username + ' ' + p.mode) if p.user.email && p.user.username%>
     <% } %>
+    <%= image_tag(gravatar_url_for(@repository.user.email, "&size=16"), :size => "16x16", :class => 'repo_public_private', :title => @repository.user.username + ' rw') if @repository.user && @repository.user.email %>
     <%= link_to_user(@owner) %> / <b> <%= link_to_repository(@repository) %></b>
 
     <% @repository.tags.each { |t| %>
