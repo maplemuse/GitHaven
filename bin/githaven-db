@@ -9,4 +9,4 @@ if [ ! -f "${db}" ] ; then
     echo "Error: Unable to find database" >&2
     exit 1
 fi
-echo $db
+echo "${db}"

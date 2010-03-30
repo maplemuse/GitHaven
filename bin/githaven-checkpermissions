@@ -10,13 +10,13 @@ fi
 
 # repositories should come in user/repo.git
 reponame="${3}"
-repo_owner=`echo $reponame | sed -e 's_\(.*\)/\(.*\).git_\1_g'`
-repo_name=`echo $reponame | sed -e 's_\(.*\)/\(.*\).git_\2_g'`
+repo_owner=`echo "${reponame}" | sed -e 's_\(.*\)/\(.*\).git_\1_g'`
+repo_name=`echo "${reponame}" | sed -e 's_\(.*\)/\(.*\).git_\2_g'`
 if [[ -z "${repo_owner}" || -z "${repo_name}" ]] ; then
   echo "Invalid repository: ${reponame}" >&2
   exit 1
 fi
-repoowner_id=`githaven-idfromusername $repo_owner`
+repoowner_id=`githaven-idfromusername ${repo_owner}`
 repo_id=`githaven-idfromreponame "${repo_name}" "${repoowner_id}"`
 
 # The owner of the repository can can always access the repository
@@ -26,30 +26,30 @@ fi
 
 EVERYONE="1"
 if [ "${access}" = "read" ] ; then
-  good=`githaven-permissionsforuserid $user_id | grep $repo_id`
+  good=`githaven-permissionsforuserid "${user_id}" | grep "${repo_id}"`
   if [ -n "${good}" ] ; then
     exit 0
   fi
-  good=`githaven-permissionsforuserid "${EVERYONE}" | grep $repo_id`
+  good=`githaven-permissionsforuserid "${EVERYONE}" | grep "${repo_id}"`
   if [ -n "${good}" ] ; then
     exit 0
   fi
 
-  echo "You do not have read access to $reponame.  Access is denied";
+  echo "You do not have read access to ${reponame}.  Access is denied";
   exit 1
 fi
 
 if [ "${access}" = "write" ] ; then
-  good=`githaven-permissionsforuserid $user_id | grep $repo_id`
+  good=`githaven-permissionsforuserid "${user_id}" | grep "${repo_id}"`
   if [ "${good}" = "${repo_id}|rw" ] ; then
     exit 0
   fi
-  good=`githaven-permissionsforuserid "${EVERYONE}" | grep $repo_id`
+  good=`githaven-permissionsforuserid "${EVERYONE}" | grep "${repo_id}"`
   if [ "${good}" = "${repo_id}|rw" ] ; then
     exit 0
   fi
 
-  echo "You do not have write access to $reponame.  Access is denied";
+  echo "You do not have write access to ${reponame}.  Access is denied";
   exit 1
 fi
 

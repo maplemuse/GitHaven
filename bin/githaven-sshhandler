@@ -1,8 +1,8 @@
 #!/bin/bash -e
 
-cd $HOME/githaven/db
+cd ${HOME}/githaven/db
 
-if [[ `whoami` = "git" && -z "$RAILS_ENV" ]] ; then
+if [[ `whoami` = "git" && -z "${RAILS_ENV}" ]] ; then
     export RAILS_ENV="production"
 fi
 
@@ -27,7 +27,7 @@ elif [ "${cmd}" = "upload-pack" ] ; then
   githaven-checkpermissions "read" "${user_id}" "${repopath}"
 fi
 
-cd $HOME
+cd ${HOME}
 
 # Create the repos directory if it does not exists
 if [ ! -d repos ] ; then

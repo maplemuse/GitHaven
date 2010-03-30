@@ -1,9 +1,9 @@
 #!/bin/sh -e
-username=$1
+username="${1}"
 dbfile=`githaven-db`
-user_id=`sqlite3 "${dbfile}" "select id,username from users"  | grep $username`
-if [ -z "$user_id" ] ; then
-    echo "Unknown user: $username" >&2
+user_id=`sqlite3 "${dbfile}" "select id,username from users"  | grep ${username}`
+if [ -z "${user_id}" ] ; then
+    echo "Unknown user: ${username}" >&2
     exit 1
 fi
-echo $user_id
+echo "${user_id}"

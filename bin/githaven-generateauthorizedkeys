@@ -7,7 +7,7 @@ root=`pwd`
 if [ ! -d "${HOME}" ] ; then
   HOME="/var/git"
 fi
-keyfile="$HOME/.ssh/authorized_keys"
+keyfile="${HOME}/.ssh/authorized_keys"
 command="githaven-sshhandler"
 
 tempfile=`mktemp`

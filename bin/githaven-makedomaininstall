@@ -10,13 +10,13 @@ touch log/development.log log/production.log
 # Create the top level directories, but symlink the files inside them
 # rails has issues if you symlink the top level directories
 for d in `echo "config app doc public test script vendor db"` ; do
-    mkdir $d
-    for f in `ls -1 "${WEBROOT}"/$d` ; do
-        ln -s "${WEBROOT}"/$d/$f $d/$f
+    mkdir "${d}"
+    for f in `ls -1 "${WEBROOT}"/${d}` ; do
+        ln -s "${WEBROOT}"/${d}/${f} ${d}/${f}
     done
 done
 for f in `echo "Rakefile"` ; do
-    ln -s "${WEBROOT}"/$f $f
+    ln -s "${WEBROOT}"/${f} ${f}
 done
 
 # Create the initial db

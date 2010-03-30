@@ -1,14 +1,14 @@
 #!/bin/bash -e
-name=$1
-if [ -z "$name" ] ; then
+name="${1}"
+if [ -z "${name}" ] ; then
   echo "Error: name not specified" >&2
   exit 1
 fi
 table="users"
 dbfile=`githaven-db`
 id=`sqlite3 "${dbfile}" "select id,username from ${table}" | grep "${name}$" | sed -e s/\|"${name}$"//g`
-if [ -z "$id" ] ; then
-    echo "Unknown user: $name" >&2
+if [ -z "${id}" ] ; then
+    echo "Unknown user: ${name}" >&2
     exit 1
 fi
-echo $id
+echo ${id}

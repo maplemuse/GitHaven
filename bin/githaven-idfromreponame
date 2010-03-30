@@ -13,8 +13,8 @@ fi
 table="repositories"
 dbfile=`githaven-db`
 id=`sqlite3 "${dbfile}" "select id,user_id,name from ${table}" | grep "${name}$" | grep "${user_id}" | sed -e s/\|"${user_id}"\|"${name}$"//g`
-if [ -z "$id" ] ; then
-    echo "Unknown repository: $name" >&2
+if [ -z "${id}" ] ; then
+    echo "Unknown repository: ${name}" >&2
     exit 1
 fi
-echo $id
+echo ${id}
