@@ -17,7 +17,7 @@ if [[ -z "${repo_owner}" || -z "${repo_name}" ]] ; then
   exit 1
 fi
 repoowner_id=`githaven-idfromusername $repo_owner`
-repo_id=`githaven-idfromreponame $repo_name`
+repo_id=`githaven-idfromreponame "${repo_name}" "${repoowner_id}"`
 
 # The owner of the repository can can always access the repository
 if [ "${user_id}" = "${repoowner_id}" ] ; then
