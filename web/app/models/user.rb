@@ -48,6 +48,12 @@ class User < ActiveRecord::Base
     return self.email
   end
 
+  def forked(repository)
+    return false if !repository
+    return true if self == repository.user
+    Repository.find_by_forked_repository_id(repository.id)
+  end
+
 private
   def self.encrypted_password(password, salt)
     string_to_hash = password + 'paris' + salt

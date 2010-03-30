@@ -17,6 +17,7 @@
 }
 
 img.repo_public_private {
+    padding: 2px;
     float: right;
 }
 
@@ -26,4 +27,11 @@ div#repository_actions {
 
 #commit_contents {
    white-space: pre-wrap;
+}
+
+#fork {
+    float: right;
+    border: 1px solid orange;
+    background: white;
+    padding: 3px;
 }

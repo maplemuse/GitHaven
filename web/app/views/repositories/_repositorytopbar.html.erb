@@ -14,6 +14,13 @@
 <% if @repository.description && !@repository.description.empty? -%>
     <%= t('repository.description') -%>: <%=h @repository.description %><br />
 <% end -%>
+
+    <% if @loggedinuser && !@loggedinuser.forked(@repository) %>
+        <div id="fork">
+        <%= link_to 'Fork', { :controller => 'repositories', :repo => @repository.name, :user => @repository.user.username, :action => 'fork' } -%>
+        </div>
+    <% end %>
+
     <%
     if @repository.public
     %>

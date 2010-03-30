@@ -93,6 +93,11 @@ ActionController::Routing::Routes.draw do |map|
       :action => 'httpgit',
       :conditions => { :method => :get }
 
+  map.connect ':user/:repo/fork',
+      :controller => 'repositories',
+      :action => 'fork',
+      :conditions => { :method => :get }
+
   # Default Routes
   #map.connect ':controller/:action/:id'
   #map.connect ':controller/:action/:id.:format'

@@ -1,5 +1,5 @@
 class RepositoriesController < ApplicationController
-  before_filter :require_login, :only => [:new, :create, :edit, :update, :destroy]
+  before_filter :require_login, :only => [:new, :create, :edit, :update, :destroy, :fork]
   before_filter :requires_authorization, :only => [:edit, :update, :destroy]
 
   # GET /repositories
@@ -81,6 +81,28 @@ class RepositoriesController < ApplicationController
         :filename => @repository.user.username + "-" + @repository.name + "-" + @branch + ".tar.gz");
   end
 
+  def fork
+    return if !find_repository
+
+    repository = Repository.new
+    repository.copy(@repository)
+    @loggedinuser.repositories << repository
+
+    respond_to do |format|
+      if repository.save
+        system("git clone --no-hardlinks --bare #{@repository.location()} #{repository.location()}")
+        flash[:notice] = t('repository.created', :name => h(repository.name))
+        @repository = repository
+        format.html { redirect_to(:controller => 'repositories', :user => repository.user.username, :repo => repository.name, :action => 'show') }
+        format.xml  { render :xml => repository, :status => :created, :location => repository }
+      else
+        @repository = repository
+        format.html { render :action => 'new' }
+        format.xml  { render :xml => repository.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
   # GET /repositories/new
   def new
     @repository = Repository.new
@@ -94,12 +116,6 @@ class RepositoriesController < ApplicationController
   def create
     repository = Repository.new(params[:repository])
     @loggedinuser.repositories << repository
-
-    permission = Permission.new
-    permission.mode = 'ro'
-    everyone = User.find_by_username(I18n.t('user.all'))
-    permission.user_id = everyone.id
-    repository.permissions << permission
 
     respond_to do |format|
       if @loggedinuser.save && repository.save && permission.save

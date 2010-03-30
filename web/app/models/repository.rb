@@ -11,6 +11,15 @@ class Repository < ActiveRecord::Base
 
   validate :existing_branch_name
 
+  def initialize
+    super
+    permission = Permission.new
+    permission.mode = 'ro'
+    everyone = User.find_by_username(I18n.t('user.all'))
+    permission.user_id = everyone.id
+    permissions << permission
+  end
+
   def authorized(user)
     return true if user && self.user == user
     permissions.each { |p|
@@ -28,6 +37,21 @@ class Repository < ActiveRecord::Base
 
   def public
     return authorized(I18n.t('user.all'))
+  end
+
+  def copy(other)
+    self.name = other.name
+    self.description = other.description
+    other.tags.each { |t|
+        tag = Tag.new
+        tag.tag = t.tag
+        self.tags << tag
+    }
+
+    if !other.authorized(User.find_by_username(I18n.t('user.all')))
+      permissions.clear
+    end
+    self.forked_repository_id = other.id
   end
 
 private
