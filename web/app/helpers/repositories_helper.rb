@@ -22,7 +22,7 @@ module RepositoriesHelper
   end
 
   def print_short_commit_message(message, length = 50)
-    if (message.length < length)
+    if (length < 0 || message.length < length)
         message
     else
         message.slice(0, length) + "..."

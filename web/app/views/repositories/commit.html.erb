@@ -4,7 +4,7 @@
 <%= page_heading ("Commit " + @commits.first.sha + " in " + @repository.user.username + "'s " + @repository.name) %>
 <%= render(:partial => 'repositorytop.html.erb') %>
 <div id="repopage">
-<%= render(:partial => 'commitlist.html.erb') %>
+<%= @singlecommit = true; render(:partial => 'commitlist.html.erb') %>
 <pre>
 <%=h @commits.first.to_patch %>
 </pre>
