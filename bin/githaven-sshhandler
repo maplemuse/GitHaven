@@ -38,7 +38,7 @@ cd repos
 # Create the repo if it does not exists
 if [ ! -d "${repopath}" ] ; then
     mkdir -p "${repopath}"
-    (cd "${repopath}"; git init --bare -q)
+    (cd "${repopath}"; git init --bare -q; git update-server-info)
 fi
 
 nice git-shell -c "${SSH_ORIGINAL_COMMAND}"
