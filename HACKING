@@ -1,0 +1,41 @@
+GitHaven
+
+Various bits of information about the files and how the project works.  Please add to this file as you find something that should have been here.
+
+
+bin/
+- Various scripts that are installed with GitHaven to handle the ssh connection.
+
+debian/
+- Debian files used to generate debian packages.  This includes the postinst script which sets up GitHaven when it is installed.
+
+git_hooks/
+- Various scripts that are used to improve the quality of the commits.  It is built on top of the git-hooks tool.  See http://git.meyerhome.net/icefox/git-hooks to install git-hooks on your system.
+
+web/
+- The actual web application.
+
+
+SSH FAQ:
+
+When a user adds a ssh key githaven-generateauthorizedkeys populates ~/.git/.ssh/authorized_keys with all of the user keys.  when a user clones from git@server:user/repo they are logging in as the git user and authenticated via authorized_keys.  The only command that is run is githaven-sshhandler which takes one argument which is the user id.  githaven-sshhandler checks permissions and then executes git shell if everything checks out.
+
+Install FAQ:
+
+- We create a locked down user called git (unless another user name is specified via debian conf).
+- githaven-makedomaininstall runs which makes symlinks to the githaven installed rails app (making upgrade and multiple installs a snap)
+- Databases are populated if needed
+- The default githaven apache site file is created and default is removed, apache is restarted.
+
+WebSite FAQ:
+
+GitHaven is a Ruby On Rails application.
+
+It uses the Grit ruby library to access git repositories which are stored in ~/repos.
+
+It uses sqlite to store the data as there isn't that much.  Tables:
+* users (which has sshkeys and repositories)
+* sshkeys
+* repositories (which has permissions and tags)
+* permissions
+* tags
