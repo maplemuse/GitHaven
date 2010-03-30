@@ -5,7 +5,7 @@
 <%= render(:partial => 'repositorytop.html.erb') %>
 <div id="repopage">
 <%= @singlecommit = true; render(:partial => 'commitlist.html.erb') %>
-<pre>
+<pre id="commit_contents">
 <%=h @commits.first.to_patch %>
 </pre>
 </div>
