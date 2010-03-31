@@ -11,7 +11,7 @@
     <% } %>
     <br />
 
-<% if !@repository.description.empty? -%>
+<% if @repository.description && !@repository.description.empty? -%>
     <%= t('repository.description') -%>: <%=h @repository.description %><br />
 <% end -%>
     <%
