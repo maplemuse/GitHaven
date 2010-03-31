@@ -1,3 +1,23 @@
+githaven (0.0.8-1) unstable; urgency=low
+
+  * Add the ability for a user to click on a link and fork a repository. - The name and description are copied - Tags are copied - If the original repository doesn't allow Everyone it is also removed   in the fork.
+  * Because flash content is run though the h helper function we can't use links.
+  * Be a little safer and check that repository.description is not nil before using it.
+  * Set the white-space on the commit to pre-wrap so it wont look so ugly
+  * When showing a commit and its diff display the full commit message.
+  * Remove test script that was accidentally added.
+  * Add a HACKING file to the repository giving some basic information about the project and directories.
+  * Execute git shell, not git-shell when someone uses the ssh handler.
+  * Use the full 80% width to display the repository list, not 80% of 80%
+  * Show the owner of the repository and populate the title (image tooltip) with the user name and permissions.  For example "icefox rw".
+  * Improve githaven-* bash scripts to be safer when dealing with variables, use {} and "" to be more specific and less likely to result in any accidental issues.
+  * When determining the id of the repository name both the name of the repository and the id of the ownser is needed because multiple users can have repositories with the same name.
+  * When creating a repository update the server info so cloning over http will work
+  * Fix several errors found with the W3C Markup Validator
+  * Fix several errors found with the W3C CSS Validator
+
+ -- Benjamin Meyer <ben@meyerhome.net>  Wed, 31 Mar 2010 00:08:25 -0400
+
 githaven (0.0.7-1) unstable; urgency=low
 
   * Add a shell script to update the application version in various locations.
