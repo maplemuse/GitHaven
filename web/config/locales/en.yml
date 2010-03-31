@@ -18,7 +18,7 @@ en:
     deleted: "User successfully deleted: {{username}}"
   sshkey:
     notsshkey: "must begin with ssh-rsa or ssh-dss"
-    nosshkeyhint: "Note: to push to a repository you need to <a href=\"{{link}}\">add a ssh key</a>"
+    nosshkeyhint: "Note: to push to a repository you need to add a ssh key."
     created: "SSHKey successfully created: {{name}}"
     updated: "SSHKey successfully updated: {{name}}"
     deleted: "SSHKey successfully deleted: {{name}}"
