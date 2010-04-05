@@ -1,3 +1,9 @@
+githaven (0.0.9-1) unstable; urgency=low
+
+  * Add the ability to create arbitrary links in the project bar.
+
+ -- Benjamin Meyer <ben@meyerhome.net>  Mon, 05 Apr 2010 00:37:39 -0400
+
 githaven (0.0.8-1) unstable; urgency=low
 
   * Add the ability for a user to click on a link and fork a repository. - The name and description are copied - Tags are copied - If the original repository doesn't allow Everyone it is also removed   in the fork.
