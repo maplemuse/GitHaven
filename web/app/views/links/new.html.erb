@@ -1,0 +1,18 @@
+<%= page_heading "New Link" %>
+<h1>New link for <%= link_to h(@repository.name), edit_repository_path(@repository) %></h1>
+
+<% form_for(@link) do |f| %>
+  <%= f.error_messages %>
+  <%= f.hidden_field(:repository_id) %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :url %><br />
+    <%= f.text_field :url %>
+  </p>
+  <p>
+    <%= f.submit "Add" %>
+  </p>
+<% end %>

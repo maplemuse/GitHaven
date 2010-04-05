@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+
   # Root
   map.root :controller => 'application'
 
@@ -18,12 +19,17 @@ ActionController::Routing::Routes.draw do |map|
       :controller => 'tags',
       :conditions => { :method => :get }
 
+  map.connect 'links/new/:repo',
+      :controller => 'links',
+      :action => 'new'
+
   # RESTful Routes
   map.resources :users
   map.resources :sshkeys
   map.resources :repositories
   map.resources :permissions
   map.resources :tags
+  map.resources :links
 
   map.connect 'permissions/:action/:repo',
       :controller => 'permissions',
@@ -99,6 +105,6 @@ ActionController::Routing::Routes.draw do |map|
       :conditions => { :method => :get }
 
   # Default Routes
-  #map.connect ':controller/:action/:id'
-  #map.connect ':controller/:action/:id.:format'
+  map.connect ':controller/:action/:id'
+  map.connect ':controller/:action/:id.:format'
 end

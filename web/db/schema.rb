@@ -9,7 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100331023518) do
+ActiveRecord::Schema.define(:version => 20100405021755) do
+
+  create_table "links", :force => true do |t|
+    t.integer  "repository_id"
+    t.string   "name"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "permissions", :force => true do |t|
     t.integer  "repository_id",                   :null => false

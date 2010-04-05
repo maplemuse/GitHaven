@@ -36,6 +36,19 @@
 </ul>
 <%= button_to 'Add another tag', { :controller => 'tags', :action => 'new', :repo => @repository.id},  :method => :get %>
 
+<hr>
+<h2>External Links</h2>
+<ul>
+<% for link in @repository.links %>
+<li>
+<%= h link.name %>
+<%= h link.url %>
+<%= link_to '(Edit)', { :controller => 'links', :action => 'edit', :id => link.id } %>
+<%= link_to '(Remove)', link, :confirm => 'Are you sure?', :method => :delete %>
+<% end %>
+</ul>
+<%= button_to 'Add another link', { :controller => 'links', :action => 'new', :repo => @repository.id},  :method => :get %>
+
 
 <hr>
 <h2>Repository Permissions</h2>

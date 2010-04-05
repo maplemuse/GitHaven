@@ -4,6 +4,7 @@ class Repository < ActiveRecord::Base
   belongs_to :user
   has_many :permissions, :dependent => :destroy
   has_many :tags, :dependent => :destroy
+  has_many :links, :dependent => :destroy
 
   validates_presence_of :name
   validates_uniqueness_of :name, :scope => :user_id
