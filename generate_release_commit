@@ -10,6 +10,7 @@ mv -f $file web/app/views/layouts/site.erb
 
 cat generate_deb | sed -e s/$lver/$cver/g > $file
 mv -f $file generate_deb
+chmod +x generate_deb
 
 echo "githaven (${cver}-1) unstable; urgency=low" > $file
 echo "" >> $file
