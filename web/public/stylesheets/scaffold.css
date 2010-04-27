@@ -284,14 +284,6 @@ pre {
     color: red;
 }
 
-#data {
-    margin-bottom: 1em;
-    padding: .5em;
-    border: 1px solid gray;
-    margin-top: 0;
-    background: #f8f8f8;
-}
-
 #branches, #tags {
     float: right;
     font-size: 12px;

@@ -35,3 +35,12 @@ div#repository_actions {
     background: white;
     padding: 3px;
 }
+
+#data {
+    margin-bottom: 1em;
+    padding: .5em;
+    border: 1px solid gray;
+    margin-top: 0;
+    background: #f8f8f8;
+    white-space: pre-wrap;
+}
