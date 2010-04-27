@@ -6,7 +6,7 @@
 #rake rails:unfreeze
 
 # run generate
-version="0.0.9"
+version="0.1.0"
 git tag -a "v$version" -m "Version $version"
 git archive --format=tar --prefix=githaven-$version/ "v$version" | gzip > githaven-$version.tar.gz
 
