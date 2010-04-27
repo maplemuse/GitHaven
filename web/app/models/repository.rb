@@ -12,8 +12,8 @@ class Repository < ActiveRecord::Base
 
   validate :existing_branch_name
 
-  def initialize
-    super
+  def initialize(arg=nil)
+    super(arg)
     permission = Permission.new
     permission.mode = 'ro'
     everyone = User.find_by_username(I18n.t('user.all'))

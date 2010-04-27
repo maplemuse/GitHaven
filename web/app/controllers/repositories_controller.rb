@@ -118,7 +118,7 @@ class RepositoriesController < ApplicationController
     @loggedinuser.repositories << repository
 
     respond_to do |format|
-      if @loggedinuser.save && repository.save && permission.save
+      if @loggedinuser.save && repository.save
         flash[:notice] = t('repository.created', :name => repository.name)
         format.html { redirect_to(:controller => 'repositories', :user => repository.user.username, :repo => repository.name, :action => 'show') }
         format.xml  { render :xml => repository, :status => :created, :location => repository }
