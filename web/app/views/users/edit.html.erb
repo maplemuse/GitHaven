@@ -31,5 +31,5 @@ render(:partial => 'sshkeys/show')
 %>
 
 <div id="delete_button">
-<%= button_to 'Delete my Account', @user, :confirm => 'Are you sure?', :method => :delete  %>
+<%= button_to 'Delete my Account', @user, :confirm => 'Are you sure?  All your repositories will be deleted also.', :method => :delete  %>
 </div>
