@@ -52,6 +52,11 @@ class Repository < ActiveRecord::Base
 
     if !other.authorized(User.find_by_username(I18n.t('user.all')))
       permissions.clear
+      # Give ro permissions to the owner of the repository I forked from.
+      permission = Permission.new
+      permission.mode = 'ro'
+      permission.user_id = other.user.id
+      permissions << permission
     end
     self.forked_repository_id = other.id
   end
