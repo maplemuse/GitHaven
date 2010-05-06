@@ -1,4 +1,9 @@
 require 'digest/sha1'
+require 'digest/md5'
+
+def gravatar_url_for(email, options)
+    "http://www.gravatar.com/avatar.php?gravatar_id=" + Digest::MD5.hexdigest(email) + options
+end
 
 class User < ActiveRecord::Base
   has_many :repositories, :dependent => :destroy
@@ -46,6 +51,14 @@ class User < ActiveRecord::Base
       return self.avatar
     end
     return self.email
+  end
+
+  def gravatar_url(options)
+    if self.username == I18n.t('user.all')
+        # If the repository is private user.all wont be in its list.
+        return 'public.png'
+    end
+    gravatar_url_for(self.avatar_email, options)
   end
 
   def forked(repository)

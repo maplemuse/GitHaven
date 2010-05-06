@@ -11,7 +11,7 @@ end
 <table id="tree">
 <% for repository in @repositories %>
   <tr class="<%= cycle('contents-line-odd', 'contents-line-even') %>">
-    <td><%= (image_tag 'private.png') if !repository.public %></td>
+    <td><%= (image_tag 'private.png', :title => 'Everyone can NOT access this repository.') if !repository.public %></td>
     <td><%=link_to h(repository.user.username), :user => repository.user.username, :controller => 'users', :action => 'show' %></td>
     <td>/</td>
     <td><%=link_to h(repository.name), :controller => 'repositories', :action => 'show', :user => repository.user.username, :repo => repository.name %></td>
