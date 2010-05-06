@@ -37,6 +37,8 @@ class RepositoriesController < ApplicationController
     @path = params[:path].join('/') if params[:path]
     filename = @repository.location() + '/' + @path
     if File.exists?(filename)
+        # This should be moved out to a hook
+        system("cd #{@repository.location()}; git update-server-info")
         send_file filename
     else
         render :nothing => true, :status => :not_found
