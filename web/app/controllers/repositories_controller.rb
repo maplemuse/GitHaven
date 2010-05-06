@@ -30,8 +30,8 @@ class RepositoriesController < ApplicationController
   end
 
   def httpgit
-    @repository = Repository.find_by_name(params[:repo])
-    return if !@repository || !@repository.public
+    return if !find_repository
+    return if !@repository.public
 
     @path = ''
     @path = params[:path].join('/') if params[:path]
