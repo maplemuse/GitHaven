@@ -1,4 +1,5 @@
 require 'grit'
+require 'fileutils'
 
 class Repository < ActiveRecord::Base
   belongs_to :user
@@ -53,6 +54,13 @@ class Repository < ActiveRecord::Base
       permissions.clear
     end
     self.forked_repository_id = other.id
+  end
+
+  def destroy
+    super
+    if File.exists?(location())
+        FileUtils.rm_rf location()
+    end
   end
 
 private
