@@ -1,3 +1,14 @@
+githaven (0.1.1-1) unstable; urgency=low
+
+  * When forking a private repository give the forked owner read-only permissions to the repository
+  * Add a tooltip to the public/private icon. - When the repository is private set the tooltip to explictly state that   Everyone can not access the repository. - When the repository is public set the tooltip to be the permissions   that Everyone has. - Add a tooltip to the private icon in the repository listing - Move the gravatar function to the user model rather then in the helper and add a helper function to the user class.
+  * git update-server-info needs to be run whenever something changes for http to work, not just after git init. Add update-server-info to the httpgit action.
+  * git fetching over http could access the wrong repository. Access the repository using the user+repo combination not just the repository name otherwise it will simply go to the first one the was created with the repository name which might not be the one that is wanted.
+  * When a repository is deleted rm -rf the location of the repository.
+  * When deleting a user mention that the repositories will be deleted too
+
+ -- Benjamin Meyer <ben@meyerhome.net>  Thu, 06 May 2010 01:53:36 -0400
+
 githaven (0.1.0-1) unstable; urgency=low
 
   * Cleanup whitespace in the data box and add a raw link for any item that is shown
