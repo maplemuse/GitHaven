@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
   def forked(repository)
     return false if !repository
     return true if self == repository.user
-    Repository.find_by_forked_repository_id(repository.id)
+    Repository.find_by_forked_repository_id(repository.id, :conditions => ['user_id = ?', self.id])
   end
 
 private
