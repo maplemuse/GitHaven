@@ -48,8 +48,8 @@ ActiveRecord::Schema.define(:version => 20100405021755) do
   end
 
   create_table "tags", :force => true do |t|
-    t.integer  "repository_id"
-    t.string   "tag"
+    t.integer  "repository_id", :null => false
+    t.string   "tag",           :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
