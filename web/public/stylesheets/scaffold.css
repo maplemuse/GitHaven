@@ -306,3 +306,10 @@ pre {
     float: right;
 }
 
+#system_message {
+    text-align: center;
+    padding: .5em;
+    margin-top: -1em;
+    border: 1px solid black;
+    border-top: 0px;
+}

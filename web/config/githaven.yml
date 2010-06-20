@@ -1,0 +1,5 @@
+production:
+  system_message: "Welcome to GitHaven, see /var/git/githaven/config/githaven.conf for custom server configuration."
+
+development:
+  system_message:

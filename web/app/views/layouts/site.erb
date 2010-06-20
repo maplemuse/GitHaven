@@ -28,6 +28,9 @@
 </div>
 
 <div id="main">
+<% if !GitHavenConfig["system_message"].blank? -%>
+<div id="system_message"><%= GitHavenConfig["system_message"] -%></div>
+<% end -%>
 <div id="flash"><%= h flash[:notice] %></div>
 <%= yield  -%>
 </div>

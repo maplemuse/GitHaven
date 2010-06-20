@@ -11,6 +11,9 @@ RAILS_GEM_VERSION = '2.2.3' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
+  githaven_yaml = YAML.load_file(File.join(RAILS_ROOT, "config/githaven.yml"))[RAILS_ENV]
+  raise "The config/githaven.yml does not have an entry for the current rails environment." unless githaven_yaml
+
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.
