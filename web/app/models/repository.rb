@@ -38,7 +38,7 @@ class Repository < ActiveRecord::Base
   end
 
   def public
-    return authorized(I18n.t('user.all'))
+    return authorized(User.find_by_username(I18n.t('user.all')))
   end
 
   def copy(other)
