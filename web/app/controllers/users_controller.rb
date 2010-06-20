@@ -49,6 +49,14 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
+    if GitHavenConfig["allow_signup"] == false && !(@loggedinuser and @loggedinuser.username == GitHavenConfig["root_user"])
+        flash[:notice] = t('user.nosignups')
+        respond_to do |format|
+          format.html { redirect_to(root_url) }
+          format.xml  { head :ok }
+        end
+        return
+    end
     @user = User.new
 
     respond_to do |format|
@@ -104,8 +112,20 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
+    @user = @loggedinuser
     username = @loggedinuser.username
-    @loggedinuser.destroy
+
+    if username == GitHavenConfig["root_user"]
+        @user = User.find(params[:id]) if params[:id]
+        username = @user.username
+    end
+
+    if username == GitHavenConfig["root_user"]
+        flash[:notice] = t('user.deletedroot', :username => username)
+        redirect_to(root_url)
+    end
+
+    @user.destroy
     flash[:notice] = t('user.deleted', :username => username)
     respond_to do |format|
       format.html { redirect_to(root_url) }

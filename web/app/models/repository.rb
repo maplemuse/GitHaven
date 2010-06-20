@@ -22,13 +22,18 @@ class Repository < ActiveRecord::Base
     permissions << permission
   end
 
+  def admin(user)
+    return true if user && self.user == user
+    return user.username == GitHavenConfig["root_user"]
+  end
+
   def authorized(user)
     return true if user && self.user == user
     permissions.each { |p|
       return true if user && p.user_id == user.id
       return true if p.user.username == I18n.t('user.all')
     }
-    return false
+    return (user and user.username == GitHavenConfig["root_user"])
   end
 
   def location

@@ -1,5 +1,14 @@
 production:
+  # Message shown at the top of every web page
   system_message: "Welcome to GitHaven, see /var/git/githaven/config/githaven.conf for custom server configuration."
+
+  # When this is set to false only the root_user can create new accounts
+  allow_signup: true
+
+  # This user can do anything, create accounts, delete users, repositories etc
+  root_user:
 
 development:
   system_message:
+  allow_signup: true
+  root_user:

@@ -12,10 +12,12 @@ en:
     password: "Password"
     loggedout: "Logged out"
     accessdenied: "This action requires that you be logged in"
+    nosignups: "Only the admin is allowed to create new users"
     invalid_user_or_password: "Invalid username or password"
     created: "User successfully created: {{username}}"
     updated: "User successfully updated: {{username}}"
     deleted: "User successfully deleted: {{username}}"
+    deletedroot: "Not allowed to delete the root user"
   sshkey:
     notsshkey: "must begin with ssh-rsa or ssh-dss"
     nosshkeyhint: "Note: to push to a repository you need to add a ssh key."

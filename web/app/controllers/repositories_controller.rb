@@ -251,6 +251,7 @@ private
 
   def requires_authorization
     return if !find_repository
+    return true if @loggedinuser.username == GitHavenConfig["root_user"]
     if @owner != @loggedinuser
         @repository = nil
         flash[:notice] = t('repository.notowner')
