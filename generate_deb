@@ -10,6 +10,7 @@ version="0.1.1"
 git tag -a "v$version" -m "Version $version"
 git archive --format=tar --prefix=githaven-$version/ "v$version" | gzip > githaven-$version.tar.gz
 
+curdir=`pwd`
 tempdir=`mktemp -d /tmp/tmp.githaven.XXXXXXXXXX`
 cp githaven-$version.tar.gz $tempdir
 cd $tempdir
@@ -18,10 +19,10 @@ cd githaven-$version
 dpkg-buildpackage -rfakeroot
 
 echo $tempdir
-
-WEB=~/githaven.com/githaven-debian-repository
-cp $tempdir/githaven*.deb $WEB/binary/
-cd $WEB
-dpkg-scanpackages binary /dev/null | gzip -9c > binary/Packages.gz
-dpkg-scansources source /dev/null | gzip -9c > source/Sources.gz
-scp -r $WEB/ toybin.org:~/www/githaven/
+cp $tempdir/githaven*.deb $curdir
+# Repository management
+#WEB=~/githaven.com/githaven-debian-repository
+#cp $tempdir/githaven*.deb $WEB/binary/
+#cd $WEB
+#dpkg-scanpackages binary /dev/null | gzip -9c > binary/Packages.gz
+#dpkg-scansources source /dev/null | gzip -9c > source/Sources.gz

@@ -1,23 +1,32 @@
 #!/bin/sh
 
+# Current version
 cver="0.1.1"
+# Last version
 lver="0.1.0"
 
 file=`mktemp`
 
+# Replace last version with current version in the site template
 cat web/app/views/layouts/site.erb | sed -e s/$lver/$cver/g > $file
 mv -f $file web/app/views/layouts/site.erb
 
+# Replace last version with current version in the generate_deb script
 cat generate_deb | sed -e s/$lver/$cver/g > $file
 mv -f $file generate_deb
 chmod +x generate_deb
 
+#update the changelog
 echo "githaven (${cver}-1) unstable; urgency=low" > $file
 echo "" >> $file
 git log v${lver}..HEAD --pretty=format:%s | sed -e 's/^/  * /g' >> $file
 echo "" >> $file
 echo "" >> $file
-echo -n " -- Benjamin Meyer <ben@meyerhome.net>  " >> $file
+echo -n " -- " >> $file
+echo -n `git config user.name` >> $file
+echo -n " <" >> $file
+echo -n `git config user.email` >> $file
+echo -n ">  " >> $file
 date --rfc-2822 >> $file
 echo "" >> $file
 
