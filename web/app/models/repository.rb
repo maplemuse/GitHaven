@@ -41,7 +41,7 @@ class Repository < ActiveRecord::Base
 
   def admin(user)
     return true if user && self.user == user
-    return user.username == GitHavenConfig["root_user"]
+    return (user and user.username == GitHavenConfig["root_user"])
   end
 
   def authorized(user)
