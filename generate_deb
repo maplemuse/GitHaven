@@ -14,8 +14,9 @@ git archive --format=tar --prefix=githaven-$version/web/vendor/rails/ "HEAD" > .
 cd ../../.. 
 echo `pwd`
 tar --concatenate --file=githaven-$version.tar githaven-rails-$version.tar
-#rm githaven-rails-$version.tar
+rm githaven-rails-$version.tar
 gzip -f githaven-$version.tar > githaven-$version.tar.gz
+rm githaven-$version.tar
 
 
 curdir=`pwd`
