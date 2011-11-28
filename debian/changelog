@@ -1,3 +1,14 @@
+githaven (0.1.2-1) unstable; urgency=low
+
+  * Include the submodule version of rails in the archive file.
+  * Bump to 0.1.2
+  * Pin to rails 2.2.3, which is the version previously developed against.
+  * Update to using git submodule for vendor/rails
+  * Remove symlinks to rails, active* and action*. These have moved recently, at least in Ubuntu.
+  * Clean up debian build script. Don't automatically attempt to deploy to toybin Don't deploy directly to a local debian repository. Document generate_release_commit. Remove hard coded maintainer name from the scripts. We now pull this information from the current git user.
+
+ -- Nick Matthews <nick.matthews@esentire.com>  Mon, 28 Nov 2011 12:07:52 -0500
+
 githaven (0.1.1-1) unstable; urgency=low
 
   * When forking a private repository give the forked owner read-only permissions to the repository
