@@ -8,7 +8,15 @@
 # run generate
 version="0.1.1"
 git tag -a "v$version" -m "Version $version"
-git archive --format=tar --prefix=githaven-$version/ "v$version" | gzip > githaven-$version.tar.gz
+git archive --format=tar --prefix=githaven-$version/ "v$version" > githaven-$version.tar
+cd web/vendor/rails
+git archive --format=tar --prefix=githaven-$version/web/vendor/rails/ "HEAD" > ../../../githaven-rails-$version.tar
+cd ../../.. 
+echo `pwd`
+tar --concatenate --file=githaven-$version.tar githaven-rails-$version.tar
+#rm githaven-rails-$version.tar
+gzip -f githaven-$version.tar > githaven-$version.tar.gz
+
 
 curdir=`pwd`
 tempdir=`mktemp -d /tmp/tmp.githaven.XXXXXXXXXX`
