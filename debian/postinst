@@ -34,7 +34,7 @@ case "${1}" in
               ${_USERNAME}
         else
             echo "User (${_USERNAME}) already exists, user was not created."
-            currentuserhomedir=`getent passwd | grep "${_USERNAME}" | awk -F':' '{ print $6 }'`
+            currentuserhomedir=`getent passwd | grep "^${_USERNAME}:" | awk -F':' '{ print $6 }'`
             if [ "${_HOMEDIR}" != "${currentuserhomedir}" ] ; then
             echo "WARNING: ******"
             echo "WARNING: The existing user \"${_USERNAME}\" home directory does not point to the expected location: \"${_HOMEDIR}\", it points to \"${currentuserhomedir}\""
